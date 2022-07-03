@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import MapView from 'react-native-maps';
 import * as React from 'react';
 import {mapStyleDark} from './maps/map_style'; // this gets the design of the map; the style
-
+import { Marker } from 'react-native-maps';
 export default function App() {
   var typeOfMapForDesign = mapStyleDark;
   return (
@@ -23,6 +23,29 @@ export default function App() {
           longitudeDelta: 0.0421,
         }}
       >
+        <Marker
+          coordinate={{
+            latitude: 46.77164492183006,
+            longitude: 23.625553844482933,
+          }} 
+          image = {require('../eCharge/assets/markers/map_marker_green.png')}
+          />
+        <Marker
+          coordinate={{
+            latitude: 46.77325416741861, 
+            longitude: 23.625092504549855,
+          }} 
+          image = {require('../eCharge/assets/markers/map_marker_green.png')}
+          />
+         <Marker
+          coordinate={{
+            latitude: 46.77142447348493,  
+            longitude: 23.621165750701667,
+          }} 
+          image = {require('../eCharge/assets/markers/map_marker_green.png')}
+          />
+       
+       
       </MapView>
       <StatusBar style="auto" />
     </View>
