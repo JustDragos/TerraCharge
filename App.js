@@ -4,6 +4,8 @@ import MapView from 'react-native-maps';
 import * as React from 'react';
 import {mapStyleDark} from './maps/map_style'; // this gets the design of the map; the style
 import { Marker } from 'react-native-maps';
+
+
 export default function App() {
   var typeOfMapForDesign = mapStyleDark;
   return (
@@ -63,42 +65,5 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },
-  bubble:{
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
-    backgroundColor: '#fff',
-    borderRadius: 6,
-    borderColor: '#ccc',
-    borderWidth: 0.5,
-    padding: 15,
-    width: 150,
-  },
-  // this is the arrow below the bubble
-  arrow:{
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#fff',
-    borderWidth: 16,
-    alignSelf: 'center',
-    marginTop: -32,
-  },
-  arrowBorder: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#007a87',
-    borderWidth: 16,
-    alignSelf: 'center',
-    marginTop: -0.5,
-  },
-  // character name
-  name:{
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  // character image
-  image:{
-    width: 120,
-    height: 80,
-  },
-
+ 
 });
