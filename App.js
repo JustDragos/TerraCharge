@@ -1,13 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View, Text, Button } from 'react-native';
 import MapView from 'react-native-maps';
 import * as React from 'react';
 import {mapStyleDark} from './maps/map_style'; // this gets the design of the map; the style
 import { Marker } from 'react-native-maps';
 
+import {Animated} from 'react-native-reanimated';
+import BottomSheet from 'reanimated-bottom-sheet';
 
 export default function App() {
   var typeOfMapForDesign = mapStyleDark;
+  
+
   return (
     <View style={styles.container}>
       <MapView style={styles.map}
@@ -49,6 +53,7 @@ export default function App() {
        
        
       </MapView>
+
       <StatusBar style="auto" />
     </View>
   );
