@@ -7,12 +7,17 @@ import { Marker } from 'react-native-maps';
 
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {MarkerClass} from './entities/markers';
+import { MarkerClass } from './entities/markers';
+const OPENED_LIST = 1;
+const CLOSED_LIST = 0;
+let swipedUpList = CLOSED_LIST;
+
+
 export default function App() {
   // this is the style of the map
   var typeOfMapForDesign = mapStyleDark;
-  
-  
+
+
   // this is the content of the swipe up bottom sheet
   const renderContent = () => (
     <View
@@ -22,10 +27,11 @@ export default function App() {
         height: 450,
 
       }}
-
     >
     </View>
   );
+
+  /* open bottom sheet directly*/
   // this is for the head of the swipe up bottom sheet
   const renderHeader = () => (
     <View style={styles.header}>
@@ -35,9 +41,13 @@ export default function App() {
     </View>
   );
   const sheetRef = React.useRef(null);
+  // why? to render the
   // ends here
+
   return (
     <View style={styles.container}>
+
+
       <MapView style={styles.map}
         // comple with locations of the map  and the style
         // the style is from the variable in maps, in maps_style.js
@@ -52,7 +62,7 @@ export default function App() {
           longitudeDelta: 0.0421,
         }}
       >
-        
+
         <Marker
           coordinate={{
             latitude: 46.77164492183006,
@@ -72,13 +82,14 @@ export default function App() {
             latitude: 46.77142447348493,
             longitude: 23.621165750701667,
           }}
+          onPress={() => renderBottomSheet(sheetRef)}
+         
           image={require('../eCharge/assets/markers/map_marker_green.png')}
         />
 
       </MapView>
-      <SafeAreaView>
-        <BottomSheet hasDraggableIcon ref={sheetRef} height={450}>
-        </BottomSheet>
+      <SafeAreaView style={styles.container}>
+        <BottomSheet hasDraggableIcon ref={sheetRef} height={600} />
         <TouchableOpacity
           style={styles.button}
           onPress={() => sheetRef.current.show()}
@@ -89,13 +100,29 @@ export default function App() {
         </TouchableOpacity>
       </SafeAreaView>
 
-
-
-
       <StatusBar style="auto" />
     </View>
   );
 }
+
+function renderBottomSheet(sheetRef) {
+  swipedUpList = OPENED_LIST;
+  return (
+    <SafeAreaView>
+      <BottomSheet
+        hasDraggableIcon
+        ref={sheetRef}
+        height={450}
+      >
+        {sheetRef.current.show()}
+
+      </BottomSheet>
+    </SafeAreaView>
+  );
+}
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -120,6 +147,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#140078",
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 50,
+    marginRight: 50,
+    alignSelf: "flex-end",
     borderRadius: 20,
     shadowColor: "#8559da",
     shadowOpacity: 0.7,
@@ -127,6 +157,7 @@ const styles = StyleSheet.create({
       height: 4,
       width: 4,
     },
+    flexDirection: "row",
     shadowRadius: 5,
     elevation: 6,
   },
@@ -134,4 +165,3 @@ const styles = StyleSheet.create({
   // 
 
 });
-
