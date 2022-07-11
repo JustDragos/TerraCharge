@@ -1,48 +1,46 @@
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { Dimensions, StyleSheet, View, TouchableOpacity, Text, SliderComponent } from 'react-native';
 import MapView from 'react-native-maps';
 import * as React from 'react';
 import { mapStyleDark } from './maps/map_style'; // this gets the design of the map; the style
-import { Marker } from 'react-native-maps';
-
-import BottomSheet from "react-native-gesture-bottom-sheet";
+import { Marker } from 'react-native-maps'; // this is from the normal map
+import BottomSheet from "react-native-gesture-bottom-sheet"; // this is for the swipe up list
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MarkerClass } from './entities/markers';
-const OPENED_LIST = 1;
-const CLOSED_LIST = 0;
-let swipedUpList = CLOSED_LIST;
+
+
+function getMarkers(arr) {
+  // put the markers in the corresponding array
+  var icon = '../eCharge/assets/markers/map_marker_green.png';
+  arr.push(new MarkerClass(46.77164492183006, 23.625553844482933, "lol0", icon));
+  arr.push(new MarkerClass(46.77325416741861, 23.625092504549855, "lol1", icon));
+  arr.push(new MarkerClass(46.77142447348493, 23.621165750701667, "lol2", icon));
+}
+
+function renderBottomSheet(sheetRef) {
+  
+  return (
+    <SafeAreaView>
+      <BottomSheet
+        hasDraggableIcon
+        ref={sheetRef}
+        height={450}
+      >
+        {sheetRef.current.show()}
+
+      </BottomSheet>
+    </SafeAreaView>
+  );
+}
+
 
 
 export default function App() {
   // this is the style of the map
   var typeOfMapForDesign = mapStyleDark;
-
-
-  // this is the content of the swipe up bottom sheet
-  const renderContent = () => (
-    <View
-      style={{
-        backgroundColor: 'white',
-        padding: 16,
-        height: 450,
-
-      }}
-    >
-    </View>
-  );
-
-  /* open bottom sheet directly*/
-  // this is for the head of the swipe up bottom sheet
-  const renderHeader = () => (
-    <View style={styles.header}>
-      <View style={styles.panelHeader}>
-        <View style={styles.panelHandle} />
-      </View>
-    </View>
-  );
   const sheetRef = React.useRef(null);
-  // why? to render the
-  // ends here
+  var markersArray = new Array();
+  getMarkers(markersArray);
 
   return (
     <View style={styles.container}>
@@ -62,6 +60,19 @@ export default function App() {
           longitudeDelta: 0.0421,
         }}
       >
+        {markersArray.map((marker, index) => (
+          <Marker
+            key={index}
+            coordinate={{
+              latitude: marker.latitude,
+              longitude: marker.longitude,
+
+            }}
+            image={(require('../eCharge/assets/markers/map_marker_green.png'))}
+            onPress = {() => renderBottomSheet(sheetRef)}
+          />
+
+        ))}
 
         <Marker
           coordinate={{
@@ -76,6 +87,7 @@ export default function App() {
             longitude: 23.625092504549855,
           }}
           image={require('../eCharge/assets/markers/map_marker_green.png')}
+
         />
         <Marker
           coordinate={{
@@ -83,7 +95,7 @@ export default function App() {
             longitude: 23.621165750701667,
           }}
           onPress={() => renderBottomSheet(sheetRef)}
-         
+
           image={require('../eCharge/assets/markers/map_marker_green.png')}
         />
 
@@ -105,21 +117,6 @@ export default function App() {
   );
 }
 
-function renderBottomSheet(sheetRef) {
-  swipedUpList = OPENED_LIST;
-  return (
-    <SafeAreaView>
-      <BottomSheet
-        hasDraggableIcon
-        ref={sheetRef}
-        height={450}
-      >
-        {sheetRef.current.show()}
-
-      </BottomSheet>
-    </SafeAreaView>
-  );
-}
 
 
 
