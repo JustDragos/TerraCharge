@@ -73,32 +73,6 @@ export default function App() {
           />
 
         ))}
-
-        <Marker
-          coordinate={{
-            latitude: 46.77164492183006,
-            longitude: 23.625553844482933,
-          }}
-          image={require('../eCharge/assets/markers/map_marker_green.png')}
-        />
-        <Marker
-          coordinate={{
-            latitude: 46.77325416741861,
-            longitude: 23.625092504549855,
-          }}
-          image={require('../eCharge/assets/markers/map_marker_green.png')}
-
-        />
-        <Marker
-          coordinate={{
-            latitude: 46.77142447348493,
-            longitude: 23.621165750701667,
-          }}
-          onPress={() => renderBottomSheet(sheetRef)}
-
-          image={require('../eCharge/assets/markers/map_marker_green.png')}
-        />
-
       </MapView>
       <SafeAreaView style={styles.container}>
         <BottomSheet hasDraggableIcon ref={sheetRef} height={600} />
