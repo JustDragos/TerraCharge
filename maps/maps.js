@@ -6,16 +6,27 @@ import { mapStyleDark } from './map_style'; // this gets the design of the map; 
 import { Marker } from 'react-native-maps'; // this is from the normal map
 import BottomSheet from "react-native-gesture-bottom-sheet"; // this is for the swipe up list
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MarkerClass } from '../domain/markers'
+import { StationsClass } from '../domain/markers'
 import { Arduino } from '../arduino/arduino_set_up';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
-function getMarkers(arr) {
+function getStations(arr) {
   // put the markers in the corresponding array
   icon = ""
-  arr.push(new MarkerClass(46.77164492183006, 23.625553844482933, "lol0", icon));
-  arr.push(new MarkerClass(46.77325416741861, 23.625092504549855, "lol1", icon));
-  arr.push(new MarkerClass(46.77142447348493, 23.621165750701667, "lol2", icon));
+  arr.push(new StationsClass(46.77164492183006, 23.625553844482933, "lol0", icon));
+  arr.push(new StationsClass(46.77325416741861, 23.625092504549855, "lol1", icon));
+  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
+  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
+  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
+  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
+  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
+
+
+  arr[0].index = 0
+  arr[1].index = 1
+  arr[2].index = 2
+
 }
 
 function renderBottomSheet(sheetRef) {
@@ -42,13 +53,8 @@ export function Maps({ navigation }) {
   // this is the style of the map
   var typeOfMapForDesign = mapStyleDark;
   const sheetRef = React.useRef(null);
-  var markersArray = new Array();
-  getMarkers(markersArray);
-
-  navigationOptions =
-  {
-     title: 'MapsActivity',
-  };
+  var stationsArray = new Array();
+  getStations(stationsArray);
   // the thing above is so that it can be recognized when you want to switch to this file
   // ex: from the login screen you need this name
   return (
@@ -66,11 +72,11 @@ export function Maps({ navigation }) {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        // latitude and longitude here are where the map starts
-        // can be changed
-        // the delta variables are constants, don't change
+      // latitude and longitude here are where the map starts
+      // can be changed
+      // the delta variables are constants, don't change
       >
-        {markersArray.map((marker, index) => (
+        {stationsArray.map((marker, index) => (
           <Marker
             key={index}
             coordinate={{
@@ -85,18 +91,41 @@ export function Maps({ navigation }) {
         ))}
 
       </MapView>
+
+
       {/*the component below also renders the list from the markers  */}
 
+
       <SafeAreaView style={styles.container}>
-        <BottomSheet hasDraggableIcon ref={sheetRef} height={600}>
-          {/* in this area you add things like buttons, views etc */}
+
+        <BottomSheet hasDraggableIcon ref={sheetRef} height={600}
+        
+        >
           <TouchableOpacity style={styles.button}
-          onPress = {() => navigation.navigate(Arduino)}
+            onPress={() => navigation.navigate(Arduino)}
           >
-              <Text style = {styles.text}>
-                Go to Arduino app
-              </Text>
+            <Text style={styles.text}>
+              Go to Arduino app
+            </Text>
           </TouchableOpacity>
+
+          {/* in this area you add things like buttons, views etc */}
+
+
+
+          {/* here are the stations, to change the design go to style.list_element */}
+          <ScrollView contentContainerStyle={styles.scrollViewContainer}
+
+            nestedScrollEnabled={true}
+          >
+            {stationsArray.map((station, index) => (
+              <View style={styles.eachListElement} key={index}>
+                <Text> {stationsArray[index].address}</Text>
+
+              </View>
+
+            ))}
+          </ScrollView>
 
         </BottomSheet>
 
@@ -112,6 +141,8 @@ export function Maps({ navigation }) {
         </TouchableOpacity>
 
       </SafeAreaView>
+
+
 
       <StatusBar style="auto" />
     </View>
@@ -159,6 +190,22 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 6,
   },
+  scrollViewContainer: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    flexDirection: 'column'
+  },
+  eachListElement: {
+    minHeight: 200,
+    width: 350,
+    marginLeft: 10,
+    marginBottom: 10,
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  }
 
   // 
 

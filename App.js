@@ -13,17 +13,17 @@ export default function App() {
        screenOptions={{ headerShown: false }}
       >
         {/*in this area all the activities should be initialized for the navigation to work, i don't
-        think the order of these screens matter */}
+        think the order of these screens matter,except the first activity is the default one
+        , if the first activity wants to be changed, go in
+        the initialRouteName */}
         <Stack.Screen name = "Maps" component={Maps} options={{gestureEnabled: false}} />
-        
+
         <Stack.Screen name="Arduino" component={Arduino} options={{ gestureEnabled: false}} />
       </Stack.Navigator>
       
     </NavigationContainer>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   
