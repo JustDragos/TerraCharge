@@ -11,7 +11,7 @@ import { MarkerClass } from './entities/markers';
 
 function getMarkers(arr) {
   // put the markers in the corresponding array
-  var icon = '../eCharge/assets/markers/map_marker_green.png';
+  var icon = '../eCharge-App/assets/markers/map_marker_green.png';
   arr.push(new MarkerClass(46.77164492183006, 23.625553844482933, "lol0", icon));
   arr.push(new MarkerClass(46.77325416741861, 23.625092504549855, "lol1", icon));
   arr.push(new MarkerClass(46.77142447348493, 23.621165750701667, "lol2", icon));
@@ -68,7 +68,7 @@ export default function App() {
               longitude: marker.longitude,
 
             }}
-            image={(require('../eCharge/assets/markers/map_marker_green.png'))}
+            image={(require('../eCharge-App/assets/markers/map_marker_green.png'))}
             onPress = {() => renderBottomSheet(sheetRef)}
           />
 
