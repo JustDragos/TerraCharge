@@ -94,6 +94,7 @@ export function Maps({ navigation }) {
       <BottomSheet isOpen = {false}
         sliderMaxHeight={400}
         sliderMinHeight={0}
+        
         ref={sheetRef}
       >
         {(onScrollEndDrag) => (
