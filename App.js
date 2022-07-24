@@ -4,7 +4,7 @@ import { Animated, Dimensions, Image, Platform, StyleSheet, Text, TouchableOpaci
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import { Maps } from './pages/maps/maps';
 // Plus...
 import plus from './assets/plus.png'
 
@@ -47,7 +47,7 @@ export default function App() {
 
           // Tab ICons....
         }
-        <Tab.Screen name={"Home"} component={HomeScreen} options={{
+        <Tab.Screen name={"Home"} component={Maps} options={{
           tabBarLabel:() => {return null},
           tabBarIcon: ({ focused }) => (
             <View style={{
