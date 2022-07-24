@@ -21,9 +21,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={{
-        showLabel: false,
         // Floating Tab Bar...
-        style: {
+        tabBarStyle: {
           backgroundColor: '#95D2FF',
           position: 'absolute',
           bottom: 0,
@@ -49,11 +48,12 @@ export default function App() {
           // Tab ICons....
         }
         <Tab.Screen name={"Home"} component={HomeScreen} options={{
+          tabBarLabel:() => {return null},
           tabBarIcon: ({ focused }) => (
             <View style={{
               // centring Tab Button...
               position: 'absolute',
-              top: 20
+              top: 28
             }}>
               <FontAwesome5
                 name="map"
@@ -73,11 +73,12 @@ export default function App() {
         })}></Tab.Screen>
 
         <Tab.Screen name={"Search"} component={SearchScreen} options={{
+          tabBarLabel:() => {return null},
           tabBarIcon: ({ focused }) => (
             <View style={{
               // centring Tab Button...
               position: 'absolute',
-              top: 20
+              top: 28
             }}>
               <FontAwesome5
                 name="exclamation-circle"
@@ -97,11 +98,12 @@ export default function App() {
         })}></Tab.Screen>
 
         <Tab.Screen name={"Notifications"} component={NotificationScreen} options={{
+          tabBarLabel:() => {return null},
           tabBarIcon: ({ focused }) => (
             <View style={{
               // centring Tab Button...
               position: 'absolute',
-              top: 20
+              top: 28
             }}>
               <FontAwesome5
                 name="chart-bar"
@@ -121,11 +123,12 @@ export default function App() {
         })}></Tab.Screen>
 
         <Tab.Screen name={"Settings"} component={SettingsScreen} options={{
+          tabBarLabel:() => {return null},
           tabBarIcon: ({ focused }) => (
             <View style={{
               // centring Tab Button...
               position: 'absolute',
-              top: 20
+              top: 28
             }}>
               <FontAwesome5
                 name="user-alt"
