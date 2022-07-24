@@ -4,11 +4,10 @@ import MapView from 'react-native-maps';
 import * as React from 'react';
 import { mapStyleDark } from './map_style'; // this gets the design of the map; the style
 import { Marker } from 'react-native-maps'; // this is from the normal map
-import BottomSheet from "react-native-gesture-bottom-sheet"; // this is for the swipe up list
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { StationsClass } from '../domain/markers'
 import { Arduino } from '../arduino/arduino_set_up';
-import { ScrollView } from 'react-native-gesture-handler';
+import BottomSheet from 'react-native-simple-bottom-sheet';
+import { ScrollView } from 'react-native';
 
 
 function getStations(arr) {
@@ -29,29 +28,30 @@ function getStations(arr) {
 
 }
 
-function renderBottomSheet(sheetRef) {
-  // this uses the same bottom sheet from the see stations menu
-  // if you modify that, you modify this
-  // this happens because you use the same referrence === sheetRef
-  // this is here just for when you press a marker, so that the list pops up, make all changes
-  // in the one in see stations button
-  return (
-    <SafeAreaView>
-      <BottomSheet
-        hasDraggableIcon
-        ref={sheetRef}
-      >
-        {sheetRef.current.show()}
-      </BottomSheet>
-    </SafeAreaView>
-  );
+function closeBottomSheet(ref) {
+  ref.current.togglePanel()
+  
 }
 
+function loadStationsButton(ref) {
+    return (
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => closeBottomSheet(ref)}
+      >
+        <Text style={styles.text}>
+          See stations
+        </Text>
+      </TouchableOpacity>
+    );
+  
 
+}
 
 export function Maps({ navigation }) {
   // this is the style of the map
   var typeOfMapForDesign = mapStyleDark;
+
   const sheetRef = React.useRef(null);
   var stationsArray = new Array();
   getStations(stationsArray);
@@ -85,65 +85,33 @@ export function Maps({ navigation }) {
 
             }}
             image={(require('../assets/markers/map_marker_green.png'))}
-            onPress={() => renderBottomSheet(sheetRef)}
+            onPress={() => closeBottomSheet(sheetRef)}
           />
 
         ))}
 
       </MapView>
-
-
-      {/*the component below also renders the list from the markers  */}
-
-
-      <SafeAreaView style={styles.container}>
-
-        <BottomSheet hasDraggableIcon ref={sheetRef} height={600}
-        
-        >
-          <TouchableOpacity style={styles.button}
-            onPress={() => navigation.navigate(Arduino)}
-          >
-            <Text style={styles.text}>
-              Go to Arduino app
-            </Text>
-          </TouchableOpacity>
-
-          {/* in this area you add things like buttons, views etc */}
-
-
-
-          {/* here are the stations, to change the design go to style.list_element */}
-          <ScrollView contentContainerStyle={styles.scrollViewContainer}
-
-            nestedScrollEnabled={true}
-          >
-            {stationsArray.map((station, index) => (
-              <View style={styles.eachListElement} key={index}>
-                <Text> {stationsArray[index].address}</Text>
-
+      <BottomSheet isOpen = {false}
+        sliderMaxHeight={400}
+        sliderMinHeight={0}
+        ref={sheetRef}
+      >
+        {(onScrollEndDrag) => (
+          <ScrollView onScrollEndDrag={onScrollEndDrag}>
+            {stationsArray.map((_, index) => (
+              <View key={`${index}`} style={styles.eachListElement}
+              
+              >
+                <Text>{stationsArray[index].address}</Text>
+                
               </View>
-
             ))}
           </ScrollView>
-
-        </BottomSheet>
-
-
-        {/*see the all stations button */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => sheetRef.current.show()}
-        >
-          <Text style={styles.text}>
-            See stations
-          </Text>
-        </TouchableOpacity>
-
-      </SafeAreaView>
-
-
-
+        )}
+      </BottomSheet>
+      <View>
+        {loadStationsButton(sheetRef)}
+      </View>
       <StatusBar style="auto" />
     </View>
   );
