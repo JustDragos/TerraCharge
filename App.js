@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Maps} from './maps/maps'
+import {Maps} from './pages/maps/maps'
 import { Arduino } from './arduino/arduino_set_up';
 const Stack = createNativeStackNavigator();
 

@@ -4,8 +4,8 @@ import MapView from 'react-native-maps';
 import * as React from 'react';
 import { mapStyleDark } from './map_style'; // this gets the design of the map; the style
 import { Marker } from 'react-native-maps'; // this is from the normal map
-import { StationsClass } from '../domain/markers'
-import { Arduino } from '../arduino/arduino_set_up';
+import { StationsClass } from '../../domain/markers'
+import { Arduino } from '../../arduino/arduino_set_up';
 import BottomSheet from 'react-native-simple-bottom-sheet';
 import { ScrollView } from 'react-native';
 
@@ -84,7 +84,7 @@ export function Maps({ navigation }) {
               longitude: marker.longitude,
 
             }}
-            image={(require('../assets/markers/map_marker_green.png'))}
+            image={(require('../../assets/markers/map_marker_green.png'))}
             onPress={() => closeBottomSheet(sheetRef)}
           />
 
@@ -103,6 +103,9 @@ export function Maps({ navigation }) {
               
               >
                 <Text>{stationsArray[index].address}</Text>
+                <TouchableOpacity style={styles.button}>
+
+                </TouchableOpacity>
                 
               </View>
             ))}
