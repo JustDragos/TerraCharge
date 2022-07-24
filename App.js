@@ -20,8 +20,11 @@ export default function App() {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{
+      <Tab.Navigator 
+      
+      screenOptions={{
         // Floating Tab Bar...
+        headerShown: false,
         tabBarStyle: {
           backgroundColor: '#95D2FF',
           position: 'absolute',
@@ -29,6 +32,7 @@ export default function App() {
           marginHorizontal: 0,
           // Max Height...
           height: 75,
+          headerShown: false,
           borderTopRightRadius: 28,
           borderTopLeftRadius: 28,
           // Shadow...
