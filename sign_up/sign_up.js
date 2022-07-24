@@ -5,71 +5,92 @@ import React, { Component } from 'react';
 import { TextInput } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-web';
 import { render } from 'react-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
 
-export function SignUp({navigation})
-{
+//API client
+import axios from 'axios'
+
+export function SignUp({navigation})  {
         return(
-        
-        <View style={styles.main_view}>
-            
-            <View>
-                 <Image
-                    style={styles.image}
-                    source={require('../assets/logo/logo.jpg')}
-                />
-                <Text style={styles.sign_up} >
-                    Sign Up
-                </Text>
-            </View>
-
-            <View style={styles.input_container}>
-                <Text style={styles.input_label}>
-                    E-mail
-                </Text>
-                <TextInput
-                    keyboardType='email-address'
-                    style={styles.input}
-                    returnKeyLabel='send'
-                    placeholder='youremail@email.com'
-                />
-                <Text style={styles.input_label}>
-                    Password
-                </Text>
-                <TextInput
-                    secureTextEntry = {true}
-                    style={styles.input}
-                    returnKeyLabel='send'
-                    placeholder='Enter your password'
-                />
-                <Text style={styles.input_label}>
-                    Confirm password
-                </Text>
-                <TextInput
-                    secureTextEntry = {true}
-                    style={styles.input}
-                    returnKeyLabel='send'
-                    placeholder='Confirm your password'
-                />
+            <View style={styles.main_view}>
+                
+                <View>
+                     <Image
+                        style={styles.image}
+                        source={require('../assets/logo/logo.jpg')}
+                    />
+                    <Text style={styles.sign_up} >
+                        Sign Up
+                    </Text>
+                </View>
+    
+                <View style={styles.input_container}>
+                    <Text style={styles.input_label}>
+                        E-mail
+                    </Text>
+                    <TextInput
+                        keyboardType='email-address'
+                        style={styles.input}
+                        returnKeyLabel='send'
+                        placeholder='youremail@email.com'
+                    />
+                    <Text style={styles.input_label}>
+                        Password
+                    </Text>
+                    <TextInput
+                        secureTextEntry = {true}
+                        style={styles.input}
+                        returnKeyLabel='send'
+                        placeholder='Enter your password'
+                    />
+                    <Text style={styles.input_label}>
+                        Confirm password
+                    </Text>
+                    <TextInput
+                        secureTextEntry = {true}
+                        style={styles.input}
+                        returnKeyLabel='send'
+                        placeholder='Confirm your password'
+                    />
+                    <TouchableOpacity
+                        style={styles.sign_up_button}
+                    >
+                        <Text style={styles.sign_up_text}>
+                            Sign Up
+                        </Text>
+                    </TouchableOpacity>
+                    
+                </View>
+                <View>
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <View style={{flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50}} />
+                    <View>
+                        <Text style={{width: 90, textAlign: 'center'}}>Or try with</Text>
+                    </View>
+                        <View style={{flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50}} />
+                    </View>
+                    <View style={styles.try_with_container}>
+                        <Image
+                            style={styles.facebook_icon}
+                            source = {require('../assets/try_with_icons/facebook.png')}
+                        />
+                        <Image
+                            style={styles.apple_icon}
+                            source = {require('../assets/try_with_icons/apple.png')}
+                        />
+                        <Image
+                            style={styles.google_icon}
+                            source = {require('../assets/try_with_icons/google.png')}
+                        />
+                    </View>
+                    
+                </View>
                 
             </View>
-            <View style={styles.try_with_container}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
-                <View>
-                    <Text style={{width: 90, textAlign: 'center'}}>Or try with</Text>
-                </View>
-                    <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
-                </View>
-            </View>
-            <FontAwesomeIcon icon="fa-brands fa-facebook" />
-            <FontAwesomeIcon icon="fa-brands fa-apple" />
-            <FontAwesomeIcon icon="fa-brands fa-google" />
-        </View>
-        );
+            );
 }
+
+
 
 const styles = StyleSheet.create({
     main_view: {
@@ -104,11 +125,39 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     input_container: {
-        paddingTop: 30,
-        paddingBottom: 40,
         margin: 30
     },
     try_with_container: {
-        paddingBottom: 400
+        paddingTop: 30,
+        paddingBottom: 400,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
+    },
+    facebook_icon: {
+        height: 40,
+        width: 40
+    },
+    apple_icon: {
+        height: 36,
+        width: 36
+    },
+    google_icon: {
+        height: 36,
+        width: 36
+    },
+    sign_up_button: {
+    height: 70,
+    width: 300,
+    marginTop: 20,
+    backgroundColor: 'deepskyblue',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    borderRadius: 20
+    },
+    sign_up_text: {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: '700'
     }
   });

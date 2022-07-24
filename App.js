@@ -15,13 +15,12 @@ export default function App() {
       >
         {/*in this area all the activities should be initialized for the navigation to work, i don't
         think the order of these screens matter */}
-        <Stack.Screen name = "Sign-Up" component={SignUp} options={{gestureEnabled: false}} />
+        <Stack.Screen name = "SignUp" component={SignUp} options={{gestureEnabled: false}} />
 
         <Stack.Screen name = "Maps" component={Maps} options={{gestureEnabled: false}} />
         
         <Stack.Screen name="Arduino" component={Arduino} options={{ gestureEnabled: false}} />
       </Stack.Navigator>
-      
     </NavigationContainer>
   );
 }
