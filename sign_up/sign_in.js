@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-web';
 import { render } from 'react-dom';
 
 
-export function SignUp({navigation}){
+export function SignIn({navigation}){
         return(
             <View style={styles.main_view}>
                 
@@ -17,7 +17,7 @@ export function SignUp({navigation}){
                         source={require('../assets/logo/logo.jpg')}
                     />
                     <Text style={styles.title} >
-                        Sign Up
+                        Sign In
                     </Text>
                 </View>
     
@@ -40,23 +40,15 @@ export function SignUp({navigation}){
                         returnKeyLabel='send'
                         placeholder='Enter your password'
                     />
-                    <Text style={styles.input_label}>
-                        Confirm password
-                    </Text>
-                    <TextInput
-                        secureTextEntry = {true}
-                        style={styles.input}
-                        returnKeyLabel='send'
-                        placeholder='Confirm your password'
-                    />
+                    
                     <TouchableOpacity
                         style={styles.submit_button}
                         onPress = {() => {
-                            navigation.navigate("Maps", {name: "Maps"})
+                            navigation.navigate("Maps", {name: "Maps"});
                         }}
                     >
                         <Text style={styles.submit_text}>
-                            Sign Up
+                            Sign In
                         </Text>
                     </TouchableOpacity>
                     
@@ -65,7 +57,7 @@ export function SignUp({navigation}){
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <View style={{flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50}} />
                     <View>
-                        <Text style={{width: 90, textAlign: 'center'}}>Or try with</Text>
+                        <Text style={{width: 120, textAlign: 'center'}}>Or continue with</Text>
                     </View>
                         <View style={{flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50}} />
                     </View>
@@ -87,8 +79,7 @@ export function SignUp({navigation}){
                 </View>
                 
             </View>
-        );
-        
+        );     
 }
 
 const styles = StyleSheet.create({
@@ -124,7 +115,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     input_container: {
-        margin: 30
+        margin: 30,
+        paddingTop: 40,
+        paddingBottom: 30
     },
     try_with_container: {
         paddingTop: 30,
@@ -147,7 +140,7 @@ const styles = StyleSheet.create({
     submit_button: {
     height: 70,
     width: 300,
-    marginTop: 20,
+    marginTop: 50,
     backgroundColor: 'deepskyblue',
     justifyContent: 'center',
     alignSelf: 'center',

@@ -5,6 +5,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Maps} from './maps/maps'
 import { Arduino } from './arduino/arduino_set_up';
 import { SignUp } from './sign_up/sign_up';
+import { SignIn } from './sign_up/sign_in';
+import { GetStarted } from './sign_up/get_started';
+
+
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -15,7 +20,11 @@ export default function App() {
       >
         {/*in this area all the activities should be initialized for the navigation to work, i don't
         think the order of these screens matter */}
+        <Stack.Screen name = "GetStarted" component={GetStarted} options={{gestureEnabled: false}} />
+
         <Stack.Screen name = "SignUp" component={SignUp} options={{gestureEnabled: false}} />
+
+        <Stack.Screen name = "SignIn" component={SignIn} options={{gestureEnabled: false}} />
 
         <Stack.Screen name = "Maps" component={Maps} options={{gestureEnabled: false}} />
         
