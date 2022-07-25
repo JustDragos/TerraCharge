@@ -1,16 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
+//import { StatusBar } from 'expo-status-bar';
 import { Dimensions, StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
 import { WebView } from 'react-native-webview';
 import React, { Component } from 'react'; 
 import { TextInput } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-web';
 import { render } from 'react-dom';
+import {registerUser} from "./sign_up_backend.js"
 
 
-//API client
-import axios from 'axios'
+export class SignUp extends Component{
+    state = {
+        email: "",
+        password1: "",
+        password2: ""
+    }
 
-export function SignUp({navigation})  {
+    submit() {
+        console.warn("email: ", this.state.email, "password1: ", this.state.password1, "password2: ", this.state.password2);
+    }
+
+    render() {
         return(
             <View style={styles.main_view}>
                 
@@ -31,6 +40,11 @@ export function SignUp({navigation})  {
                     <TextInput
                         keyboardType='email-address'
                         style={styles.input}
+                        onChangeText = {(text) => {
+                            this.setState({
+                                email: text
+                            });
+                        }}
                         returnKeyLabel='send'
                         placeholder='youremail@email.com'
                     />
@@ -40,6 +54,11 @@ export function SignUp({navigation})  {
                     <TextInput
                         secureTextEntry = {true}
                         style={styles.input}
+                        onChangeText = {(text) => {
+                            this.setState({
+                                password1: text
+                            });
+                        }}
                         returnKeyLabel='send'
                         placeholder='Enter your password'
                     />
@@ -49,11 +68,19 @@ export function SignUp({navigation})  {
                     <TextInput
                         secureTextEntry = {true}
                         style={styles.input}
+                        onChangeText = {(text) => {
+                            this.setState({
+                                password2: text
+                            });
+                        }}
                         returnKeyLabel='send'
                         placeholder='Confirm your password'
                     />
                     <TouchableOpacity
                         style={styles.sign_up_button}
+                        onPress = {() => {
+                            this.submit();
+                        }}
                     >
                         <Text style={styles.sign_up_text}>
                             Sign Up
@@ -87,10 +114,10 @@ export function SignUp({navigation})  {
                 </View>
                 
             </View>
-            );
+        );
+    }
+        
 }
-
-
 
 const styles = StyleSheet.create({
     main_view: {
@@ -161,3 +188,4 @@ const styles = StyleSheet.create({
         fontWeight: '700'
     }
   });
+
