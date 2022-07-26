@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Dimensions, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import MapView from 'react-native-maps';
 import * as React from 'react';
 import { mapStyleDark } from './map_style'; // this gets the design of the map; the style
@@ -8,7 +9,7 @@ import { StationsClass } from '../../domain/markers'
 import { Arduino } from '../../arduino/arduino_set_up';
 import BottomSheet from 'react-native-simple-bottom-sheet';
 import { ScrollView } from 'react-native';
-
+import { Portal } from '@gorhom/portal';
 
 function getStations(arr) {
   // put the markers in the corresponding array
@@ -30,28 +31,11 @@ function getStations(arr) {
 
 function closeBottomSheet(ref) {
   ref.current.togglePanel()
-  
-}
-
-function loadStationsButton(ref) {
-    return (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => closeBottomSheet(ref)}
-      >
-        <Text style={styles.text}>
-          See stations
-        </Text>
-      </TouchableOpacity>
-    );
-  
 
 }
 
 export function Maps({ navigation }) {
   // this is the style of the map
-  var typeOfMapForDesign = mapStyleDark;
-
   const sheetRef = React.useRef(null);
   var stationsArray = new Array();
   getStations(stationsArray);
@@ -62,7 +46,7 @@ export function Maps({ navigation }) {
       <MapView style={styles.map}
         // comple with locations of the map  and the style
         // the style is from the variable in maps, in maps_style.js
-        customMapStyle={typeOfMapForDesign}
+
         showsUserLocation={true}
         zoomEnabled={true}
         zoomControlEnabled={true}
@@ -91,31 +75,31 @@ export function Maps({ navigation }) {
         ))}
 
       </MapView>
-      <BottomSheet isOpen = {false}
-        sliderMaxHeight={400}
-        sliderMinHeight={0}
-        
-        ref={sheetRef}
-      >
-        {(onScrollEndDrag) => (
-          <ScrollView onScrollEndDrag={onScrollEndDrag}>
-            {stationsArray.map((_, index) => (
-              <View key={`${index}`} style={styles.eachListElement}
-              
-              >
-                <Text>{stationsArray[index].address}</Text>
-                <TouchableOpacity style={styles.button}>
+      <Portal hostName="bottomSheetPortal">
+      <View >
+        <BottomSheet isOpen={false}
+          sliderMaxHeight={400}
+          sliderMinHeight={0}
+          ref={sheetRef}
+        >
+          {(onScrollEndDrag) => (
+            <ScrollView onScrollEndDrag={onScrollEndDrag}>
+              {stationsArray.map((_, index) => (
+                <View key={`${index}`} style={styles.eachListElement}
 
-                </TouchableOpacity>
-                
-              </View>
-            ))}
-          </ScrollView>
-        )}
-      </BottomSheet>
-      <View>
-        {loadStationsButton(sheetRef)}
-      </View>
+                >
+                  <Text>{stationsArray[index].address}</Text>
+                  <TouchableOpacity style={styles.button}>
+
+                  </TouchableOpacity>
+
+                </View>
+              ))}
+            </ScrollView>
+          )}
+        </BottomSheet>
+        </View>
+        </Portal>
       <StatusBar style="auto" />
     </View>
   );
@@ -128,14 +112,20 @@ export function Maps({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
+    height: "100%",
+    position: 'relative',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  // goes with the general bacground of app; not really used here
+  // goes with the general background of app; not really used here
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+    marginBottom: 150,
+    position: 'relative'
+    
   },
   // goes with the map
   text: {
@@ -145,6 +135,7 @@ const styles = StyleSheet.create({
   button: {
     height: 50,
     width: 150,
+
     backgroundColor: "#140078",
     justifyContent: "center",
     alignItems: "center",
@@ -162,11 +153,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 6,
   },
-  scrollViewContainer: {
-    flexGrow: 1,
-    justifyContent: 'space-between',
-    flexDirection: 'column'
-  },
+
   eachListElement: {
     minHeight: 200,
     width: 350,
@@ -177,8 +164,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-  }
+  },
+  
 
-  // 
 
 });
