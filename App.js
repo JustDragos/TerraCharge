@@ -4,7 +4,7 @@ import { Animated, Dimensions, Image, Platform, StyleSheet, Text, TouchableOpaci
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Maps } from './pages/maps/maps';
-import { tipsAndTricks } from './pages/tipsAndTricks/tipsAndTricks';
+import { TipsAndTricks } from './pages/tipsAndTricks/tipsAndTricks';
 // Plus...
 import plus from './assets/plus.png'
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -84,7 +84,7 @@ export default function App() {
               }
             })}></Tab.Screen>
 
-            <Tab.Screen name={"Search"} component={tipsAndTricks} options={{
+            <Tab.Screen name={"Search"} component={TipsAndTricks} options={{
               tabBarLabel: () => { return null },
               tabBarIcon: ({ focused }) => (
                 <View style={{
