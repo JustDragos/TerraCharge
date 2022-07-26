@@ -4,6 +4,7 @@ import { Animated, Dimensions, Image, Platform, StyleSheet, Text, TouchableOpaci
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Maps } from './pages/maps/maps';
+import { tipsAndTricks } from './pages/tipsAndTricks/tipsAndTricks';
 // Plus...
 import plus from './assets/plus.png'
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -20,7 +21,7 @@ export default function App() {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
   return (
-
+    
     <SafeAreaView style={styles.SafeAreaViewContainer}>
       <PortalProvider>
         <NavigationContainer>
@@ -83,7 +84,7 @@ export default function App() {
               }
             })}></Tab.Screen>
 
-            <Tab.Screen name={"Search"} component={SearchScreen} options={{
+            <Tab.Screen name={"Search"} component={tipsAndTricks} options={{
               tabBarLabel: () => { return null },
               tabBarIcon: ({ focused }) => (
                 <View style={{
@@ -223,14 +224,6 @@ function NotificationScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Aici trebuie sa apara stats</Text>
-    </View>
-  );
-}
-
-function SearchScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Aici trebuie sa apara info(tips'ntricks)!</Text>
     </View>
   );
 }
