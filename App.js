@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Animated, Dimensions, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Maps } from './pages/maps/maps';
 import { TipsAndTricks } from './pages/tipsAndTricks/tipsAndTricks';
@@ -12,6 +14,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome5 } from '@expo/vector-icons'
 import { useRef } from 'react';
 import { PortalProvider, PortalHost } from '@gorhom/portal';
+
 
 const Tab = createBottomTabNavigator();
 
