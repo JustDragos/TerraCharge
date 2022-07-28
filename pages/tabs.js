@@ -197,32 +197,18 @@ function getWidth() {
   return width / 5
 }
 
-function EmptyScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    </View>
-  );
-}
+
 
 function SettingsScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
       <Text>Aici trebuie sa apara profile!</Text>
     </View>
   );
 }
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Aici trebuie sa apara harta!</Text>
-    </View>
-  );
-}
-
 function NotificationScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
       <Text>Aici trebuie sa apara stats</Text>
     </View>
   );
@@ -243,3 +229,6 @@ const styles = StyleSheet.create({
     // width: "100%",
   }
 });
+
+
+
