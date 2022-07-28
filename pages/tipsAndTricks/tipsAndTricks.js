@@ -14,11 +14,15 @@ export function TipsAndTricks() {
       </View>
       <View style = {styles.secoundContainer}>
         <Text style = {styles.mostPopular}>Most popular</Text>
-        <View style={{    backgroundColor: '#41EF22',}}>
+        <View style={styles.insideSecoundContainer}>
           <View style = {styles.tipsContainer}>
-            <Text style = {styles.tips}>Tips and tricks</Text>
-            <Text style  = {styles.battery}>for battery health</Text>
-            <Button title='see now'/>
+            <View style = {{flex: 1}}>
+              <Text style = {styles.tips}>Tips and tricks</Text>
+              <Text style  = {styles.battery}>for battery health</Text>
+            </View>
+            <View style = {{flex: 1}}>
+              <Button title='see now'/>
+            </View>
           </View>
           <View>
             <Image source = {require('../../assets/question (1) 1.png')}/>
@@ -26,9 +30,13 @@ export function TipsAndTricks() {
         </View>
       </View>
       <View style = {styles.thirdContainer}>
-        <View>
-          <Text>Others</Text>
-          <Button title = 'View all'/>
+        <View style = {{flexDirection: 'row', alignContent: 'space-between'}}>
+          <View>
+            <Text style = {styles.mostPopular}>Others</Text>
+          </View>
+          <View style = {{paddingLeft: 200}}>
+            <Button title = 'View all'/>
+          </View>
         </View>
         <View>
 
@@ -42,12 +50,10 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingLeft: 30,
     paddingRight: 30,
-    paddingBottom: 10,
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignContent: 'center',
-    width: 400,
-    height: 600,
+    flex: 1,
     backgroundColor: '#fff'
   },
   firstContainer: {
@@ -56,17 +62,28 @@ const styles = StyleSheet.create({
   },
   secoundContainer: {
     flex: 1,
-    paddingBottom: 50
+    paddingBottom: 50,
+  },
+  insideSecoundContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+    backgroundColor: '#D0F9C9',
+    borderRadius: 25
   },
   thirdContainer: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignContent: 'center'
   },
   tipsContainer: {
-    paddingTop: 5,
-    justifyContent: 'flex-start',
+    paddingTop: 20,
+    paddingBottom: 20,
+    justifyContent: 'center',
     alignContent: 'stretch',
-    paddingLeft: 20
+    paddingLeft: 25
   },
   welcomeback: {
     color: 393939,
@@ -89,7 +106,7 @@ const styles = StyleSheet.create({
   },
   mostPopular: {
     color: 989898,
-    fontSize: 15
+    fontSize: 20
     
   },
   seeNow: {
