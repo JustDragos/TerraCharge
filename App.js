@@ -202,14 +202,14 @@ function getWidth() {
 
 function EmptyScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
     </View>
   );
 }
 
 function SettingsScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
       <Text>Aici trebuie sa apara profile!</Text>
     </View>
   );
@@ -217,7 +217,7 @@ function SettingsScreen() {
 
 function HomeScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
       <Text>Aici trebuie sa apara harta!</Text>
     </View>
   );
@@ -225,7 +225,7 @@ function HomeScreen() {
 
 function NotificationScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff'}}>
       <Text>Aici trebuie sa apara stats</Text>
     </View>
   );

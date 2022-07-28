@@ -8,8 +8,12 @@ export function TipsAndTricks() {
       <View style={styles.firstContainer}>
         <Text style = {styles.welcomeback}>Welcome back,</Text>
         <View style = {styles.davidContainer}>
-          <Text style = {styles.david}>David!</Text>
-          <Image source = {require('../../assets/charging 1.png')} style = {styles.charging1}   />
+          <View style = {{flex: 2}}>
+            <Text style = {styles.david}>David!</Text>
+          </View>
+          <View style = {{flex: 4, felxDirection: 'row', justifyContent: 'flex-start', paddingRight: 100}}>
+            <Image source = {require('../../assets/battery1.png')} style = {styles.charging1}   />
+          </View>
         </View>     
       </View>
       <View style = {styles.secoundContainer}>
@@ -24,8 +28,8 @@ export function TipsAndTricks() {
               <Button title='see now'/>
             </View>
           </View>
-          <View>
-            <Image source = {require('../../assets/question (1) 1.png')}/>
+          <View style = {{justifyContent:'center', paddingBottom: 20, paddingRight: 20}}>
+            <Image source = {require('../../assets/battery2.png')} style = {styles.image2}/>
           </View>
         </View>
       </View>
@@ -63,13 +67,17 @@ const styles = StyleSheet.create({
   secoundContainer: {
     flex: 1,
     paddingBottom: 50,
+    width: 325,
+    height: 400,
+    justifyContent: 'center'
   },
   insideSecoundContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignContent: 'center',
     backgroundColor: '#D0F9C9',
-    borderRadius: 25
+    borderRadius: 25,
+    height: 200
   },
   thirdContainer: {
     flex: 1,
@@ -79,7 +87,7 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   tipsContainer: {
-    paddingTop: 20,
+    paddingTop: 40,
     paddingBottom: 20,
     justifyContent: 'center',
     alignContent: 'stretch',
@@ -96,7 +104,8 @@ const styles = StyleSheet.create({
   },
   davidContainer:{
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'flex-start',
+    alignContent: 'center'
   },
   charging1: {
     flex: 1,
@@ -120,5 +129,9 @@ const styles = StyleSheet.create({
   battery: {
     color: 393939,
     fontSize: 18,
+  },
+  image2: {
+    width: 100,
+    height: 100
   }
 })
