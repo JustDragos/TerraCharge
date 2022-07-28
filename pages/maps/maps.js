@@ -10,6 +10,7 @@ import { Arduino } from '../../arduino/arduino_set_up';
 import BottomSheet from 'react-native-simple-bottom-sheet';
 import { ScrollView } from 'react-native';
 import { Portal } from '@gorhom/portal';
+import { PageOfStation } from '../station/pageOfStation';
 
 function getStations(arr) {
   // put the markers in the corresponding array
@@ -31,6 +32,11 @@ function getStations(arr) {
 
 function closeBottomSheet(ref) {
   ref.current.togglePanel()
+
+}
+
+function goToPageOfStation(){
+  
 
 }
 
@@ -76,30 +82,36 @@ export function Maps({ navigation }) {
 
       </MapView>
       <Portal hostName="bottomSheetPortal">
-      <View >
-        <BottomSheet isOpen={false}
-          sliderMaxHeight={400}
-          sliderMinHeight={0}
-          ref={sheetRef}
-        >
-          {(onScrollEndDrag) => (
-            <ScrollView onScrollEndDrag={onScrollEndDrag}>
-              {stationsArray.map((_, index) => (
-                <View key={`${index}`} style={styles.eachListElement}
+        <View >
+          <BottomSheet isOpen={false}
+            sliderMaxHeight={400}
+            sliderMinHeight={0}
+            ref={sheetRef}
+          >
+            {(onScrollEndDrag) => (
+              <ScrollView onScrollEndDrag={onScrollEndDrag}>
+                {stationsArray.map((_, index) => (
+                  <View key={`${index}`} style={styles.eachListElement}
 
-                >
-                  <Text>{stationsArray[index].address}</Text>
-                  <TouchableOpacity style={styles.button}>
+                  >
+                    <Text>{stationsArray[index].address}</Text>
+                    <TouchableOpacity style={styles.button}
+                      onPress={() => {
+                        navigation.navigate(
+                          "PageOfStation"
+                        );
+                      }}
+                    >
 
-                  </TouchableOpacity>
+                    </TouchableOpacity>
 
-                </View>
-              ))}
-            </ScrollView>
-          )}
-        </BottomSheet>
+                  </View>
+                ))}
+              </ScrollView>
+            )}
+          </BottomSheet>
         </View>
-        </Portal>
+      </Portal>
       <StatusBar style="auto" />
     </View>
   );
@@ -125,7 +137,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
     marginBottom: 150,
     position: 'relative'
-    
+
   },
   // goes with the map
   text: {
@@ -165,7 +177,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
   },
-  
+
 
 
 });

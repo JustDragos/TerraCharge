@@ -6,7 +6,6 @@ import { TextInput } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-web';
 import { render } from 'react-dom';
 
-
 export function SignIn({navigation}){
         return(
             <View style={styles.main_view}>
