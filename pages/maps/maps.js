@@ -1,16 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { Dimensions, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
 import MapView from 'react-native-maps';
 import * as React from 'react';
-import { mapStyleDark } from './map_style'; // this gets the design of the map; the style
 import { Marker } from 'react-native-maps'; // this is from the normal map
 import { StationsClass } from '../../domain/markers'
-import { Arduino } from '../../arduino/arduino_set_up';
 import BottomSheet from 'react-native-simple-bottom-sheet';
 import { ScrollView } from 'react-native';
 import { Portal } from '@gorhom/portal';
-import { PageOfStation } from '../station/pageOfStation';
+import {LoadSearchBar} from './search';
 
 function getStations(arr) {
   // put the markers in the corresponding array
@@ -34,12 +32,6 @@ function closeBottomSheet(ref) {
   ref.current.togglePanel()
 
 }
-
-function goToPageOfStation(){
-  
-
-}
-
 export function Maps({ navigation }) {
   // this is the style of the map
   const sheetRef = React.useRef(null);
@@ -66,6 +58,9 @@ export function Maps({ navigation }) {
       // can be changed
       // the delta variables are constants, don't change
       >
+        
+
+        {/*this is here to put the markers on the map */}
         {stationsArray.map((marker, index) => (
           <Marker
             key={index}
@@ -81,13 +76,16 @@ export function Maps({ navigation }) {
         ))}
 
       </MapView>
+      {LoadSearchBar()}
       <Portal hostName="bottomSheetPortal">
+        {/*this is here so that you can open bottom sheet in tabs.js */}
         <View >
           <BottomSheet isOpen={false}
             sliderMaxHeight={400}
             sliderMinHeight={0}
             ref={sheetRef}
           >
+            {/* this is here so that you can scroll up in the list*/}
             {(onScrollEndDrag) => (
               <ScrollView onScrollEndDrag={onScrollEndDrag}>
                 {stationsArray.map((_, index) => (
@@ -113,7 +111,7 @@ export function Maps({ navigation }) {
         </View>
       </Portal>
       <StatusBar style="auto" />
-    </View>
+    </View >
   );
 }
 
@@ -177,7 +175,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
   },
-
+  searchBarStyle: {
+    borderRadius: 10,
+    margin: 10,
+    color: '#000',
+    borderColor: '#666',
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    height: 45,
+    paddingHorizontal: 10,
+    fontSize: 18,
+  },
 
 
 });
