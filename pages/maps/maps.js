@@ -1,33 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Dimensions, StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import MapView from 'react-native-maps';
 import * as React from 'react';
-import { mapStyleDark } from './map_style'; // this gets the design of the map; the style
 import { Marker } from 'react-native-maps'; // this is from the normal map
 import { StationsClass } from '../../domain/markers'
-import { Arduino } from '../../arduino/arduino_set_up';
 import BottomSheet from 'react-native-simple-bottom-sheet';
 import { ScrollView } from 'react-native';
 import { Portal } from '@gorhom/portal';
-import { PageOfStation } from '../station/pageOfStation';
+
+
 
 function getStations(arr) {
   // put the markers in the corresponding array
-  icon = ""
+  icon = '../../assets/markers/map_marker_green.png';
+  var red_icon = '../../assets/markers/map_marker_red.png';
+  var green_icon = '../../assets/markers/map_marker_green.png';
   arr.push(new StationsClass(46.77164492183006, 23.625553844482933, "lol0", icon));
   arr.push(new StationsClass(46.77325416741861, 23.625092504549855, "lol1", icon));
   arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
-  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
-  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
-  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
-  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
 
+  arr[0].chargersLeft = 2;
+  arr[0].chargersInTotal = 5;
+  arr[0].hoursOpened = [8, 20];
+
+
+  arr[1].chargersLeft = 1;
+  arr[1].chargersInTotal = 10;
+  arr[1].hoursOpened = [19, 22];
+
+
+  arr[2].chargersLeft = 5;
+  arr[2].chargersInTotal = 7;
+  arr[2].hoursOpened = [17, 19];
 
   arr[0].index = 0
   arr[1].index = 1
   arr[2].index = 2
-
 }
 
 function closeBottomSheet(ref) {
@@ -35,9 +43,8 @@ function closeBottomSheet(ref) {
 
 }
 
-function goToPageOfStation(){
-  
-
+function getTextOfStationsLeft(arr, index) {
+  return arr[index].chargersInTotal + " charges " + arr[index].chargersLeft + " left";
 }
 
 export function Maps({ navigation }) {
@@ -68,15 +75,17 @@ export function Maps({ navigation }) {
       >
         {stationsArray.map((marker, index) => (
           <Marker
-            key={index}
             coordinate={{
               latitude: marker.latitude,
               longitude: marker.longitude,
 
             }}
-            image={(require('../../assets/markers/map_marker_green.png'))}
+            key={index}
             onPress={() => closeBottomSheet(sheetRef)}
-          />
+            icon = {require('../../assets/markers/map_marker_green.png')}
+          >
+            
+          </Marker>
 
         ))}
 
@@ -94,17 +103,20 @@ export function Maps({ navigation }) {
                   <View key={`${index}`} style={styles.eachListElement}
 
                   >
+                    <Image
+                      style={styles.photo}
+                      source={require('../../assets/battery1.png')}
+                    />
                     <Text>{stationsArray[index].address}</Text>
-                    <TouchableOpacity style={styles.button}
-                      onPress={() => {
-                        navigation.navigate(
-                          "PageOfStation"
-                        );
-                      }}
+                    <Text>{getTextOfStationsLeft(stationsArray, index)}</Text>
+                    <TouchableOpacity style={styles.tinyLogo}
+                      onPress={() => navigation.navigate('PageOfStation')}
                     >
-
+                      <Image
+                        style={styles.tinyLogo}
+                        source={require('../../assets/fi_chevron-left.png')}
+                      />
                     </TouchableOpacity>
-
                   </View>
                 ))}
               </ScrollView>
@@ -170,6 +182,7 @@ const styles = StyleSheet.create({
     minHeight: 200,
     width: 350,
     marginLeft: 10,
+    marginRight: 10,
     marginBottom: 10,
     flex: 1,
     backgroundColor: '#fff',
@@ -177,7 +190,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
   },
-
+  tinyLogo: {
+    width: 100,
+    flex: 1,
+    height: 50,
+    marginRight: "10%",
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+  },
+  photo: {
+    width: 66,
+    height: 58,
+    alignSelf: 'flex-start',
+  },
 
 
 });

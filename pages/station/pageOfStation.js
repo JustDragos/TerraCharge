@@ -1,10 +1,18 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Image,Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 export function PageOfStation({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text>Hello, world!</Text>
+            <TouchableOpacity onPress={() => navigation.goBack()}
+                style={styles.button}
+            >
+                <Image
+                    style={styles.tinyLogo}
+                    source={require('../../assets/fi_chevron-left.png')}
+                />
+            </TouchableOpacity>
+
         </View>
     )
 }
