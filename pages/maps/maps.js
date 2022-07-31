@@ -7,6 +7,7 @@ import { StationsClass } from '../../domain/markers'
 import BottomSheet from 'react-native-simple-bottom-sheet';
 import { ScrollView } from 'react-native';
 import { Portal } from '@gorhom/portal';
+import { LoadSearchBar } from './search_bar';
 
 
 
@@ -18,6 +19,8 @@ function getStations(arr) {
   arr.push(new StationsClass(46.77164492183006, 23.625553844482933, "lol0", icon));
   arr.push(new StationsClass(46.77325416741861, 23.625092504549855, "lol1", icon));
   arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "lol2", icon));
+  arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "Strada Alexandrescu", icon));
+
 
   arr[0].chargersLeft = 2;
   arr[0].chargersInTotal = 5;
@@ -33,9 +36,14 @@ function getStations(arr) {
   arr[2].chargersInTotal = 7;
   arr[2].hoursOpened = [17, 19];
 
+  arr[3].chargersLeft = 5;
+  arr[3].chargersInTotal = 7;
+  arr[3].hoursOpened = [17, 19];
+
   arr[0].index = 0
   arr[1].index = 1
   arr[2].index = 2
+  arr[3].index = 3
 }
 
 function closeBottomSheet(ref) {
@@ -82,14 +90,15 @@ export function Maps({ navigation }) {
             }}
             key={index}
             onPress={() => closeBottomSheet(sheetRef)}
-            icon = {require('../../assets/markers/map_marker_green.png')}
+            icon={require('../../assets/markers/map_marker_green.png')}
           >
-            
+
           </Marker>
 
         ))}
 
       </MapView>
+      {LoadSearchBar(navigation, stationsArray)}
       <Portal hostName="bottomSheetPortal">
         <View >
           <BottomSheet isOpen={false}
