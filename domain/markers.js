@@ -10,17 +10,20 @@ export class StationsClass{
         this.chargersLeft = 0;
         this.hoursOpened = [9, 17];
         this.status = 0;
+        this.distanceFromUser = 0;
         // status - 0 => closed
         // status - 1 => opened
     }
-    
-};
-function getStatus(hoursArray){
-    var hour = new Date().getHours();
-    var minute = new Date().getMinutes()
-    if (hoursArray[0] <= hour && hour <= hoursArray[1]){
-        return 1
+    createStatus(){
+        var hour = new Date().getHours();
+        var minute = new Date().getMinutes()
+        if (this.hoursOpened[0] <= hour && hour <= this.hoursOpened[1]){
+            return 1
+        }
+        return 0;
+        // get current hour and minute
+    } 
+    calculateDistance(){
+        // calculate distance between user and station
     }
-    return 0;
-    // get current hour and minute
-} 
+};
