@@ -2,8 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Animated, Dimensions, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Maps } from './pages/maps/maps';
 import { TipsAndTricks } from './pages/tipsAndTricks/tipsAndTricks';
@@ -14,12 +12,34 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome5 } from '@expo/vector-icons'
 import { useRef } from 'react';
 import { PortalProvider, PortalHost } from '@gorhom/portal';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Arduino } from './arduino/arduino_set_up';
+import { SignUp } from './sign_up/sign_up';
+import { SignIn } from './sign_up/sign_in';
+import { GetStarted } from './sign_up/get_started';
+import { NativeScreenContainer } from 'react-native-screens';
+import { render } from 'react-dom';
 
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 // Hiding Tab Names...
 export default function App() {
+  return(
+    <NavigationContainer>
+      <Stack.Navigator screenOptions = { {headerShown: false} }>
+        <Stack.Screen name = "GetStarted" component = {GetStarted}/>
+        <Stack.Screen name = "SignUp" component = {SignUp} />
+        <Stack.Screen name = "SignIn" component = {SignIn} />
+        <Stack.Screen name = "Home" component = {Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+
+function Home() {
   // Animated Tab Indicator...
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
@@ -27,7 +47,6 @@ export default function App() {
     
     <SafeAreaView style={styles.SafeAreaViewContainer}>
       <PortalProvider>
-        <NavigationContainer>
           <Tab.Navigator
 
             screenOptions={{
@@ -62,7 +81,7 @@ export default function App() {
               // Tab ICons....
             }
 
-            <Tab.Screen name={"Home"} component={Maps} options={{
+            <Tab.Screen name={"Maps"} component={Maps} options={{
               tabBarLabel: () => { return null },
               tabBarIcon: ({ focused }) => (
                 <View style={{
@@ -180,7 +199,6 @@ export default function App() {
           }}>
 
           </Animated.View>
-        </NavigationContainer>
 
         <PortalHost name="bottomSheetPortal" />
 
@@ -189,6 +207,7 @@ export default function App() {
 
   );
 }
+
 
 function getWidth() {
   let width = Dimensions.get("window").width

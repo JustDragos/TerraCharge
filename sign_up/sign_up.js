@@ -52,7 +52,7 @@ export function SignUp({navigation}){
                     <TouchableOpacity
                         style={styles.submit_button}
                         onPress = {() => {
-                            navigation.navigate("Maps", {name: "Maps"})
+                            navigation.navigate("Home", {name: "Home"})
                         }}
                     >
                         <Text style={styles.submit_text}>
