@@ -74,8 +74,15 @@ const texts = StyleSheet.create({
     whiteText: {
         color: "white",
         fontWeight: "600",
+    },
+    redText:{
+        color: "red",
+        fontWeight: "600",
+    },
+    greenText:{
+        color: "green",
+        fontWeight: "600",
     }
-
 })
 
 export { containers, buttons, views, texts }

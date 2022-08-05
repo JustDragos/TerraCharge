@@ -13,7 +13,7 @@ export function LoadSearchBar(navigation, stationsArray) {
                 style={[views.styleOfSearchBar, {width: 150} ]}
                 onPress={() => navigation.navigate('SearchBarActivity', {itemId: 86, arr: stationsArray})}
             >
-                <Text> Search </Text>
+                <Text> Search location... </Text>
             </TouchableOpacity>
         </View >
         

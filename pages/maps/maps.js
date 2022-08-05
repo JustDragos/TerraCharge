@@ -9,6 +9,9 @@ import { ScrollView } from 'react-native';
 import { Portal } from '@gorhom/portal';
 import { LoadSearchBar } from './search_bar';
 import * as Location from 'expo-location';
+import { texts } from './styles';
+import { AirbnbRating } from 'react-native-ratings';
+
 
 
 function distanceBetweenTwoPoints(lat1, lon1, lat2, lon2) {
@@ -41,20 +44,22 @@ function getStations(arr, latitude, longitude) {
   arr[0].chargersLeft = 2;
   arr[0].chargersInTotal = 5;
   arr[0].hoursOpened = [8, 20];
-
+  arr[0].rating = 2.5;
 
   arr[1].chargersLeft = 1;
   arr[1].chargersInTotal = 10;
   arr[1].hoursOpened = [19, 22];
-
+  arr[1].rating = 3.5;
 
   arr[2].chargersLeft = 5;
   arr[2].chargersInTotal = 7;
   arr[2].hoursOpened = [17, 19];
+  arr[2].rating = 5.0;
 
   arr[3].chargersLeft = 5;
   arr[3].chargersInTotal = 7;
   arr[3].hoursOpened = [10, 19];
+  arr[3].rating = 4.5;
 
   for (let i = 0; i < arr.length; i++) {
 
@@ -62,13 +67,11 @@ function getStations(arr, latitude, longitude) {
     arr[i].distanceFromUser = distanceBetweenTwoPoints(latitude, longitude, arr[i].latitude, arr[i].longitude);
   }
   arr.sort(sortingFunction);
-  for (let i = 0; i < arr.length; i++) {
-    arr[i].idInList = i;
-  }
+
 
 }
 function operateBottomSheet(ref) {
-  
+
   ref.current.togglePanel()
 }
 function getTextOfStationsLeft(arr, index) {
@@ -159,7 +162,7 @@ export function Maps({ navigation }) {
 
             }}
             key={index}
-            onPress={() => {operateBottomSheet(sheetRef), setIndexOfStation(index)}}
+            onPress={() => { operateBottomSheet(sheetRef), setIndexOfStation(index) }}
             icon={marker.status == 1 ? require(green_icon) : require(red_icon)}
           >
           </Marker>
@@ -184,16 +187,27 @@ export function Maps({ navigation }) {
                     source={require('../../assets/battery1.png')}
                   />
                   <Text>{stationsArray[indexOfStation].address}</Text>
+                  <AirbnbRating
+                    defaultRating={stationsArray[indexOfStation].rating}
+                    isDisabled={true}
+                    size = {30}
+                    showRating={false}
+                  />
                   <Text>{getTextOfStationsLeft(stationsArray, indexOfStation)}</Text>
+                  <Text style={stationsArray[indexOfStation].status == 1 ? texts.greenText : texts.redText}>
+                    {stationsArray[indexOfStation].status == 1 ? "Open" : "Closed"}
+                  </Text>
                   <TouchableOpacity style={styles.tinyLogo}
-                    onPress={() => navigation.navigate('PageOfStation')}
+                    onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[indexOfStation] })}
                   >
                     <Image
                       style={styles.tinyLogo}
-                      source={require('../../assets/fi_chevron-left.png')}
+                      source={require('../../assets/Vector-10.png')}
                     />
                   </TouchableOpacity>
                 </View>
+
+
                 {stationsArray.map((_, index) => (
                   <View key={`${index}`} style={renderFirstItem(index, stationsArray, 0)}
 
@@ -203,15 +217,25 @@ export function Maps({ navigation }) {
                       source={require('../../assets/battery1.png')}
                     />
                     <Text>{stationsArray[index].address}</Text>
+                    <AirbnbRating
+                      defaultRating={stationsArray[index].rating}
+                      size = {30}
+                      showRating={false}
+                      isDisabled={true}
+                    />
                     <Text>{getTextOfStationsLeft(stationsArray, index)}</Text>
+                    <Text style={stationsArray[index].status == 1 ? texts.greenText : texts.redText}>
+                      {stationsArray[index].status == 1 ? "Open" : "Closed"}
+                    </Text>
                     <TouchableOpacity style={styles.tinyLogo}
-                      onPress={() => navigation.navigate('PageOfStation')}
+                      onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[index] })}
                     >
                       <Image
                         style={styles.tinyLogo}
-                        source={require('../../assets/fi_chevron-left.png')}
+                        source={require('../../assets/Vector-10.png')}
                       />
                     </TouchableOpacity>
+
                   </View>
                 ))}
               </ScrollView>
