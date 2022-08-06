@@ -181,30 +181,35 @@ export function Maps({ navigation }) {
             {(onScrollEndDrag) => (
               <ScrollView onScrollEndDrag={onScrollEndDrag}
               >
+
                 <View style={renderFirstItem(indexOfStation, stationsArray, 1)}>
-                  <Image
-                    style={styles.photo}
-                    source={require('../../assets/battery1.png')}
-                  />
-                  <Text>{stationsArray[indexOfStation].address}</Text>
-                  <AirbnbRating
-                    defaultRating={stationsArray[indexOfStation].rating}
-                    isDisabled={true}
-                    size = {30}
-                    showRating={false}
-                  />
-                  <Text>{getTextOfStationsLeft(stationsArray, indexOfStation)}</Text>
-                  <Text style={stationsArray[indexOfStation].status == 1 ? texts.greenText : texts.redText}>
-                    {stationsArray[indexOfStation].status == 1 ? "Open" : "Closed"}
-                  </Text>
-                  <TouchableOpacity style={styles.tinyLogo}
-                    onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[indexOfStation] })}
-                  >
+                  <View style={{ flexDirection: "row" }}>
                     <Image
-                      style={styles.tinyLogo}
-                      source={require('../../assets/Vector-10.png')}
+                      style={styles.photo}
+                      source={require('../../assets/battery1.png')}
                     />
-                  </TouchableOpacity>
+                    <View>
+                      <Text>{stationsArray[indexOfStation].address}</Text>
+                      <AirbnbRating
+                        defaultRating={stationsArray[indexOfStation].rating}
+                        isDisabled={true}
+                        size={30}
+                        showRating={false}
+                      />
+                      <Text>{getTextOfStationsLeft(stationsArray, indexOfStation)}</Text>
+                      <Text style={stationsArray[indexOfStation].status == 1 ? texts.greenText : texts.redText}>
+                        {stationsArray[indexOfStation].status == 1 ? "Open" : "Closed"}
+                      </Text>
+                    </View>
+                    <TouchableOpacity style={styles.tinyLogo}
+                      onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[indexOfStation] })}
+                    >
+                      <Image
+                        style={styles.tinyLogo}
+                        source={require('../../assets/Vector-10.png')}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
 
 
@@ -212,30 +217,34 @@ export function Maps({ navigation }) {
                   <View key={`${index}`} style={renderFirstItem(index, stationsArray, 0)}
 
                   >
-                    <Image
-                      style={styles.photo}
-                      source={require('../../assets/battery1.png')}
-                    />
-                    <Text>{stationsArray[index].address}</Text>
-                    <AirbnbRating
-                      defaultRating={stationsArray[index].rating}
-                      size = {30}
-                      showRating={false}
-                      isDisabled={true}
-                    />
-                    <Text>{getTextOfStationsLeft(stationsArray, index)}</Text>
-                    <Text style={stationsArray[index].status == 1 ? texts.greenText : texts.redText}>
-                      {stationsArray[index].status == 1 ? "Open" : "Closed"}
-                    </Text>
-                    <TouchableOpacity style={styles.tinyLogo}
-                      onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[index] })}
-                    >
+                    <View style={{ flexDirection: "row" }}>
                       <Image
-                        style={styles.tinyLogo}
-                        source={require('../../assets/Vector-10.png')}
+                        style={styles.photo}
+                        source={require('../../assets/battery1.png')}
                       />
-                    </TouchableOpacity>
 
+                      <View>
+                        <Text>{stationsArray[index].address}</Text>
+                        <AirbnbRating
+                          defaultRating={stationsArray[index].rating}
+                          isDisabled={true}
+                          size={30}
+                          showRating={false}
+                        />
+                        <Text>{getTextOfStationsLeft(stationsArray, index)}</Text>
+                        <Text style={stationsArray[index].status == 1 ? texts.greenText : texts.redText}>
+                          {stationsArray[index].status == 1 ? "Open" : "Closed"}
+                        </Text>
+                      </View>
+                      <TouchableOpacity style={styles.tinyLogo}
+                        onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[index] })}
+                      >
+                        <Image
+                          style={styles.tinyLogo}
+                          source={require('../../assets/Vector-10.png')}
+                        />
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 ))}
               </ScrollView>

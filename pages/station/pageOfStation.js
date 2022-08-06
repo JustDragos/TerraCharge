@@ -29,17 +29,26 @@ export function PageOfStation({ route, navigation }) {
     const { station } = route.params;
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()}
+            <View
+                style={styles.sameRowElement}
             >
+                {/* the view above is to make them on the same line*/}
+                <TouchableOpacity onPress={() => navigation.goBack()}
+                    style={styles.sameRowElement}
+                >
+                    <Image
+                        style={styles.tinyLogo}
+                        source={require('../../assets/fi_chevron-left.png')}
+                    />
+                </TouchableOpacity>
                 <Image
-                    style={styles.tinyLogo}
-                    source={require('../../assets/fi_chevron-left.png')}
+                    source={require("../../assets/battery2.png")}
                 />
-            </TouchableOpacity>
 
-            <Image
-                source={require("../../assets/battery2.png")}
-            />
+            </View>
+
+
+
             <Text>{station.address}</Text>
             <AirbnbRating
                 defaultRating={station.rating}
@@ -49,7 +58,7 @@ export function PageOfStation({ route, navigation }) {
                 isDisabled={true}
                 showRating={false}
             />
-
+            {/* below needs modifications*/}
 
             <Tab.Navigator
                 screenOptions={{
@@ -59,17 +68,21 @@ export function PageOfStation({ route, navigation }) {
                         height: "100%",
                     },
                     tabBarLabelStyle: { fontSize: 12, },
-                    tabBarStyle: { backgroundColor: "white", width: "100%", height: 100, marginLeft: 10 },
-                    
-
+                    tabBarStyle: { backgroundColor: "white", width: 350, height: 100, marginLeft: 10, marginRight: 10, alignContent: 'center' },
                 }}
-                sceneContainerStyle={{ backgroundColor: "white", width: 100, height: 100 }}
+                sceneContainerStyle={{ backgroundColor: "white", width: 100, height: 100, flex: 1 }}
             >
                 <Tab.Screen name='Overview' component={OverviewFunction} />
                 <Tab.Screen name='Reviews' component={ReviewsFunction} />
                 <Tab.Screen name='Location' component={LocationFunction} />
             </Tab.Navigator>
 
+            {/*Up untill here */}
+            <TouchableOpacity style={styles.button}>
+                <Text>
+                    Reserve now
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -103,5 +116,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         shadowRadius: 5,
         elevation: 6,
+    },
+    sameRowElement: {
+        marginTop: 30,
+        flexDirection: "row",
+        flex: 1,
     }
 });
