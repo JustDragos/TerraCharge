@@ -24,34 +24,37 @@ export function SearchBarActivity({ route, navigation }) {
             style={containers.containerBasic}
             behavior="padding"
             enabled={false}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <TextInput
-                    style={views.styleOfSearchBar}
-                    value = {dataSource}
-                    placeholder ={"Search"}
-                    placeholderTextColor={'#666'}
-                    onChangeText={(input) => {
-                        setDataSource(input);
-                    }}
-                />
+            <View style={{ flexDirection: "row", marginTop: 10 }}>
+                <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                >
+                    <Image
+                        style={styles.tinyLogo}
+                        source={require('../../assets/fi_chevron-left.png')}
+                    />
+                </TouchableOpacity>
 
-            </TouchableWithoutFeedback>
-            <TouchableOpacity
-                style={buttons.littleButton}
-                onPress={() => setDataSource("")}
-            >
-                <Text>Clear</Text>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <TextInput
+                        style={views.styleOfSearchBar}
+                        value={dataSource}
+                        placeholder={"Search"}
+                        placeholderTextColor={'#666'}
+                        onChangeText={(input) => {
+                            setDataSource(input);
+                        }}
+                    />
 
-            </TouchableOpacity>
-            <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            >
-            <Image
-                    style={styles.tinyLogo}
-                    source={require('../../assets/fi_chevron-left.png')}
-                />
-            </TouchableOpacity>
-            
+                </TouchableWithoutFeedback>
+                <TouchableOpacity
+                    style={buttons.littleButton}
+                    onPress={() => setDataSource("")}
+                >
+                    <Text>Clear</Text>
+
+                </TouchableOpacity>
+
+            </View>
             <ScrollView>
                 {searchStreet(filteredList, dataSource).map((marker, index) => (
                     <View key={`${index}`} style={styles.eachListElement}>
@@ -68,8 +71,8 @@ export function SearchBarActivity({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-    
-    
+
+
     eachListElement: {
         minHeight: 200,
         width: 350,
@@ -81,5 +84,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    
+
 });
