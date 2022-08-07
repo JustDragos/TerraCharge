@@ -2,8 +2,7 @@ import { Dimensions, StyleSheet, View, TouchableOpacity, Text, Image} from 'reac
 import React, { Component } from 'react'; 
 import { TextInput } from 'react-native-gesture-handler';
 import { Button } from 'react-native-web';
-import { SignUp } from '../sign_up/sign_up';
-import { SignIn } from '../sign_up/sign_in';
+
 
 
 export function GetStarted({navigation}) {
@@ -12,7 +11,7 @@ export function GetStarted({navigation}) {
             <View>
                 <Image
                     style={styles.image}
-                    source={require('../assets/logo/logo.jpg')}
+                    source={require('../../assets/logo/logo.jpg')}
                 />
             </View>
             <TouchableOpacity

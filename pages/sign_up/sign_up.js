@@ -14,7 +14,7 @@ export function SignUp({navigation}){
                 <View>
                      <Image
                         style={styles.image}
-                        source={require('../assets/logo/logo.jpg')}
+                        source={require('../../assets/logo/logo.jpg')}
                     />
                     <Text style={styles.title} >
                         Sign Up
@@ -52,7 +52,7 @@ export function SignUp({navigation}){
                     <TouchableOpacity
                         style={styles.submit_button}
                         onPress = {() => {
-                            navigation.navigate("Maps", {name: "Maps"})
+                            navigation.navigate("Tabs", {name: "Tabs"})
                         }}
                     >
                         <Text style={styles.submit_text}>
@@ -72,15 +72,15 @@ export function SignUp({navigation}){
                     <View style={styles.try_with_container}>
                         <Image
                             style={styles.facebook_icon}
-                            source = {require('../assets/try_with_icons/facebook.png')}
+                            source = {require('../../assets/Facebook.png')}
                         />
                         <Image
                             style={styles.apple_icon}
-                            source = {require('../assets/try_with_icons/apple.png')}
+                            source = {require('../../assets/Apple.png')}
                         />
                         <Image
                             style={styles.google_icon}
-                            source = {require('../assets/try_with_icons/google.png')}
+                            source = {require('../../assets/Google.png')}
                         />
                     </View>
                     
@@ -127,22 +127,22 @@ const styles = StyleSheet.create({
         margin: 30
     },
     try_with_container: {
-        paddingTop: 30,
+        paddingTop: 10,
         paddingBottom: 400,
         flexDirection: 'row',
         justifyContent: 'space-evenly'
     },
     facebook_icon: {
-        height: 40,
-        width: 40
+        height: 70,
+        width: 70
     },
     apple_icon: {
-        height: 36,
-        width: 36
+        height: 70,
+        width: 70
     },
     google_icon: {
-        height: 36,
-        width: 36
+        height: 70,
+        width: 70
     },
     submit_button: {
     height: 70,
