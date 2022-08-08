@@ -14,14 +14,13 @@ export default function App() {
             <AppStack.Navigator
                 screenOptions={{
                     headerShown: false
-                }}
-            >
+                }}>
                 <AppStack.Screen name="GetStarted" component={GetStarted} />
                 <AppStack.Screen name="SignUp" component={SignUp} />
                 <AppStack.Screen name="SignIn" component={SignIn} />
                 <AppStack.Screen name="Tabs" component={Tabs} />
                 <AppStack.Screen name="PageOfStation" component={PageOfStation} />
-                <AppStack.Screen name="SearchBarActivity" component={SearchBarActivity}/>
+                <AppStack.Screen name="SearchBarActivity" component={SearchBarActivity} />
             </AppStack.Navigator>
         </NavigationContainer>
     );

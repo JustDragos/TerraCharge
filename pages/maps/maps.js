@@ -31,35 +31,41 @@ function distanceBetweenTwoPoints(lat1, lon1, lat2, lon2) {
 
   return (d / 1000).toFixed(1);
 }
+
 function sortingFunction(a, b) {
   return a.distanceFromUser - b.distanceFromUser;
 }
+
 function getStations(arr, latitude, longitude) {
   // put the markers in the corresponding array
   icon = '../../assets/markers/map_marker_green.png';
   arr.push(new StationsClass(46.77164492183006, 23.625553844482933, "Strada Alexandru Vaida Voevod", icon));
   arr.push(new StationsClass(46.77325416741861, 23.625092504549855, "Lacul Gheorgheni", icon));
   arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "Aleea Slănic", icon));
-  arr.push(new StationsClass(46.76955626297273, 23.622691749305066, "Strada Alexandrescu", icon));
+  arr.push(new StationsClass(46.76955626297273, 23.622691749305066, "Aleea Borsec", icon));
   arr[0].chargersLeft = 2;
   arr[0].chargersInTotal = 5;
   arr[0].hoursOpened = [8, 20];
   arr[0].rating = 2.5;
+  arr[0].longAddress = "Strada Alexandru Vaida Voevod 53B, Cluj-Napoca 400436";
 
   arr[1].chargersLeft = 1;
   arr[1].chargersInTotal = 10;
   arr[1].hoursOpened = [19, 22];
   arr[1].rating = 3.5;
+  arr[1].longAddress = "Lacul Gheorgheni, Cluj-Napoca";
 
   arr[2].chargersLeft = 5;
   arr[2].chargersInTotal = 7;
   arr[2].hoursOpened = [17, 19];
   arr[2].rating = 5.0;
+  arr[2].longAddress = "Aleea Slănic, Cluj-Napoca 400347";
 
   arr[3].chargersLeft = 5;
   arr[3].chargersInTotal = 7;
   arr[3].hoursOpened = [10, 19];
   arr[3].rating = 4.5;
+  arr[3].longAddress = "Gheorgheni, Cluj-Napoca 400394";
 
   for (let i = 0; i < arr.length; i++) {
 
@@ -70,13 +76,16 @@ function getStations(arr, latitude, longitude) {
 
 
 }
+
 function operateBottomSheet(ref) {
 
   ref.current.togglePanel()
 }
+
 function getTextOfStationsLeft(arr, index) {
   return arr[index].chargersInTotal + " charges " + arr[index].chargersLeft + " left \n" + arr[index].distanceFromUser + " km away";
 }
+
 function getLocationFromUser() {
   var [longitude, setLongitude] = useState(0);
   var [latitude, setLatitude] = useState(0);
@@ -107,14 +116,14 @@ function getLocationFromUser() {
   }
   return [latitude, longitude];
 }
-function renderFirstItem(index, stationsArray, shouldBeFirst) {
+
+function renderFirstItem(station, shouldBeFirst) {
   if (shouldBeFirst == 0)
     return styles.eachListElement;
-  if (stationsArray[index].status == 1)
+  if (station.status == 1)
     return [styles.eachListElement, { backgroundColor: 'lightgreen' }];
   return [styles.eachListElement, { backgroundColor: 'lightcoral' }];
 }
-
 
 export function Maps({ navigation }) {
   // this is the style of the map
@@ -181,15 +190,15 @@ export function Maps({ navigation }) {
             {(onScrollEndDrag) => (
               <ScrollView onScrollEndDrag={onScrollEndDrag}
               >
-
-                <View style={renderFirstItem(indexOfStation, stationsArray, 1)}>
+                {/*generate the clicked station*/}
+                <View style={renderFirstItem(stationsArray[indexOfStation], 1)}>
                   <View style={{ flexDirection: "row" }}>
                     <Image
                       style={styles.photo}
                       source={require('../../assets/battery1.png')}
                     />
                     <View>
-                      <Text>{stationsArray[indexOfStation].address}</Text>
+                      <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{stationsArray[indexOfStation].shortAddress}</Text>
                       <AirbnbRating
                         defaultRating={stationsArray[indexOfStation].rating}
                         isDisabled={true}
@@ -205,16 +214,16 @@ export function Maps({ navigation }) {
                       onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[indexOfStation] })}
                     >
                       <Image
-                        style={styles.tinyLogo}
-                        source={require('../../assets/Vector-10.png')}
+                        
+                        source={require('../../assets/navigators/go_forward.png')}
                       />
                     </TouchableOpacity>
                   </View>
                 </View>
-
+                {/*generate all the other stations based on distance from user */}
 
                 {stationsArray.map((_, index) => (
-                  <View key={`${index}`} style={renderFirstItem(index, stationsArray, 0)}
+                  <View key={`${index}`} style={renderFirstItem(stationsArray[index], 0)}
 
                   >
                     <View style={{ flexDirection: "row" }}>
@@ -224,7 +233,7 @@ export function Maps({ navigation }) {
                       />
 
                       <View>
-                        <Text>{stationsArray[index].address}</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{stationsArray[index].shortAddress}</Text>
                         <AirbnbRating
                           defaultRating={stationsArray[index].rating}
                           isDisabled={true}
@@ -240,8 +249,8 @@ export function Maps({ navigation }) {
                         onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[index] })}
                       >
                         <Image
-                          style={styles.tinyLogo}
-                          source={require('../../assets/Vector-10.png')}
+                          
+                          source={require('../../assets/navigators/go_forward.png')}
                         />
                       </TouchableOpacity>
                     </View>
@@ -256,10 +265,6 @@ export function Maps({ navigation }) {
     </View>
   );
 }
-
-
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -307,15 +312,16 @@ const styles = StyleSheet.create({
   },
 
   eachListElement: {
-    minHeight: 200,
-    width: 350,
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
+    minHeight: 150,
+    width: "100%",
+    marginLeft: 1,
+    marginRight: 5,
+    marginBottom: 3,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 10,
 
   },
   tinyLogo: {

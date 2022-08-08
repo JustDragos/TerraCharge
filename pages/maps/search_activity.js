@@ -6,7 +6,7 @@ import { containers, views, buttons } from "./styles";
 function searchStreet(input, dataSource) {
     return input.filter(
         (listItem) =>
-            listItem.address
+            listItem.shortAddress
                 .toLowerCase()
                 .includes(dataSource.toLowerCase()) /*||
           listItem.song.toLowerCase().includes(this.state.search.toLowerCase()),*/
@@ -29,8 +29,8 @@ export function SearchBarActivity({ route, navigation }) {
                     onPress={() => navigation.goBack()}
                 >
                     <Image
-                        style={styles.tinyLogo}
-                        source={require('../../assets/fi_chevron-left.png')}
+
+                        source={require('../../assets/navigators/go_back.png')}
                     />
                 </TouchableOpacity>
 
@@ -47,10 +47,10 @@ export function SearchBarActivity({ route, navigation }) {
 
                 </TouchableWithoutFeedback>
                 <TouchableOpacity
-                    style={buttons.littleButton}
+                    style={[buttons.littleButton, { alignSelf: 'center', marginTop: 20 }]}
                     onPress={() => setDataSource("")}
                 >
-                    <Text>Clear</Text>
+                    <Text style={{ color: 'white' }}>Clear</Text>
 
                 </TouchableOpacity>
 
@@ -58,8 +58,14 @@ export function SearchBarActivity({ route, navigation }) {
             <ScrollView>
                 {searchStreet(filteredList, dataSource).map((marker, index) => (
                     <View key={`${index}`} style={styles.eachListElement}>
-                        <Text>{marker.address}</Text>
-
+                        <Text>{marker.shortAddress}</Text>
+                        <TouchableOpacity style={{ alignSelf: 'center', marginLeft: "10%",}}
+                            onPress={() => navigation.navigate('PageOfStation', { station: marker })}
+                        >
+                            <Image
+                                source={require('../../assets/navigators/go_forward.png')}
+                            />
+                        </TouchableOpacity>
                     </View>
 
                 ))}
@@ -83,6 +89,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'row',
     },
 
 });

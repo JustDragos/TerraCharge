@@ -1,9 +1,9 @@
 
 export class StationsClass {
-    constructor(latitude, longitude, address, icon) {
+    constructor(latitude, longitude, shortAddress, icon) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.address = address;
+        this.shortAddress = shortAddress;
         this.icon = icon;
         this.chargersInTotal = 0;
         this.chargersLeft = 0;
@@ -11,6 +11,7 @@ export class StationsClass {
         this.status = 0;
         this.distanceFromUser = 0;
         this.rating = 3.0;
+        this.longAddress = "";
         // status - 0 => closed
         // status - 1 => opened
     }
