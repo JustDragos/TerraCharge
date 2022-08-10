@@ -1,39 +1,56 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Image, Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { AirbnbRating, Rating } from 'react-native-ratings';
+import { AirbnbRating } from 'react-native-ratings';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { texts } from '../maps/styles';
+
 
 function OverviewFunction({ route }) {
     const station = route.params.station;
     return (
 
-        <View style={{ alignContent: 'flex-start', width: "100%"}}>
+        <View style={{ alignContent: 'flex-start', width: "100%", marginLeft: "5%" }}>
             <ScrollView>
-                <View style={[styles.sameRowElement, { width: 150, height: "100%", marginTop: 5 }]}>
-                    <Image
-                        source={require('../../assets/battery1.png')}
-                        style={{ resizeMode: 'contain', aspectRatio: 2.0, }}
-                    />
-                    <Text style={{ width: "100%", alignSelf: 'center' }}>{station.longAddress}</Text>
+                <View style={[styles.sameRowElement, { height: 50, marginTop: 5, alignItems: 'center' }]}>
+                    <View style={styles.circleOfImage}>
+                        <Image
+                            source={require('../../assets/battery1.png')}
+                            style={styles.appearanceOfImage}
+                        />
+                    </View>
+                    <Text
+                        numberOfLines={2}
+
+                        style={[styles.textInOneLine, { width: 300 }]}
+                    >
+                        {station.longAddress}</Text>
                 </View>
-                <View style={[styles.sameRowElement, { width: 150, height: "100%", marginTop: 5, alignContent: 'flex-start' }]}>
-
-                    <Image
-                        source={require('../../assets/fi_phone-call.png')}
-                        style={styles.circleOfImage}
-                    />
-
-                    <Text style={{ alignSelf: 'center', marginLeft: "10%" }}>
+                <View style={[styles.sameRowElement, { height: "100%", marginTop: 5, }]}>
+                    <View
+                        style={styles.circleOfImage}>
+                        <Image
+                            source={require('../../assets/fi_phone-call.png')}
+                            style={styles.appearanceOfImage}
+                        />
+                    </View>
+                    <Text
+                        numberOfLines={1}
+                        style={styles.textInOneLine}
+                    >
                         +40 0740 xxx xxx
                     </Text>
                 </View>
-                <View style={[styles.sameRowElement, { width: 150, height: 50, marginTop: 5 }]}>
-                    <Image
-                        source={require('../../assets/info.png')}
-                        style={{ tintColor: "#95D2FF", resizeMode: 'contain', aspectRatio: 2.0, alignSelf: 'center' }}
-                    />
-                    <Text style={{ alignSelf: 'center' }}>
+                <View style={[styles.sameRowElement, { height: 50, marginTop: 5, alignItems: 'center' }]}>
+                    <View style={styles.circleOfImage}>
+                        <Image
+                            source={require('../../assets/info.png')}
+                            style={styles.appearanceOfImage}
+                        />
+                    </View>
+                    <Text
+                        numberOfLines={1}
+                        style={styles.textInOneLine}
+                    >
                         terra_charge@gmail.com
                     </Text>
                 </View>
@@ -93,11 +110,15 @@ function generatePhotoContainer(navigation) {
             {/* the view above is to make them on the same line*/}
             <TouchableOpacity onPress={() => navigation.goBack()}
                 style={styles.sameRowElement}
+
             >
 
-                <View>
+                <View
+                    
+                    
+                    style={[styles.circleOfImage, { backgroundColor: '#8eb994', borderRadius: 20, height: 60, width: 45, marginLeft: "10%" }]}>
                     <Image
-                        style={styles.tinyLogo}
+                        style={{ width: 50, height: 50, tintColor: 'white' }}
                         source={require('../../assets/navigators/go_back.png')}
                     />
                 </View>
@@ -110,44 +131,63 @@ function generatePhotoContainer(navigation) {
     );
 }
 function generateInformationContainer(station, Tab) {
+    const [isFavourite, setIsFavourite] = useState(station.isFavourite)
     return (<View style={styles.informationContainer}>
-        <Text style={{ marginLeft: "20%", fontWeight: 'bold', fontSize: 26, marginTop: "10%" }}>
-            {station.shortAddress}
-        </Text>
-        <AirbnbRating
-            defaultRating={station.rating}
-            count={5}
-            size={30}
-            fractions="1"
-            isDisabled={true}
-            showRating={false}
-        />
-        <View style={{ flexDirection: 'row', alignSelf: 'flex-start', marginLeft: '25%', marginBottom: 10 }}>
-            <Text style={station.status == 1 ? texts.greenText : texts.redText}>
-                {station.status == 1 ? "Open" : "Closed"}
-            </Text>
 
-            <View
-                style={{ marginTop: 7, marginLeft: 4 }}
+        <View
+            style={{ flexDirection: 'row' }}
+        >
+            <View style={{ alignItems: 'flex-start', marginLeft: "5%" }}>
+                <Text style={{ fontWeight: 'bold', fontSize: 26, marginTop: "10%" }}>
+                    {station.shortAddress}
+                </Text>
+                <AirbnbRating
+                    defaultRating={station.rating}
+                    count={5}
+                    size={30}
+                    fractions="1"
+                    selectedColor='#95D2FF'
+                    isDisabled={true}
+                    showRating={false}
+                />
+                <View style={{ flexDirection: 'row', alignSelf: 'flex-start', marginBottom: 10 }}>
+                    <Text style={station.status == 1 ? texts.greenText : texts.redText}>
+                        {station.status == 1 ? "Open" : "Closed"}
+                    </Text>
+
+                    <View
+                        style={{ marginTop: 7, marginLeft: 4 }}
+                    >
+                        <Image
+                            source={require("../../assets/Vector-13.png")}
+                            style={{
+                                tintColor: 'grey',
+
+                            }}
+                        />
+                    </View>
+                    <Text style={{ marginBottom: "20%", marginLeft: "5%" }}>
+                        open from {station.hoursOpened[0]} to {station.hoursOpened[1]}
+                    </Text>
+                </View>
+
+            </View>
+            <TouchableOpacity style={isFavourite == 0 ? styles.styleForNotFavourite : styles.styleForFavourite}
+                onPress={() => [setIsFavourite(!isFavourite), station.isFavourite = !station.isFavourite]}
             >
                 <Image
-                    source={require("../../assets/Vector-13.png")}
-                    style={{
-                        tintColor: 'grey',
-
-                    }}
+                    style={[{ width: 20, height: 20, tintColor: 'grey' }, isFavourite == 1 ? { tintColor: 'white' } : { tintColor: 'grey' }]}
+                    source={require('../../assets/full_heart.png')}
                 />
-            </View>
-            <Text style={{ marginBottom: "20%", marginLeft: "5%" }}>
-                open from {station.hoursOpened[0]} to {station.hoursOpened[1]}
-            </Text>
+            </TouchableOpacity>
         </View>
-        {/* below needs modifications*/}
+
+        {/* below needs modifications so that top bar has buttons instead of tabs*/}
 
         {generateTopTab(station, Tab)}
 
         {/*Up untill here */}
-        <TouchableOpacity style={[styles.button, { backgroundColor: '#95D2FF', alignSelf: 'center', width: '90%', height: "10%", marginLeft: "20%", marginRight: "20%", marginBottom: "8%"}]}>
+        <TouchableOpacity style={[styles.button, { backgroundColor: '#95D2FF', alignSelf: 'center', width: '90%', height: "10%", marginLeft: "20%", marginRight: "20%", marginBottom: "8%" }]}>
             <Text style={{ color: 'white', fontSize: 20 }}>
                 Reserve now
             </Text>
@@ -215,13 +255,45 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginTop: 30,
     },
+    appearanceOfImage: {
+        width: 25,
+        height: 25,
+        tintColor: 'white'
+    },
     circleOfImage: {
-        tintColor: 'white',
-        resizeMode: 'contain',
-        marginLeft: 20,
+        width: 45,
+        height: 45,
         backgroundColor: "#95D2FF",
-        borderRadius: 30,
-        width: 30,
-        height: 30
-    }
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    styleForFavourite: {
+        width: 45,
+        height: 45,
+        marginRight: "5%",
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: "15%",
+        alignSelf: 'center',
+        borderRadius: 50,
+        backgroundColor: '#95D2FF',
+
+    },
+    textInOneLine: {
+        alignSelf: 'center',
+        marginLeft: "3%",
+        marginRight: "4%",
+    },
+    styleForNotFavourite: {
+        width: 45,
+        height: 45,
+        marginRight: "5%",
+        alignItems: 'center',
+        marginLeft: "15%",
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 50,
+    },
+
 });

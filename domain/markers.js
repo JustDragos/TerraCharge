@@ -14,6 +14,7 @@ export class StationsClass {
         this.longAddress = "";
         // status - 0 => closed
         // status - 1 => opened
+        this.isFavourite = 0;
     }
     createStatus() {
         var hour = new Date().getHours();

@@ -39,7 +39,7 @@ function sortingFunction(a, b) {
 function getStations(arr, latitude, longitude) {
   // put the markers in the corresponding array
   icon = '../../assets/markers/map_marker_green.png';
-  arr.push(new StationsClass(46.77164492183006, 23.625553844482933, "Strada Alexandru Vaida Voevod", icon));
+  arr.push(new StationsClass(46.77164492183006, 23.625553844482933, "Alexandru Vaida", icon));
   arr.push(new StationsClass(46.77325416741861, 23.625092504549855, "Lacul Gheorgheni", icon));
   arr.push(new StationsClass(46.77142447348493, 23.621165750701667, "Aleea Slănic", icon));
   arr.push(new StationsClass(46.76955626297273, 23.622691749305066, "Aleea Borsec", icon));
@@ -48,24 +48,32 @@ function getStations(arr, latitude, longitude) {
   arr[0].hoursOpened = [8, 20];
   arr[0].rating = 2.5;
   arr[0].longAddress = "Strada Alexandru Vaida Voevod 53B, Cluj-Napoca 400436";
+  arr[0].icon = require('../../assets/icons_stations/icon_1.png')
+  // images without white background: https://remove-white-background.imageonline.co/
 
   arr[1].chargersLeft = 1;
   arr[1].chargersInTotal = 10;
   arr[1].hoursOpened = [19, 22];
   arr[1].rating = 3.5;
   arr[1].longAddress = "Lacul Gheorgheni, Cluj-Napoca";
+  arr[1].icon = require('../../assets/icons_stations/icon_1.png')
+
 
   arr[2].chargersLeft = 5;
   arr[2].chargersInTotal = 7;
   arr[2].hoursOpened = [17, 19];
   arr[2].rating = 5.0;
   arr[2].longAddress = "Aleea Slănic, Cluj-Napoca 400347";
+  arr[2].icon = require('../../assets/icons_stations/icon_2.png')
+
 
   arr[3].chargersLeft = 5;
   arr[3].chargersInTotal = 7;
   arr[3].hoursOpened = [10, 19];
   arr[3].rating = 4.5;
   arr[3].longAddress = "Gheorgheni, Cluj-Napoca 400394";
+  arr[3].icon = require('../../assets/icons_stations/icon_3.png')
+
 
   for (let i = 0; i < arr.length; i++) {
 
@@ -98,6 +106,9 @@ function getLocationFromUser() {
 
         if (status === "denied" || status === "undetermined") {
           alert('Permission to access location was denied, using default location');
+          setLongitude(23.615560843529316);
+          setLatitude(46.77442468134578);
+          alert(luul);
           throw error;
         }
         else {
@@ -112,7 +123,8 @@ function getLocationFromUser() {
   catch (error) {
     setLongitude(23.615560843529316);
     setLatitude(46.77442468134578);
-    console.log(error);
+    console.log(error + " line 118 maps.js");
+
   }
   return [latitude, longitude];
 }
@@ -142,8 +154,6 @@ export function Maps({ navigation }) {
   var red_icon = '../../assets/markers/map_marker.png';
   var green_icon = '../../assets/markers/map_marker_green.png';
 
-
-  // this either gets location from user or the default one, currently only being used for calculating distances
   return (
     <View style={styles.container}>
       <MapView style={styles.map}
@@ -195,14 +205,15 @@ export function Maps({ navigation }) {
                   <View style={{ flexDirection: "row" }}>
                     <Image
                       style={styles.photo}
-                      source={require('../../assets/battery1.png')}
+                      source={stationsArray[indexOfStation].icon}
                     />
                     <View>
                       <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{stationsArray[indexOfStation].shortAddress}</Text>
                       <AirbnbRating
                         defaultRating={stationsArray[indexOfStation].rating}
+                        selectedColor='#95D2FF'
                         isDisabled={true}
-                        size={30}
+                        size={20}
                         showRating={false}
                       />
                       <Text>{getTextOfStationsLeft(stationsArray, indexOfStation)}</Text>
@@ -210,13 +221,16 @@ export function Maps({ navigation }) {
                         {stationsArray[indexOfStation].status == 1 ? "Open" : "Closed"}
                       </Text>
                     </View>
-                    <TouchableOpacity style={styles.tinyLogo}
+                    <TouchableOpacity
+                      style={styles.containerOfImage}
                       onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[indexOfStation] })}
                     >
+
                       <Image
-                        
+                        style={styles.appearanceOfImage}
                         source={require('../../assets/navigators/go_forward.png')}
                       />
+
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -229,7 +243,7 @@ export function Maps({ navigation }) {
                     <View style={{ flexDirection: "row" }}>
                       <Image
                         style={styles.photo}
-                        source={require('../../assets/battery1.png')}
+                        source={stationsArray[index].icon}
                       />
 
                       <View>
@@ -237,7 +251,8 @@ export function Maps({ navigation }) {
                         <AirbnbRating
                           defaultRating={stationsArray[index].rating}
                           isDisabled={true}
-                          size={30}
+                          size={20}
+                          selectedColor='#95D2FF'
                           showRating={false}
                         />
                         <Text>{getTextOfStationsLeft(stationsArray, index)}</Text>
@@ -245,11 +260,11 @@ export function Maps({ navigation }) {
                           {stationsArray[index].status == 1 ? "Open" : "Closed"}
                         </Text>
                       </View>
-                      <TouchableOpacity style={styles.tinyLogo}
+                      <TouchableOpacity style={styles.containerOfImage}
                         onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[index] })}
                       >
                         <Image
-                          
+                          style={styles.appearanceOfImage}
                           source={require('../../assets/navigators/go_forward.png')}
                         />
                       </TouchableOpacity>
@@ -315,29 +330,41 @@ const styles = StyleSheet.create({
     minHeight: 150,
     width: "100%",
     marginLeft: 1,
-    marginRight: 5,
+    marginRight: 2,
     marginBottom: 3,
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
     borderRadius: 10,
 
   },
   tinyLogo: {
-    width: 100,
-    flex: 1,
+    width: 50,
     height: 50,
-    marginRight: "10%",
+    marginRight: "3%",
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
   },
   photo: {
-    width: 66,
-    height: 58,
+    width: "40%",
+    height: "100%",
+    marginLeft: 0,
     alignSelf: 'flex-start',
   },
-
+  containerOfImage: {
+    marginLeft : "5%",
+    marginRight: "5%",
+    width: 35,
+    height: 35,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  appearanceOfImage: {
+    width: 25,
+    height: 25,
+    tintColor: 'grey'
+  },
 
 });
