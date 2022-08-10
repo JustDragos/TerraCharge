@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-web';
 import { render } from 'react-dom';
 
 
+
 export function SignUp({navigation}){
         return(
             <View style={styles.main_view}>
