@@ -3,7 +3,7 @@ import { Animated, Dimensions, StyleSheet, Text, View } from 'react-native';
 
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {Maps} from '../pages/maps/maps';
+import { Maps } from '../pages/maps/maps';
 import { TipsAndTricks } from '../pages/tipsAndTricks/tipsAndTricks';
 // Plus...
 import { SafeAreaView } from 'react-native-safe-area-context';

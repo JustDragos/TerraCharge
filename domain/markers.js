@@ -19,10 +19,13 @@ export class StationsClass {
     createStatus() {
         var hour = new Date().getHours();
         var minute = new Date().getMinutes()
-        if (this.hoursOpened[0] <= hour && hour <= this.hoursOpened[1]) {
+        if (this.hoursOpened[0] <= hour && hour < this.hoursOpened[1]) {
             return 1
         }
         return 0;
         // get current hour and minute
+    }
+    getTextOfStationsLeft() {
+        return this.chargersInTotal + " charges " + this.chargersLeft + " left \n" + this.distanceFromUser + " km away";
     }
 };

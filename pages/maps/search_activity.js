@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Image, KeyboardAvoidingView, TouchableWithoutFeedback, ScrollView, StyleSheet, Keyboard, TextInput, Text, View, TouchableOpacity } from "react-native";
-import { containers, views, buttons } from "./styles";
+import { texts, containers, views, buttons, images } from "./styles";
+import { AirbnbRating } from "react-native-ratings";
 
 
 function searchStreet(input, dataSource) {
@@ -36,7 +37,7 @@ export function SearchBarActivity({ route, navigation }) {
 
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <TextInput
-                        style={views.styleOfSearchBar}
+                        style={[views.styleOfSearchBar, { marginTop: 30 }]}
                         value={dataSource}
                         placeholder={"Search"}
                         placeholderTextColor={'#666'}
@@ -57,15 +58,38 @@ export function SearchBarActivity({ route, navigation }) {
             </View>
             <ScrollView>
                 {searchStreet(filteredList, dataSource).map((marker, index) => (
-                    <View key={`${index}`} style={styles.eachListElement}>
-                        <Text>{marker.shortAddress}</Text>
-                        <TouchableOpacity style={{ alignSelf: 'center', marginLeft: "10%",}}
-                            onPress={() => navigation.navigate('PageOfStation', { station: marker })}
-                        >
+                    <View key={`${index}`} style={views.eachListElement}>
+                        <View style={{ flexDirection: "row" }}>
                             <Image
-                                source={require('../../assets/navigators/go_forward.png')}
+                                style={images.styleOfIcon}
+                                source={marker.icon}
                             />
-                        </TouchableOpacity>
+                            <View>
+                                <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{marker.shortAddress}</Text>
+                                <AirbnbRating
+                                    defaultRating={marker.rating}
+                                    selectedColor='#95D2FF'
+                                    isDisabled={true}
+                                    size={20}
+                                    showRating={false}
+                                />
+                                <Text>{marker.getTextOfStationsLeft()}</Text>
+                                <Text style={marker.status == 1 ? texts.greenText : texts.redText}>
+                                    {marker.status == 1 ? "Open" : "Closed"}
+                                </Text>
+                            </View>
+                            <TouchableOpacity
+                                style={buttons.buttonOfVectorForward}
+                                onPress={() => navigation.navigate('PageOfStation', { station: marker })}
+                            >
+
+                                <Image
+                                    style={images.styleOfVectorForward}
+                                    source={require('../../assets/navigators/go_forward.png')}
+                                />
+
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
                 ))}
@@ -75,21 +99,3 @@ export function SearchBarActivity({ route, navigation }) {
     );
 
 }
-
-const styles = StyleSheet.create({
-
-
-    eachListElement: {
-        minHeight: 200,
-        width: 350,
-        marginLeft: 10,
-        marginRight: 10,
-        marginBottom: 10,
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
-    },
-
-});

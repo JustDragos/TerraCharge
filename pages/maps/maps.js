@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Dimensions, StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
-import MapView from 'react-native-maps';
+
 import React, { useEffect, useState } from 'react';
 import { Marker } from 'react-native-maps'; // this is from the normal map
 import { StationsClass } from '../../domain/markers'
@@ -9,10 +9,10 @@ import { ScrollView } from 'react-native';
 import { Portal } from '@gorhom/portal';
 import { LoadSearchBar } from './search_bar';
 import * as Location from 'expo-location';
-import { texts } from './styles';
+import { buttons, images, texts, views } from './styles';
 import { AirbnbRating } from 'react-native-ratings';
 
-
+import MapView from 'react-native-maps';
 
 function distanceBetweenTwoPoints(lat1, lon1, lat2, lon2) {
   // haversine fomula
@@ -90,10 +90,6 @@ function operateBottomSheet(ref) {
   ref.current.togglePanel()
 }
 
-function getTextOfStationsLeft(arr, index) {
-  return arr[index].chargersInTotal + " charges " + arr[index].chargersLeft + " left \n" + arr[index].distanceFromUser + " km away";
-}
-
 function getLocationFromUser() {
   var [longitude, setLongitude] = useState(0);
   var [latitude, setLatitude] = useState(0);
@@ -131,10 +127,10 @@ function getLocationFromUser() {
 
 function renderFirstItem(station, shouldBeFirst) {
   if (shouldBeFirst == 0)
-    return styles.eachListElement;
+    return views.eachListElement;
   if (station.status == 1)
-    return [styles.eachListElement, { backgroundColor: 'lightgreen' }];
-  return [styles.eachListElement, { backgroundColor: 'lightcoral' }];
+    return [views.eachListElement, { backgroundColor: 'lightgreen' }];
+  return [views.eachListElement, { backgroundColor: 'lightcoral' }];
 }
 
 export function Maps({ navigation }) {
@@ -159,8 +155,7 @@ export function Maps({ navigation }) {
       <MapView style={styles.map}
         // comple with locations of the map  and the style
         // the style is from the variable in maps, in maps_style.js
-
-        showsUserLocation={true}
+        
         zoomEnabled={true}
         zoomControlEnabled={true}
         initialRegion={{
@@ -216,18 +211,18 @@ export function Maps({ navigation }) {
                         size={20}
                         showRating={false}
                       />
-                      <Text>{getTextOfStationsLeft(stationsArray, indexOfStation)}</Text>
+                      <Text>{stationsArray[indexOfStation].getTextOfStationsLeft()}</Text>
                       <Text style={stationsArray[indexOfStation].status == 1 ? texts.greenText : texts.redText}>
                         {stationsArray[indexOfStation].status == 1 ? "Open" : "Closed"}
                       </Text>
                     </View>
                     <TouchableOpacity
-                      style={styles.containerOfImage}
+                      style={buttons.buttonOfVectorForward}
                       onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[indexOfStation] })}
                     >
 
                       <Image
-                        style={styles.appearanceOfImage}
+                        style={images.styleOfVectorForward}
                         source={require('../../assets/navigators/go_forward.png')}
                       />
 
@@ -255,16 +250,16 @@ export function Maps({ navigation }) {
                           selectedColor='#95D2FF'
                           showRating={false}
                         />
-                        <Text>{getTextOfStationsLeft(stationsArray, index)}</Text>
+                        <Text>{stationsArray[index].getTextOfStationsLeft()}</Text>
                         <Text style={stationsArray[index].status == 1 ? texts.greenText : texts.redText}>
                           {stationsArray[index].status == 1 ? "Open" : "Closed"}
                         </Text>
                       </View>
-                      <TouchableOpacity style={styles.containerOfImage}
+                      <TouchableOpacity style={buttons.buttonOfVectorForward}
                         onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[index] })}
                       >
                         <Image
-                          style={styles.appearanceOfImage}
+                          style={images.styleOfVectorForward}
                           source={require('../../assets/navigators/go_forward.png')}
                         />
                       </TouchableOpacity>
@@ -295,9 +290,8 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+    position: 'relative',
     marginBottom: 150,
-    position: 'relative'
-
   },
   // goes with the map
   text: {
@@ -326,18 +320,7 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
 
-  eachListElement: {
-    minHeight: 150,
-    width: "100%",
-    marginLeft: 1,
-    marginRight: 2,
-    marginBottom: 3,
-    backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    borderRadius: 10,
-
-  },
+ 
   tinyLogo: {
     width: 50,
     height: 50,
@@ -353,7 +336,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   containerOfImage: {
-    marginLeft : "5%",
+    marginLeft: "5%",
     marginRight: "5%",
     width: 35,
     height: 35,

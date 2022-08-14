@@ -8,6 +8,21 @@ const containers = StyleSheet.create({
     }
 })
 
+const images = StyleSheet.create({
+    styleOfIcon: {
+        width: "40%",
+        height: "100%",
+        marginLeft: 0,
+        alignSelf: 'flex-start',
+    },
+    styleOfVectorForward: {
+        width: 25,
+        height: 25,
+        tintColor: 'grey'
+    },
+    
+})
+
 const buttons = StyleSheet.create({
     littleButton: {
         height: 50,
@@ -50,24 +65,42 @@ const buttons = StyleSheet.create({
         flexDirection: "row",
         shadowRadius: 5,
         elevation: 6,
-    }
+    },
+    buttonOfVectorForward:{
+        marginLeft: "5%",
+        marginRight: "5%",
+        width: 35,
+        height: 35,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 
 })
 
 const views = StyleSheet.create({
     styleOfSearchBar: {
-        borderRadius: 10,
-        margin: 10,
         color: '#000',
         borderColor: '#666',
         backgroundColor: '#FFF',
         borderWidth: 1,
-        marginTop: 40,
         width: "50%",
         height: 45,
         paddingHorizontal: 10,
         fontSize: 18,
     },
+    eachListElement: {
+        minHeight: 150,
+        width: "100%",
+        marginLeft: 1,
+        marginRight: 2,
+        marginBottom: 3,
+        backgroundColor: '#fff',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        borderRadius: 10,
+
+    }
 })
 
 const texts = StyleSheet.create({
@@ -75,14 +108,14 @@ const texts = StyleSheet.create({
         color: "white",
         fontWeight: "600",
     },
-    redText:{
+    redText: {
         color: "red",
         fontWeight: "600",
     },
-    greenText:{
+    greenText: {
         color: "green",
         fontWeight: "600",
     }
 })
 
-export { containers, buttons, views, texts }
+export { containers, buttons, views, texts, images }

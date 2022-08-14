@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Image, Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, Text, View, StyleSheet, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 import { AirbnbRating } from 'react-native-ratings';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { texts } from '../maps/styles';
@@ -14,7 +14,7 @@ function OverviewFunction({ route }) {
                 <View style={[styles.sameRowElement, { height: 50, marginTop: 5, alignItems: 'center' }]}>
                     <View style={styles.circleOfImage}>
                         <Image
-                            source={require('../../assets/battery1.png')}
+                            source={require('../../assets/mapPin.png')}
                             style={styles.appearanceOfImage}
                         />
                     </View>
@@ -40,10 +40,10 @@ function OverviewFunction({ route }) {
                         +40 0740 xxx xxx
                     </Text>
                 </View>
-                <View style={[styles.sameRowElement, { height: 50, marginTop: 5, alignItems: 'center' }]}>
+                <View style={[styles.sameRowElement, { height: "100%", marginTop: 5, alignItems: 'center', }]}>
                     <View style={styles.circleOfImage}>
                         <Image
-                            source={require('../../assets/info.png')}
+                            source={require('../../assets/mail.png')}
                             style={styles.appearanceOfImage}
                         />
                     </View>
@@ -74,58 +74,69 @@ function LocationFunction() {
 }
 function generateTopTab(station, Tab) {
     return (
-        <Tab.Navigator
-            screenOptions={{
-                tabBarScrollEnabled: true,
-                tabBarIndicatorStyle: {
-                    backgroundColor: "#95D2FF",
-                    height: "100%",
-                    borderRadius: 10,
-                },
-                tabBarLabelStyle: { fontSize: 12, textTransform: 'none', alignContent: 'center' },
-                tabBarStyle: {
-                    height: 40,
-                    width: "90%",
-                    justifyContent: 'center',
-                    backgroundColor: '#f1f1f1',
-                    marginBottom: 10,
-                    marginLeft: 10,
-                    marginRight: 10,
-                    borderRadius: 10,
-                },
+        <View style={{ height: "33%" }}>
+            <Tab.Navigator
+                screenOptions={{
+                    tabBarScrollEnabled: true,
+                    tabBarIndicatorStyle: {
+                        backgroundColor: "#95D2FF",
+                        height: "100%",
+                        borderRadius: 10,
+                    },
+                    tabBarLabelStyle: { fontSize: 12, textTransform: 'none', alignContent: 'center' },
+                    tabBarStyle: {
+                        height: 40,
+                        width: "90%",
 
-            }}
+                        justifyContent: 'center',
+                        backgroundColor: '#f1f1f1',
+                        marginBottom: 10,
+                        marginLeft: 10,
+                        marginRight: 10,
+                        borderRadius: 10,
+                    },
 
-            sceneContainerStyle={{ backgroundColor: "white" }}
-        >
-            <Tab.Screen name='Overview' component={OverviewFunction} initialParams={{ station: station }} />
-            <Tab.Screen name='Reviews' component={ReviewsFunction} />
-            <Tab.Screen name='Location' component={LocationFunction} />
-        </Tab.Navigator>
+                }}
+                sceneContainerStyle={{ backgroundColor: "white", width: "50%" }}
+            >
+                <Tab.Screen name='Overview' component={OverviewFunction} initialParams={{ station: station }} />
+                <Tab.Screen name='Reviews' component={ReviewsFunction} />
+                <Tab.Screen name='Location' component={LocationFunction} />
+            </Tab.Navigator>
+        </View>
     );
 }
 function generatePhotoContainer(navigation) {
     return (
-        <View style={[styles.photosContainer]}>
-            {/* the view above is to make them on the same line*/}
-            <TouchableOpacity onPress={() => navigation.goBack()}
-                style={styles.sameRowElement}
+        <View
+            style={{ width: "100%", height: "35%", overflow: 'visible' }}
+        >
 
+            <ImageBackground
+                source={require('../../assets/chargingStationImage.png')}
+                style={{ height: "100%", }}
+                imageStyle={{ height: "117%" }}
             >
+                <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                    style={[{ height: "10%", width: 20, marginTop: "5%" }]}
+                    source={require('../../assets/chargingStationImage.png')}
+                >
 
-                <View
-                    
-                    
-                    style={[styles.circleOfImage, { backgroundColor: '#8eb994', borderRadius: 20, height: 60, width: 45, marginLeft: "10%" }]}>
-                    <Image
-                        style={{ width: 50, height: 50, tintColor: 'white' }}
-                        source={require('../../assets/navigators/go_back.png')}
-                    />
-                </View>
-            </TouchableOpacity>
-            <Image
-                source={require("../../assets/battery2.png")}
-            />
+                    <View
+                        style={[styles.circleOfImage, { backgroundColor: '#8eb994', borderRadius: 20, height: 60, width: 45, marginLeft: 10, }]}>
+                        <Image
+                            style={{ width: 50, height: 50, tintColor: 'white', }}
+                            source={require('../../assets/navigators/go_back.png')}
+                        />
+                    </View>
+                </TouchableOpacity>
+
+
+
+
+
+            </ImageBackground>
 
         </View>
     );
@@ -133,10 +144,18 @@ function generatePhotoContainer(navigation) {
 function generateInformationContainer(station, Tab) {
     const [isFavourite, setIsFavourite] = useState(station.isFavourite)
     return (<View style={styles.informationContainer}>
-
+        <View
+            style={{ alignSelf: 'flex-end', justifyContent: 'flex-end', width: 50, height: 50,marginTop: -45}}
+        >
+            <Image
+                style={{ aspectRatio: 1.0, alignSelf: 'center', tintColor: 'black', width: 50, height: 50, tintColor: 'white' }}
+                source={require('../../assets/ramp1.png')}
+            />
+        </View>
         <View
             style={{ flexDirection: 'row' }}
         >
+
             <View style={{ alignItems: 'flex-start', marginLeft: "5%" }}>
                 <Text style={{ fontWeight: 'bold', fontSize: 26, marginTop: "10%" }}>
                     {station.shortAddress}
@@ -150,13 +169,13 @@ function generateInformationContainer(station, Tab) {
                     isDisabled={true}
                     showRating={false}
                 />
-                <View style={{ flexDirection: 'row', alignSelf: 'flex-start', marginBottom: 10 }}>
+                <View style={{ flexDirection: 'row', alignSelf: 'flex-start', marginBottom: "2%" }}>
                     <Text style={station.status == 1 ? texts.greenText : texts.redText}>
                         {station.status == 1 ? "Open" : "Closed"}
                     </Text>
 
                     <View
-                        style={{ marginTop: 7, marginLeft: 4 }}
+                        style={{ marginTop: "3%", marginLeft: "3%" }}
                     >
                         <Image
                             source={require("../../assets/Vector-13.png")}
@@ -187,7 +206,7 @@ function generateInformationContainer(station, Tab) {
         {generateTopTab(station, Tab)}
 
         {/*Up untill here */}
-        <TouchableOpacity style={[styles.button, { backgroundColor: '#95D2FF', alignSelf: 'center', width: '90%', height: "10%", marginLeft: "20%", marginRight: "20%", marginBottom: "8%" }]}>
+        <TouchableOpacity style={[styles.button, { backgroundColor: '#95D2FF', alignSelf: 'center', width: '90%', height: 50, marginLeft: "20%", marginTop: "1%", marginRight: "20%", marginBottom: "3%", }]}>
             <Text style={{ color: 'white', fontSize: 20 }}>
                 Reserve now
             </Text>
@@ -208,7 +227,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "space-between"
+
     },
     blackText: {
         color: "black",
@@ -221,9 +240,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#140078",
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 50,
-        marginRight: 50,
-        alignSelf: "flex-end",
+        marginBottom: "3%",
+        marginRight: "3%",
+        alignSelf: "center",
         borderRadius: 20,
         shadowColor: "#8559da",
         shadowOpacity: 0.7,
@@ -243,10 +262,13 @@ const styles = StyleSheet.create({
     informationContainer: {
         width: "100%",
         height: "100%",
+        top: "35%",
+        position: 'absolute',
         flex: 1,
         borderColor: 'grey',
         borderWidth: 0,
         borderTopLeftRadius: 50,
+        borderTopRightRadius: -5,
         backgroundColor: 'white',
     },
     photosContainer: {
@@ -254,6 +276,7 @@ const styles = StyleSheet.create({
         height: "30%",
         flexDirection: "row",
         marginTop: 30,
+
     },
     appearanceOfImage: {
         width: 25,
