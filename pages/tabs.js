@@ -5,6 +5,7 @@ import { Animated, Dimensions, StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Maps } from '../pages/maps/maps';
 import { TipsAndTricks } from '../pages/tipsAndTricks/tipsAndTricks';
+import { Profiles } from '../pages/profile/profile';
 // Plus...
 import { SafeAreaView } from 'react-native-safe-area-context';
 // Font Awesome Icons...
@@ -136,7 +137,7 @@ export function Tabs() {
             }
           })}></Tab.Screen>
 
-          <Tab.Screen name={"Settings"} component={SettingsScreen} options={{
+          <Tab.Screen name={"Settings"} component={Profiles} options={{
             tabBarLabel: () => { return null },
             tabBarIcon: ({ focused }) => (
               <View style={{
@@ -198,14 +199,6 @@ function getWidth() {
 }
 
 
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
-      <Text>Aici trebuie sa apara profile!</Text>
-    </View>
-  );
-}
 function NotificationScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>

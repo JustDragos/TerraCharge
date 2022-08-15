@@ -8,11 +8,14 @@ export function TipsAndTricks() {
       <View style={styles.firstContainer}>
         <Text style = {styles.welcomeback}>Welcome back,</Text>
         <View style = {styles.davidContainer}>
-          <View style = {{flex: 2}}>
+          <View style = {{flex: 7}}>
             <Text style = {styles.david}>David!</Text>
           </View>
-          <View style = {{flex: 4, felxDirection: 'row', justifyContent: 'flex-start', paddingRight: 100}}>
+          <View style = {{flex: 1, felxDirection: 'row', justifyContent: 'flex-start', paddingRight: 100}}>
             <Image source = {require('../../assets/battery1.png')} style = {styles.charging1}   />
+          </View>
+          <View style = {{flex: 10}}>
+
           </View>
         </View>     
       </View>
