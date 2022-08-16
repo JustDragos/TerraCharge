@@ -13,7 +13,7 @@ export function SignIn({navigation}){
                 <View>
                      <Image
                         style={styles.image}
-                        source={require('../../assets/logo/logo.jpg')}
+                        source={require('../../assets/logo/dpitLogo.png')}
                     />
                     <Text style={styles.title} >
                         Sign In
@@ -96,10 +96,10 @@ const styles = StyleSheet.create({
     },
     image: {
         marginTop: 60,
-        marginLeft: 120,
         height: 150,
         width: 150,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignSelf: 'center'
     },
     title: {
         fontWeight: 'bold',

@@ -11,7 +11,7 @@ export function GetStarted({navigation}) {
             <View>
                 <Image
                     style={styles.image}
-                    source={require('../../assets/logo/logo.jpg')}
+                    source={require('../../assets/logo/dpitLogo.png')}
                 />
             </View>
             <TouchableOpacity
@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
         paddingBottom: 700
     },
     image: {
-        marginLeft: 40,
         marginTop: 120,
         marginBottom: 180,
         height: 300,
         width: 300,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignSelf: 'center'
     },
     submit_button: {
         height: 70,

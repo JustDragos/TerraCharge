@@ -11,7 +11,7 @@ export function Profiles() {
                     </Pressable>
                 </View>
                 <View>
-                    <Image source={require('../../assets/logo/logo.jpg')}/>
+                    <Image source={require('../../assets/logo/dpitLogo.png')}/>
                 </View>
             </View>
             <View></View>
