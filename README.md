@@ -6,3 +6,5 @@ documentation:
   location: https://docs.expo.dev/versions/latest/sdk/location/ <br/>
   rating: https://github.com/Monte9/react-native-ratings <br/>
   top tabs: https://reactnavigation.org/docs/material-top-tab-navigator <br/>
+  date time picker: https://github.com/react-native-datetimepicker/datetimepicker <br/>
+  modal: https://reactnative.dev/docs/modal <br/>

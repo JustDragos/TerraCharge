@@ -7,20 +7,21 @@ function toggleSearchBar(visible) {
     if (visible == 0) {
         return { left: 0 };
     }
-    return [views.styleOfSearchBar, { width: 200, borderWidth: 0}];
+    return [views.styleOfSearchBar, { width: 200, borderWidth: 0 }];
 }
 function generateSearchBar(visible) {
     if (visible == 0)
         return (<View></View>);
 
     return (
-        <View style={{ flexDirection: "row", }}>
+        <View style={{ flexDirection: "row", alignSelf: 'center', justifyContent: 'center' }}>
             <Text
-                style={{ marginRight: 20, }}
+                style={{ marginRight: 20, alignSelf: 'center', justifyContent: 'center', marginTop: "5%" }}
             > Search location... </Text>
+
             <Image
                 source={require('../../assets/shape-1.png')}
-                style={{ resizeMode: 'contain', aspectRatio: 1.5, flex: 1, marginTop: 5 }}
+                style={{ width: 20, height: 20, marginTop: "5%" }}
             />
         </View>
     );

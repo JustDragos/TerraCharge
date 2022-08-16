@@ -6,6 +6,7 @@ import { SearchBarActivity } from "./pages/maps/search_activity";
 import { GetStarted } from "./pages/sign_up/get_started";
 import { SignUp } from "./pages/sign_up/sign_up";
 import { SignIn } from "./pages/sign_up/sign_in";
+import { Reservation } from "./pages/station/reservationPage";
 
 export default function App() {
     const AppStack = createNativeStackNavigator();
@@ -21,6 +22,7 @@ export default function App() {
                 <AppStack.Screen name="Tabs" component={Tabs} />
                 <AppStack.Screen name="PageOfStation" component={PageOfStation} />
                 <AppStack.Screen name="SearchBarActivity" component={SearchBarActivity} />
+                <AppStack.Screen name="ReservationActivity" component={Reservation}/>
             </AppStack.Navigator>
         </NavigationContainer>
     );
