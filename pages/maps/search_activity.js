@@ -22,22 +22,22 @@ export function SearchBarActivity({ route, navigation }) {
     // the thing above is here so that you know the text of the search bar
     return (
         <KeyboardAvoidingView
-            style={containers.containerBasic}
+            style={[containers.containerBasic, {backgroundColor: '#f7f7f7'}]}
             behavior="padding"
             enabled={false}>
-            <View style={{ flexDirection: "row", marginTop: 10 }}>
+            <View style={{ flexDirection: "row", marginTop: "8%"}}>
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                 >
                     <Image
-
+                        style={{height: 45, width: 45}}
                         source={require('../../assets/navigators/go_back.png')}
                     />
                 </TouchableOpacity>
 
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <TextInput
-                        style={[views.styleOfSearchBar, { marginTop: 30 }]}
+                        style={[views.styleOfSearchBar, { marginTop: "0%", backgroundColor: 'white',borderBottomLeftRadius: 50, borderTopLeftRadius: 50, borderWidth: 1}]}
                         value={dataSource}
                         placeholder={"Search"}
                         placeholderTextColor={'#666'}
@@ -48,7 +48,7 @@ export function SearchBarActivity({ route, navigation }) {
 
                 </TouchableWithoutFeedback>
                 <TouchableOpacity
-                    style={[buttons.littleButton, { alignSelf: 'center', marginTop: 20 }]}
+                    style={[buttons.littleButton, { alignSelf: 'center', marginTop: "0%", height: 45, borderBottomLeftRadius: 0, borderTopLeftRadius: 0, borderWidth: 1 }]}
                     onPress={() => setDataSource("")}
                 >
                     <Text style={{ color: 'white' }}>Clear</Text>
@@ -58,7 +58,7 @@ export function SearchBarActivity({ route, navigation }) {
             </View>
             <ScrollView>
                 {searchStreet(filteredList, dataSource).map((marker, index) => (
-                    <View key={`${index}`} style={views.eachListElement}>
+                    <View key={`${index}`} style={[views.eachListElement, {backgroundColor: '#f7f7f7'}]}>
                         <View style={{ flexDirection: "row" }}>
                             <Image
                                 style={images.styleOfIcon}

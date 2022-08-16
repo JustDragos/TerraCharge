@@ -141,7 +141,7 @@ function generatePhotoContainer(navigation) {
         </View>
     );
 }
-function generateInformationContainer(station, Tab) {
+function generateInformationContainer(station, Tab, navigation) {
     const [isFavourite, setIsFavourite] = useState(station.isFavourite)
     return (<View style={styles.informationContainer}>
         <View
@@ -197,6 +197,7 @@ function generateInformationContainer(station, Tab) {
                 <Image
                     style={[{ width: 20, height: 20, tintColor: 'grey' }, isFavourite == 1 ? { tintColor: 'white' } : { tintColor: 'grey' }]}
                     source={require('../../assets/full_heart.png')}
+                    
                 />
             </TouchableOpacity>
         </View>
@@ -206,7 +207,9 @@ function generateInformationContainer(station, Tab) {
         {generateTopTab(station, Tab)}
 
         {/*Up untill here */}
-        <TouchableOpacity style={[styles.button, { backgroundColor: '#95D2FF', alignSelf: 'center', width: '90%', height: 50, marginLeft: "20%", marginTop: "1%", marginRight: "20%", marginBottom: "3%", }]}>
+        <TouchableOpacity style={[styles.button, { backgroundColor: '#95D2FF', alignSelf: 'center', width: '90%', height: 50, marginLeft: "20%", marginTop: "1%", marginRight: "20%", marginBottom: "3%", }]}
+        onPress={() => navigation.navigate('ReservationActivity')}
+    >
             <Text style={{ color: 'white', fontSize: 20 }}>
                 Reserve now
             </Text>
@@ -219,7 +222,7 @@ export function PageOfStation({ route, navigation }) {
     return (
         <View style={styles.container}>
             {generatePhotoContainer(navigation)}
-            {generateInformationContainer(station, Tab)}
+            {generateInformationContainer(station, Tab, navigation)}
         </View>
     )
 }
