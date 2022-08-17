@@ -7,7 +7,7 @@ import { GetStarted } from "./pages/sign_up/get_started";
 import { SignUp } from "./pages/sign_up/sign_up";
 import { SignIn } from "./pages/sign_up/sign_in";
 import { Reservation } from "./pages/station/reservationPage";
-
+import { DatabaseHandler } from "./database/databaseHandler";
 export default function App() {
     const AppStack = createNativeStackNavigator();
     return (
@@ -23,6 +23,7 @@ export default function App() {
                 <AppStack.Screen name="PageOfStation" component={PageOfStation} />
                 <AppStack.Screen name="SearchBarActivity" component={SearchBarActivity} />
                 <AppStack.Screen name="ReservationActivity" component={Reservation}/>
+                <AppStack.Screen name="DatabaseHandlerActivity" component={DatabaseHandler}/>
             </AppStack.Navigator>
         </NavigationContainer>
     );

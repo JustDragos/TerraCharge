@@ -9,10 +9,7 @@ function decideOnStyleBasedOnDate(date) {
 function generateModal({ showModal, setShowModal }) {
     // this here generates a modal so that the user can pick a locker
     // if the user doesn't have a preference, then it can select the random button
-    var lockersArray = [];
-    for (let i = 0; i < 4; i ++){
-        lockersArray[i].idOfLocker = i;
-    }
+   
     return (
         <Modal
             animationType="fade"
