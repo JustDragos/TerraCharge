@@ -7,14 +7,23 @@ export function Profiles() {
             <View style = {styles.firstContainer}>
                 <View>
                     <Pressable>
-
+                        <Image source = {require('../../assets/navigators/go_back.png')}/>
                     </Pressable>
                 </View>
                 <View>
                     <Image source={require('../../assets/logo/dpitLogo.png')}/>
                 </View>
             </View>
-            <View></View>
+            <View style = {styles.secoundContainer}>
+                <View>
+
+                </View>
+                <View style = {{flexDirection: 'column'}}>
+                    <Text>Welcome</Text>
+                    <Text>Mister David</Text>
+                </View>
+                <View></View>
+            </View>
             <View></View>
             <View></View>
             <View></View>
@@ -31,6 +40,11 @@ const styles = StyleSheet.create({
     },
     firstContainer: {
         flexDirection: 'row'
+    },
+    secoundContainer: {
+        flexDirection: 'row',
+        borderBottomColor: '#989898',
+        borderTopColor: '#989898'
     }
 })
 
