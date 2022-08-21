@@ -8,6 +8,7 @@ import { SignUp } from "./pages/sign_up/sign_up";
 import { SignIn } from "./pages/sign_up/sign_in";
 import { Reservation } from "./pages/station/reservationPage";
 
+
 export default function App() {
     const AppStack = createNativeStackNavigator();
     return (
@@ -25,5 +26,6 @@ export default function App() {
                 <AppStack.Screen name="ReservationActivity" component={Reservation}/>
             </AppStack.Navigator>
         </NavigationContainer>
+        
     );
 }
