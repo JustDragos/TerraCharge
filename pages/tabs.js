@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator();
 export function Tabs() {
   // Animated Tab Indicator...
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
-
+  
   return (
 
     <SafeAreaView style={styles.SafeAreaViewContainer}>
