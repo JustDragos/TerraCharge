@@ -1,14 +1,19 @@
-import { Dimensions, StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
-import React, { Component } from 'react'; 
+import { Dimensions, StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
+import React, { Component } from 'react';
 import { TextInput } from 'react-native-gesture-handler';
 import { Button } from 'react-native-web';
+import { buttons } from '../maps/styles';
 
 
+export function GetStarted({ navigation }) {
+    return (
+        <View style={[styles.main_view,]}>
+            {/* <TouchableOpacity style={[buttons.littleButton, { height: 30, width: 50, marginTop: 30, backgroundColor: 'black' }]}
+                onPress={() => navigation.navigate('DatabaseHandlerActivity')}
+            >
 
-export function GetStarted({navigation}) {
-    return(
-        <View style={styles.main_view}>
-            <View>
+            </TouchableOpacity> */}
+            <View style={{marginBottom: "10%"}}>
                 <Image
                     style={styles.image}
                     source={require('../../assets/logo/dpitLogo.png')}
@@ -16,39 +21,39 @@ export function GetStarted({navigation}) {
             </View>
             <TouchableOpacity
                 style={styles.submit_button}
-                onPress = {() => {
+                onPress={() => {
                     navigation.navigate('SignUp', { name: 'SignUp' });
                 }}
-                >
+            >
                 <Text style={styles.submit_text}>
                     Get Started
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity 
+            <TouchableOpacity
                 style={styles.sign_in_button}
-                onPress = {() => {
-                    navigation.navigate("SignIn", {name: "SignIn"});
+                onPress={() => {
+                    navigation.navigate("SignIn", { name: "SignIn" });
                 }}
-                >
+            >
                 <Text style={styles.sign_in_text}>
                     Already have an account?
                 </Text>
             </TouchableOpacity>
         </View>
     );
-    
-    
+
+
 }
 
 
 const styles = StyleSheet.create({
     main_view: {
         backgroundColor: "white",
-        paddingBottom: 700
+        borderWidth: 5
     },
     image: {
         marginTop: 120,
-        marginBottom: 180,
+        marginBottom: "20%",
         height: 300,
         width: 300,
         justifyContent: 'center',
@@ -71,7 +76,7 @@ const styles = StyleSheet.create({
     },
     sign_in_button: {
         alignItems: "center",
-        padding: 20
+        marginBottom: "5%",
     },
     sign_in_text: {
         fontFamily: "sans-serif",

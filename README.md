@@ -8,3 +8,4 @@ documentation:
   top tabs: https://reactnavigation.org/docs/material-top-tab-navigator <br/>
   date time picker: https://github.com/react-native-datetimepicker/datetimepicker <br/>
   modal: https://reactnative.dev/docs/modal <br/>
+  concurrently: https://www.npmjs.com/package/concurrently#usage for running app and backend at the same time <br/>
