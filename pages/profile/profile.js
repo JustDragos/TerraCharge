@@ -30,9 +30,107 @@ export function Profiles() {
                     <Image source = {require('../../assets/fi_log-out.png')} style = {{width: 40, height: 40}}/>
                 </View>
             </View>
-            <View></View>
-            <View></View>
-            <View></View>
+            <View style = {styles.thirdContainer}>
+                <View style = {{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
+                    <View style = {{}}>
+                        <Image source = {require('../../assets/payment.png')} style = {{width: 25, height: 25}}/>
+                    </View>
+                    <View style = {{}}>
+                        <Text style = {styles.payment}>Payment history</Text>
+                    </View>
+                    <View style = {{justifyContent: 'center'}}>
+                        <Pressable>
+                            <Image source = {require('../../assets/navigators/go_forward.png')} style = {{width: 15, height: 15}}/>
+                        </Pressable>
+                    </View>
+                </View>
+                <View style = {{padding: 10, flexDirection: 'row'}}>
+                    <View style = {{flex: 1}}></View>
+                    <View style = {{borderLeftColor: '#4D88ED', borderLeftWidth: 1.5, flex: 13}}>
+                        <Text> </Text>
+                    </View>
+                </View>
+                <View style = {{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
+                    <View style = {{}}>
+                        <Image source = {require('../../assets/Vector-9.png')} style = {{width: 20, height: 20}}/>
+                    </View>
+                    <View style = {{}}>
+                        <Text style = {styles.payment}>Payment method</Text>
+                    </View>
+                    <View style = {{justifyContent: 'center'}}>
+                        <Pressable>
+                            <Image source = {require('../../assets/navigators/go_forward.png')} style = {{width: 15, height: 15}}/>
+                        </Pressable>
+                    </View>
+                </View>
+                <View style = {{padding: 10, flexDirection: 'row'}}>
+                    <View style = {{flex: 1}}></View>
+                    <View style = {{borderLeftColor: '#5F60E9', borderLeftWidth: 1.5, flex: 13}}>
+                        <Text> </Text>
+                    </View>
+                </View>
+                <View style = {{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
+                    <View style = {{}}>
+                        <Image source = {require('../../assets/Subtract.png')} style = {{width: 25, height: 25}}/>
+                    </View>
+                    <View style = {{paddingRight: 80}}>
+                        <Text style = {styles.payment}>Settings</Text>
+                    </View>
+                    <View style = {{justifyContent: 'center'}}>
+                        <Pressable>
+                            <Image source = {require('../../assets/navigators/go_forward.png')} style = {{width: 15, height: 15}}/>
+                        </Pressable>
+                    </View>
+                </View>
+                <View style = {{padding: 10, flexDirection: 'row'}}>
+                    <View style = {{flex: 1}}></View>
+                    <View style = {{borderLeftColor: '#6D42E6', borderLeftWidth: 1.5, flex: 13}}>
+                        <Text> </Text>
+                    </View>
+                </View>
+                <View style = {{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
+                    <View style = {{flex: 2}}>
+                        <Image source = {require('../../assets/Vector-3.png')} style = {{width: 33, height: 22}}/>
+                    </View>
+                    <View style = {{flex: 3, paddingRight: 20}}>
+                        <Text style = {styles.payment}>Find us</Text>
+                    </View>
+                    <View style = {{flexDirection: 'row', justifyContent: 'space-between', flex: 2}}>
+                        <View style = {{justifyContent: 'center'}}>
+                            <Pressable>
+                                <Image source = {require('../../assets/InstagramGray.png')} style = {{width: 22, height: 22}}/>
+                            </Pressable>
+                        </View>
+                        <View style = {{justifyContent: 'center'}}>
+                            <Pressable>
+                                <Image source = {require('../../assets/FacebookGray.png')} style = {{width: 23, height: 23}}/>
+                            </Pressable>
+                        </View>
+                        <View style = {{justifyContent: 'center'}}>
+                            <Pressable>
+                                <Image source = {require('../../assets/TwitterGray.png')} style = {{width: 25, height: 25}}/>
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
+            </View>
+            <View style = {styles.fourthContainer}>
+                <View style = {{justifyContent: 'center'}}>
+                    <Image source = {require('../../assets/fi_phone-call.png')} style = {{width: 50, height: 50}}/>
+                </View>
+                <View style = {{justifyContent: 'center'}}>
+                    <Text style = {styles.help}>How can we help you ?</Text>
+                </View>
+            </View>
+            <View style = {{flexDirection: 'row', justifyContent: 'center'}}>
+                <View style = {{justifyContent: 'center'}}>
+                    <Image source = {require('../../assets/Copyright-Symbol.png')} style = {{width: 10, height: 10}}/>
+                </View>
+                <View>                
+                    <Text>TerraCharge. All rights reserved</Text>
+                </View>
+
+            </View>
         </View>
     )
 }
@@ -40,15 +138,15 @@ export function Profiles() {
 const styles = StyleSheet.create({
     mainCointainer: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         alignContent: 'center',
         backgroundColor: '#fff',
         paddingLeft: 30,
-        paddingRight: 30
+        paddingRight: 30,
+        paddingBottom: 80
     },
     firstContainer: {
         flexDirection: 'row',
-        paddingBottom: 7
     },
     secoundContainer: {
         flexDirection: 'row',
@@ -56,12 +154,33 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderTopColor: '#828282',
         borderTopWidth: 1,
-        paddingLeft: 15
+        paddingLeft: 15,
+    },
+    thirdContainer: {
+        justifyContent: 'center',
+        paddingTop: 50,
+        paddingBottom: 50
     },
     backIcon: {
         resizeMode: 'center',
         width: 60,
         height: 60
+    },
+    payment: {
+        color: '#363636',
+        fontSize: 22
+    },
+    fourthContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        backgroundColor: '#F2FDFF',
+        borderRadius: 15,
+        paddingRight: 50,
+        height: 70,
+    },
+    help: {
+        color: '#4CB4FF',
+        fontWeight: '700'
     }
 })
 
