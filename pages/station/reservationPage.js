@@ -1,7 +1,8 @@
-import { View, TouchableOpacity, Text, Modal, StyleSheet, Alert } from "react-native";
+import { View, TouchableOpacity, Text, Modal, StyleSheet, Alert, Image } from "react-native";
 import { useState } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { texts } from "../../pages/maps/styles.js";
+import ModalDropdown from 'react-native-modal-dropdown';
 
 function decideOnStyleBasedOnDate(date) {
 
@@ -9,7 +10,10 @@ function decideOnStyleBasedOnDate(date) {
 function generateModal({ showModal, setShowModal }) {
     // this here generates a modal so that the user can pick a locker
     // if the user doesn't have a preference, then it can select the random button
-   
+    // var lockersArray = Locker.getLockers;
+    // for (let i = 0; i < lockersArray.length; i ++){
+    //     lockersArray[i].idOfLocker = i;
+    // }
     return (
         <Modal
             animationType="fade"
@@ -20,9 +24,10 @@ function generateModal({ showModal, setShowModal }) {
                 setShowModal(!showModal);
             }}
         >
+            
             <View style={{ width: "75%", backgroundColor: 'blue', height: "50%", alignSelf: 'center', justifyContent: 'flex-end', marginTop: "25%" }}>
 
-
+            
                 <TouchableOpacity
                     style={[styles.styleOfPickerButton]}
                     onPress={() => setShowModal(!showModal)}
@@ -60,25 +65,77 @@ export function Reservation({ navigation }) {
         setShowModal(true);
     }
 
-    return (
+    return(
+        <View style={styles.mainView}>
+            <View style={styles.topContainer}>
+                <Text style={styles.topContainerText}>
+                    Set your charging preferences here!
+                </Text>
+                <Image
+                    style={styles.image}
+                    source={require('../../assets/logo/dpitLogo.png')}
+                />
+            </View>
+            
         <View
-            style={{ alignItems: 'center' }}
-        >
-            <Text style={{ marginTop: "20%" }}> Please select the date in which you want to be programmed</Text>
-            <TouchableOpacity onPress={showDatepicker} style={styles.styleOfPickerButton} >
-                <Text>
-                    Date:  {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
+            style={styles.selectorContainer}
+        >    
+            <View style={styles.pickerContainer}>
+                <Text style={[styles.dropDownText, {marginRight: "16%"}]}>
+                    Charger Type:
                 </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={showTimepicker} style={styles.styleOfPickerButton}>
-                <Text>
-                    Hour:  {date.getHours()}:{date.getMinutes()}
+                <ModalDropdown options={['USB-C', 'Lightning']} style={styles.dropDown} textStyle={styles.dropDownText} dropdownTextStyle={styles.dropDownText} dropdownStyle={[styles.dropDown, {height: 110, width: 150}]} defaultValue={"USB-C"}/>
+            </View>
+
+            <View style={styles.pickerContainer}>
+                <Text style={[styles.dropDownText, {marginRight: "30%"}]}>
+                    Payment:
                 </Text>
-            </TouchableOpacity>
+                <ModalDropdown options={['Visa', 'Mastercard', 'Cash']} textStyle={styles.dropDownText} dropdownTextStyle={styles.dropDownText} dropdownStyle={styles.dropDown} defaultValue={"Visa"}/>
+            </View>
 
-            <TouchableOpacity onPress={showLockerPicker} style={styles.styleOfPickerButton}>
+            <View style={styles.pickerContainer}>
+                <Text style={[styles.dropDownText, {marginRight: "40%"}]}>
+                    Hour:                      
+                </Text>
+                <TouchableOpacity onPress={showTimepicker} >
+                    <Text style={styles.dropDownText}>
+                        {date.getHours()}:{date.getMinutes()}
+                    </Text>
+                </TouchableOpacity>
+            </View>
 
-            </TouchableOpacity>
+            <View style={styles.pickerContainer}>
+                <Text style={[styles.dropDownText, {marginRight: "40%"}]}>
+                    Date:                      
+                </Text>
+                <TouchableOpacity onPress={showDatepicker} >
+                    <Text style={styles.dropDownText}>
+                        {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
+                    </Text>
+                </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+                        style={styles.submit_button}
+                        onPress = {() => {
+                            alert("You succsessfully reserved a station!")
+                            navigation.navigate("Tabs", {name: "Tabs"})
+                        }}
+                    >
+                        <Text style={styles.submit_text}>
+                            Book Now
+                        </Text>
+                    </TouchableOpacity>
+            </View>
+
+            
+            
+            
+            
+            
+            {/* <TouchableOpacity onPress={showLockerPicker} style={styles.styleOfPickerButton}>
+
+            </TouchableOpacity> */}
 
 
             {showPicker && (
@@ -104,13 +161,56 @@ export function Reservation({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    styleOfPickerButton: {
-        marginTop: '10%',
-        width: "50%",
-        height: 30,
-        borderRadius: 50,
-        alignItems: 'center',
+    mainView: {
+        backgroundColor: "white",
+        paddingBottom: 200
+    },
+    image: {
+        marginTop: 20,
+        height: 250,
+        width: 250,
         justifyContent: 'center',
-        backgroundColor: '#95D2FF'
+        alignSelf: 'center'
+    },
+    selectorContainer: {
+        marginTop: "5%",
+        marginBottom: "10%"
+    },
+    dropDown: {
+        justifyContent: "center",
+        borderRadius: 20
+    },
+    dropDownText: {
+        fontSize: 23,
+        fontWeight: "500",
+        color: "#444444",
+        marginRight: "20%"
+    },
+    pickerContainer: {
+        marginTop: "5%",
+        marginLeft: 50,
+        flexDirection: "row"
+    },
+    topContainer: {
+        paddingTop: "25%",
+        alignSelf: "center"
+    },
+    topContainerText: {
+        fontSize: 40
+    },
+    submit_button: {
+    height: 70,
+    width: 300,
+    marginTop: 50,
+    backgroundColor: 'deepskyblue',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    borderRadius: 20
+    },
+    submit_text: {
+        color: 'white',
+        fontSize: 25,
+        fontWeight: '700'
     }
 });

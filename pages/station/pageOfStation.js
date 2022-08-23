@@ -55,6 +55,7 @@ function OverviewFunction({ route }) {
                     </Text>
                 </View>
             </ScrollView>
+            
         </View>
 
     );
