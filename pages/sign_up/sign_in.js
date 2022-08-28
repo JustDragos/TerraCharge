@@ -52,8 +52,11 @@ export function SignIn({ navigation }) {
                     style={styles.submit_button}
                     onPress={() => {
                         // navigation.navigate("Tabs", {name: "Tabs"});
+                        
+                        // the part below doesn't work in mobile data
                         ((async () => {
                             var message = await verifyUser(emailOfUser, passwordOfUser);
+                           
                             if (message != "valid user") {
                                 alert(message);
                             }

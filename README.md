@@ -9,3 +9,9 @@ documentation:
   date time picker: https://github.com/react-native-datetimepicker/datetimepicker <br/>
   modal: https://reactnative.dev/docs/modal <br/>
   concurrently: https://www.npmjs.com/package/concurrently#usage for running app and backend at the same time <br/>
+
+  how to start app:
+    -start backend: node database/server/index.js (this connects app with the database)
+    -start webserver: lt --port 3002 --subdomain terra-charge (this is so that you can get to the backend from any device
+    <br/> on the network)
+    -start app: npm start (first 2 steps only need to be done the first time)

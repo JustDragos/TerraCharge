@@ -2,12 +2,28 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { NetworkInfo } from 'react-native-network-info';
+import publicIP from 'react-native-public-ip';
 
+const url = 'https://terra-charge.loca.lt';
 
+async function getIpAddress() {
 
+    // Get Local IP
+    try {
+        publicIP().then(ip =>{
+            console.log(ip);
+        }).catch(error => {
+            console.log(error);
+        }); 
+
+    } catch (E) {
+
+    }
+}
 export async function addUser(nameOfUser, emailOfUser, passwordOfUser) {
     try {
-        const response = await fetch('http://192.168.100.9:3002/make_user.json', {
+        const response = await fetch(url + '/make_user.json', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -29,7 +45,7 @@ async function connectToDB() {
     // basic connection model
     try {
 
-        const response = await fetch('http://192.168.100.9:3002/home.json');
+        const response = await fetch(url + '/home.json');
         const json = await response.json();
         console.log(json)
     }
@@ -40,7 +56,8 @@ async function connectToDB() {
 
 export async function verifyUser(emailOfUser, passwordOfUser) {
     try {
-        const response = await fetch('http://192.168.100.9:3002/verify_user.json', {
+
+        const response = await fetch(url + '/verify_user.json', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -63,7 +80,7 @@ export async function verifyUser(emailOfUser, passwordOfUser) {
 export function DatabaseHandler() {
     // addUser("Luca", "dex5@gmail.com", "234q");
     // verifyUser("dex8@gmail.com", "1214");
-
+    
     //the one above can return in res.json:
     // user exists - user is in database
     // valid user - user put correct email and password

@@ -8,11 +8,11 @@ import { buttons } from '../maps/styles';
 export function GetStarted({ navigation }) {
     return (
         <View style={[styles.main_view,]}>
-            {/* <TouchableOpacity style={[buttons.littleButton, { height: 30, width: 50, marginTop: 30, backgroundColor: 'black' }]}
+            <TouchableOpacity style={[buttons.littleButton, { height: 30, width: 50, marginTop: 30, backgroundColor: 'black' }]}
                 onPress={() => navigation.navigate('DatabaseHandlerActivity')}
             >
 
-            </TouchableOpacity> */}
+            </TouchableOpacity>
             <View style={{marginBottom: "10%"}}>
                 <Image
                     style={styles.image}
