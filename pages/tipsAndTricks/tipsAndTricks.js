@@ -15,7 +15,6 @@ export function TipsAndTricks() {
             <Image source = {require('../../assets/battery1.png')} style = {styles.charging1}   />
           </View>
           <View style = {{flex: 10}}>
-
           </View>
         </View>     
       </View>
@@ -46,7 +45,6 @@ export function TipsAndTricks() {
           </View>
         </View>
         <View>
-
         </View>
       </View>
     </View>

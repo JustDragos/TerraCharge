@@ -8,6 +8,8 @@ import { SignUp } from "./pages/sign_up/sign_up";
 import { SignIn } from "./pages/sign_up/sign_in";
 import { Reservation } from "./pages/station/reservationPage";
 import { DatabaseHandler } from "./database/databaseHandler";
+import {PaymentHistory} from "./pages/profile/paymentHistory";
+import {PaymentMethod} from "./pages/profile/paymentMethod";
 export default function App() {
     const AppStack = createNativeStackNavigator();
     return (
@@ -24,6 +26,8 @@ export default function App() {
                 <AppStack.Screen name="SearchBarActivity" component={SearchBarActivity} />
                 <AppStack.Screen name="ReservationActivity" component={Reservation}/>
                 <AppStack.Screen name="DatabaseHandlerActivity" component={DatabaseHandler}/>
+                <AppStack.Screen name="PaymentHistory" component={PaymentHistory}/>
+                <AppStack.Screen name="PaymentMethod" component={PaymentMethod}/>
             </AppStack.Navigator>
         </NavigationContainer>
     );

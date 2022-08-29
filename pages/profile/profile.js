@@ -1,132 +1,138 @@
-import { Text, View, StyleSheet, Button, Image, Pressable} from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet, Button, Image, Pressable, TouchableOpacity } from 'react-native';
 import { back } from 'react-native/Libraries/Animated/Easing';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export function Profiles() {
-    return(
-        <View style = {styles.mainCointainer}>
-            <View style = {styles.firstContainer}>
+
+
+export function Profiles({ navigation }) {
+    return (
+        <View style={styles.mainCointainer}>
+            <View style={styles.firstContainer}>
                 <View>
-                    <Pressable>
-                        <Image source = {require('../../assets/navigators/go_back.png')} style = {styles.backIcon}/>
-                    </Pressable>
+                    <TouchableOpacity>
+                        <Image source={require('../../assets/navigators/go_back.png')} style={styles.backIcon} />
+                    </TouchableOpacity>
                 </View>
-                <View style = {{paddingLeft: 200}}>
-                    <Image source = {require('../../assets/logo/dpitLogo.png')} style = {styles.backIcon}/>
+                <View style={{ paddingLeft: 200 }}>
+                    <Image source={require('../../assets/logo/dpitLogo.png')} style={styles.backIcon} />
                 </View>
             </View>
-            <View style = {styles.secoundContainer}>
-                <View style = {{flex: 1, paddingRight: 30}}>
-                    <Image source = {require('../../assets/emote.png')} style = {{width: 100, height: 100}}/>
+            <View style={styles.secoundContainer}>
+                <View style={{ flex: 1, paddingRight: 30 }}>
+                    <Image source={require('../../assets/emote.png')} style={{ width: 100, height: 100 }} />
                 </View>
-                <View style = {{flexDirection: 'column', flex: 2, justifyContent: 'center'}}>
-                    <View style = {{paddingBottom: 6}}>
-                        <Text style = {{color: '#828282', fontSize: 20}}>Welcome</Text>
+                <View style={{ flexDirection: 'column', flex: 2, justifyContent: 'center' }}>
+                    <View style={{ paddingBottom: 6 }}>
+                        <Text style={{ color: '#828282', fontSize: 20 }}>Welcome</Text>
                     </View>
                     <View>
-                        <Text style = {{color: '#000000', fontSize: 20, fontWeight: '600'}}>Mister David</Text>
+                        <Text style={{ color: '#000000', fontSize: 20, fontWeight: '600' }}>Mister David</Text>
                     </View>
                 </View>
-                <View style = {{flex: 1, justifyContent: 'center'}}>
-                    <Image source = {require('../../assets/fi_log-out.png')} style = {{width: 40, height: 40}}/>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <Image source={require('../../assets/fi_log-out.png')} style={{ width: 40, height: 40 }} />
                 </View>
             </View>
-            <View style = {styles.thirdContainer}>
-                <View style = {{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
-                    <View style = {{}}>
-                        <Image source = {require('../../assets/payment.png')} style = {{width: 25, height: 25}}/>
+            <View style={styles.thirdContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('PaymentHistory')}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
+                        <View style={{}}>
+                            <Image source={require('../../assets/payment.png')} style={{ width: 25, height: 25 }} />
+                        </View>
+                        <View style={{}}>
+                            <Text style={styles.payment}>Payment history</Text>
+                        </View>
+                        <View style={{ justifyContent: 'center' }}>
+                            <Image source={require('../../assets/navigators/go_forward.png')} style={{ width: 15, height: 15 }} />
+
+                        </View>
                     </View>
-                    <View style = {{}}>
-                        <Text style = {styles.payment}>Payment history</Text>
-                    </View>
-                    <View style = {{justifyContent: 'center'}}>
-                        <Pressable>
-                            <Image source = {require('../../assets/navigators/go_forward.png')} style = {{width: 15, height: 15}}/>
-                        </Pressable>
-                    </View>
-                </View>
-                <View style = {{padding: 10, flexDirection: 'row'}}>
-                    <View style = {{flex: 1}}></View>
-                    <View style = {{borderLeftColor: '#4D88ED', borderLeftWidth: 1.5, flex: 13}}>
+                </TouchableOpacity>
+                <View style={{ padding: 10, flexDirection: 'row' }}>
+                    <View style={{ flex: 1 }}></View>
+                    <View style={{ borderLeftColor: '#4D88ED', borderLeftWidth: 1.5, flex: 13 }}>
                         <Text> </Text>
                     </View>
                 </View>
-                <View style = {{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
-                    <View style = {{}}>
-                        <Image source = {require('../../assets/Vector-9.png')} style = {{width: 20, height: 20}}/>
+                <TouchableOpacity onPress={() => navigation.navigate('PaymentMethod')}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
+                        <View style={{}}>
+                            <Image source={require('../../assets/Vector-9.png')} style={{ width: 20, height: 20 }} />
+                        </View>
+                        <View style={{}}>
+                            <Text style={styles.payment}>Payment method</Text>
+                        </View>
+                        <View style={{ justifyContent: 'center' }}>
+                            <Image source={require('../../assets/navigators/go_forward.png')} style={{ width: 15, height: 15 }} />
+                        </View>
                     </View>
-                    <View style = {{}}>
-                        <Text style = {styles.payment}>Payment method</Text>
-                    </View>
-                    <View style = {{justifyContent: 'center'}}>
-                        <Pressable>
-                            <Image source = {require('../../assets/navigators/go_forward.png')} style = {{width: 15, height: 15}}/>
-                        </Pressable>
-                    </View>
-                </View>
-                <View style = {{padding: 10, flexDirection: 'row'}}>
-                    <View style = {{flex: 1}}></View>
-                    <View style = {{borderLeftColor: '#5F60E9', borderLeftWidth: 1.5, flex: 13}}>
+                </TouchableOpacity>
+                <View style={{ padding: 10, flexDirection: 'row' }}>
+                    <View style={{ flex: 1 }}></View>
+                    <View style={{ borderLeftColor: '#5F60E9', borderLeftWidth: 1.5, flex: 13 }}>
                         <Text> </Text>
                     </View>
                 </View>
-                <View style = {{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
-                    <View style = {{}}>
-                        <Image source = {require('../../assets/Subtract.png')} style = {{width: 25, height: 25}}/>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
+                    <View style={{}}>
+                        <Image source={require('../../assets/Subtract.png')} style={{ width: 25, height: 25 }} />
                     </View>
-                    <View style = {{paddingRight: 80}}>
-                        <Text style = {styles.payment}>Settings</Text>
+                    <View style={{ paddingRight: 80 }}>
+                        <Text style={styles.payment}>Settings</Text>
                     </View>
-                    <View style = {{justifyContent: 'center'}}>
+                    <View style={{ justifyContent: 'center' }}>
                         <Pressable>
-                            <Image source = {require('../../assets/navigators/go_forward.png')} style = {{width: 15, height: 15}}/>
+                            <Image source={require('../../assets/navigators/go_forward.png')} style={{ width: 15, height: 15 }} />
                         </Pressable>
                     </View>
                 </View>
-                <View style = {{padding: 10, flexDirection: 'row'}}>
-                    <View style = {{flex: 1}}></View>
-                    <View style = {{borderLeftColor: '#6D42E6', borderLeftWidth: 1.5, flex: 13}}>
+                <View style={{ padding: 10, flexDirection: 'row' }}>
+                    <View style={{ flex: 1 }}></View>
+                    <View style={{ borderLeftColor: '#6D42E6', borderLeftWidth: 1.5, flex: 13 }}>
                         <Text> </Text>
                     </View>
                 </View>
-                <View style = {{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
-                    <View style = {{flex: 2}}>
-                        <Image source = {require('../../assets/Vector-3.png')} style = {{width: 33, height: 22}}/>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
+                    <View style={{ flex: 2 }}>
+                        <Image source={require('../../assets/Vector-3.png')} style={{ width: 33, height: 22 }} />
                     </View>
-                    <View style = {{flex: 3, paddingRight: 20}}>
-                        <Text style = {styles.payment}>Find us</Text>
+                    <View style={{ flex: 3, paddingRight: 20 }}>
+                        <Text style={styles.payment}>Find us</Text>
                     </View>
-                    <View style = {{flexDirection: 'row', justifyContent: 'space-between', flex: 2}}>
-                        <View style = {{justifyContent: 'center'}}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 2 }}>
+                        <View style={{ justifyContent: 'center' }}>
                             <Pressable>
-                                <Image source = {require('../../assets/InstagramGray.png')} style = {{width: 22, height: 22}}/>
+                                <Image source={require('../../assets/InstagramGray.png')} style={{ width: 22, height: 22 }} />
                             </Pressable>
                         </View>
-                        <View style = {{justifyContent: 'center'}}>
+                        <View style={{ justifyContent: 'center' }}>
                             <Pressable>
-                                <Image source = {require('../../assets/FacebookGray.png')} style = {{width: 23, height: 23}}/>
+                                <Image source={require('../../assets/FacebookGray.png')} style={{ width: 23, height: 23 }} />
                             </Pressable>
                         </View>
-                        <View style = {{justifyContent: 'center'}}>
+                        <View style={{ justifyContent: 'center' }}>
                             <Pressable>
-                                <Image source = {require('../../assets/TwitterGray.png')} style = {{width: 25, height: 25}}/>
+                                <Image source={require('../../assets/TwitterGray.png')} style={{ width: 25, height: 25 }} />
                             </Pressable>
                         </View>
                     </View>
                 </View>
             </View>
-            <View style = {styles.fourthContainer}>
-                <View style = {{justifyContent: 'center'}}>
-                    <Image source = {require('../../assets/fi_phone-call.png')} style = {{width: 50, height: 50}}/>
+            <View style={styles.fourthContainer}>
+                <View style={{ justifyContent: 'center' }}>
+                    <Image source={require('../../assets/fi_phone-call.png')} style={{ width: 50, height: 50 }} />
                 </View>
-                <View style = {{justifyContent: 'center'}}>
-                    <Text style = {styles.help}>How can we help you ?</Text>
+                <View style={{ justifyContent: 'center' }}>
+                    <Text style={styles.help}>How can we help you ?</Text>
                 </View>
             </View>
-            <View style = {{flexDirection: 'row', justifyContent: 'center'}}>
-                <View style = {{justifyContent: 'center'}}>
-                    <Image source = {require('../../assets/Copyright-Symbol.png')} style = {{width: 10, height: 10}}/>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                <View style={{ justifyContent: 'center' }}>
+                    <Image source={require('../../assets/Copyright-Symbol.png')} style={{ width: 10, height: 10 }} />
                 </View>
-                <View>                
+                <View>
                     <Text>TerraCharge. All rights reserved</Text>
                 </View>
 
@@ -181,9 +187,5 @@ const styles = StyleSheet.create({
     help: {
         color: '#4CB4FF',
         fontWeight: '700'
-    }
+    },
 })
-
-function onPress(){
-    
-}
