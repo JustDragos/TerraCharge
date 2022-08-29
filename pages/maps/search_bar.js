@@ -18,11 +18,6 @@ function generateSearchBar(visible) {
             <Text
                 style={{ marginRight: 20, alignSelf: 'center', justifyContent: 'center', marginTop: "5%" }}
             > Search location... </Text>
-
-            <Image
-                source={require('../../assets/shape-1.png')}
-                style={{ width: 20, height: 20, marginTop: "5%" }}
-            />
         </View>
     );
 }
@@ -52,12 +47,12 @@ export function LoadSearchBar(navigation, stationsArray) {
 
             </TouchableOpacity>
             <TouchableOpacity
-                style={{ width: 36, height: 45, alignSelf: 'flex-start', alignItems: "center", justifyContent: 'center', borderTopRightRadius: 50, borderBottomRightRadius: 50, backgroundColor: '#95D2FF' }}
+                style={{ width: 45, height: 45, alignSelf: 'flex-start', alignItems: "center", justifyContent: 'center', borderTopRightRadius: 50, borderBottomRightRadius: 50, backgroundColor: 'white' }}
                 onPress={() => setVisibility(!visible)}
             >
                 <Image
-                    style={{ width: 30, height: 30, alignSelf: 'center', tintColor: 'white' }}
-                    source={styleOfToggleButton(visible)}
+                    source={require('../../assets/shape-1.png')}
+                    style={{ width: 20, height: 20, marginTop: "5%" }}
                 />
             </TouchableOpacity>
         </View >

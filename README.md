@@ -15,3 +15,4 @@ documentation:
     -start webserver: lt --port 3002 --subdomain terra-charge (this is so that you can get to the backend from any device
     <br/> on the network)
     -start app: npm start (first 2 steps only need to be done the first time)
+    -start arduino: node arduino/arduinoServer.js ( backend and webserver need to be opened)
