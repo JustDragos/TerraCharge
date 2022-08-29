@@ -41,7 +41,7 @@ export async function addUser(nameOfUser, emailOfUser, passwordOfUser) {
     }
 }
 
-async function connectToDB() {
+export async function connectToDB() {
     // basic connection model
     try {
 
