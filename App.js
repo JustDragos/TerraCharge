@@ -10,6 +10,8 @@ import { Reservation } from "./pages/station/reservationPage";
 import { DatabaseHandler } from "./database/databaseHandler";
 import {PaymentHistory} from "./pages/profile/paymentHistory";
 import {PaymentMethod} from "./pages/profile/paymentMethod";
+import {WebSite} from "./pages/profile/website";
+import {Settings} from "./pages/profile/settings";
 export default function App() {
     const AppStack = createNativeStackNavigator();
     return (
@@ -28,6 +30,8 @@ export default function App() {
                 <AppStack.Screen name="DatabaseHandlerActivity" component={DatabaseHandler}/>
                 <AppStack.Screen name="PaymentHistory" component={PaymentHistory}/>
                 <AppStack.Screen name="PaymentMethod" component={PaymentMethod}/>
+                <AppStack.Screen name="WebSite" component={WebSite}/>
+                <AppStack.Screen name="Settings" component={Settings}/>
             </AppStack.Navigator>
         </NavigationContainer>
     );

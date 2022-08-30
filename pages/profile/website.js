@@ -1,6 +1,8 @@
+import React from 'react';
 import { Text, View, StyleSheet, Button, Image, Pressable, TouchableOpacity } from 'react-native';
+import { WebView } from 'react-native-webview';
 
-export function PaymentMethod({ navigation }) {
+export function WebSite({ navigation }) {
     return (
         <View style={styles.mainCointainer}>
             <View style={styles.firstContainer}>
@@ -14,22 +16,13 @@ export function PaymentMethod({ navigation }) {
                 </View>
             </View>
             <View style={styles.secoundContainer}>
-                <TouchableOpacity>
-                    <View style={styles.add}>
-
-                        <View>
-                            <Image source={require('../../assets//add.png')} style={styles.backIcon} />
-                        </View>
-                        <View style = {{justifyContent: 'center', paddingLeft: 30}}>
-                            <Text style = {{fontSize: 17}}>Add debit or credit card</Text>
-                        </View>
-
-                    </View>
-                </TouchableOpacity>
+                <WebView source={{ uri: 'https://terrachargestations.github.io/TerraChargeWebsite/' }} />
             </View>
         </View>
     )
+
 }
+
 
 const styles = StyleSheet.create({
     mainCointainer: {
@@ -45,26 +38,16 @@ const styles = StyleSheet.create({
     firstContainer: {
         flexDirection: 'row',
         borderBottomWidth: 1,
-        paddingBottom: 20
+        paddingBottom: 20,
+        flex: 1,
+        
     },
     secoundContainer: {
-        paddingTop: 60,
+        flex: 10,
     },
     backIcon: {
         resizeMode: 'center',
         width: 60,
         height: 60
     },
-    add: {
-        flexDirection: 'row',
-        backgroundColor: '#BFFF93',
-        alignContent: 'center',
-        borderRadius: 20,
-        shadowColor: "#8559da",
-        shadowOpacity: 0.7,
-        shadowOffset: {
-          height: 4,
-          width: 4,
-        },
-    }
 })

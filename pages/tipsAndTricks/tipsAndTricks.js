@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Button, Image} from 'react-native';
+import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
 import { back } from 'react-native/Libraries/Animated/Easing';
 
 
@@ -6,42 +6,46 @@ export function TipsAndTricks() {
   return (
     <View style={styles.container}>
       <View style={styles.firstContainer}>
-        <Text style = {styles.welcomeback}>Welcome back,</Text>
-        <View style = {styles.davidContainer}>
-          <View style = {{flex: 7}}>
-            <Text style = {styles.david}>David!</Text>
+        <Text style={styles.welcomeback}>Welcome back,</Text>
+        <View style={styles.davidContainer}>
+          <View style={{ flex: 7 }}>
+            <Text style={styles.david}>David!</Text>
           </View>
-          <View style = {{flex: 1, felxDirection: 'row', justifyContent: 'flex-start', paddingRight: 100}}>
-            <Image source = {require('../../assets/battery1.png')} style = {styles.charging1}   />
+          <View style={{ flex: 1, felxDirection: 'row', justifyContent: 'flex-start', paddingRight: 100 }}>
+            <Image source={require('../../assets/battery1.png')} style={styles.charging1} />
           </View>
-          <View style = {{flex: 10}}>
-          </View>
-        </View>     
-      </View>
-      <View style = {styles.secoundContainer}>
-        <Text style = {styles.mostPopular}>Most popular</Text>
-        <View style={styles.insideSecoundContainer}>
-          <View style = {styles.tipsContainer}>
-            <View style = {{flex: 1}}>
-              <Text style = {styles.tips}>Tips and tricks</Text>
-              <Text style  = {styles.battery}>for battery health</Text>
-            </View>
-            <View style = {{flex: 1}}>
-              <Button title='see now'/>
-            </View>
-          </View>
-          <View style = {{justifyContent:'center', paddingBottom: 20, paddingRight: 20}}>
-            <Image source = {require('../../assets/battery2.png')} style = {styles.image2}/>
+          <View style={{ flex: 10 }}>
           </View>
         </View>
       </View>
-      <View style = {styles.thirdContainer}>
-        <View style = {{flexDirection: 'row', alignContent: 'space-between'}}>
-          <View>
-            <Text style = {styles.mostPopular}>Others</Text>
+      <View style={styles.secoundContainer}>
+        <View style = {{paddingBottom: 10}}>
+          <Text style={styles.mostPopular}>Most popular</Text>
+        </View>
+        <View style={styles.insideSecoundContainer}>
+          <View style={styles.tipsContainer}>
+            <View style={{}}>
+              <Text style={styles.tips}>Tips and tricks</Text>
+              <Text style={styles.battery}>for battery health</Text>
+            </View>
+            <TouchableOpacity>
+              <View style={{backgroundColor: '#95D2FF', paddingLeft: 30, justifyContent: 'center', alignContent: 'center', borderRadius: 30, width: 110, height: 25}}>
+                <Text style = {{color: '#fff'}}>See now</Text>
+              </View>
+            </TouchableOpacity>
           </View>
-          <View style = {{paddingLeft: 200}}>
-            <Button title = 'View all'/>
+          <View style={{ justifyContent: 'center', paddingBottom: 20, paddingRight: 20 }}>
+            <Image source={require('../../assets/battery2.png')} style={styles.image2} />
+          </View>
+        </View>
+      </View>
+      <View style={styles.thirdContainer}>
+        <View style={{ flexDirection: 'row', alignContent: 'space-between' }}>
+          <View>
+            <Text style={styles.mostPopular}>Others</Text>
+          </View>
+          <View style={{ paddingLeft: 200 }}>
+            <Button title='View all' />
           </View>
         </View>
         <View>
@@ -76,9 +80,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignContent: 'center',
-    backgroundColor: '#D0F9C9',
-    borderRadius: 25,
-    height: 200
+    backgroundColor: '#fff',
+    borderRadius: 13,
+    height: 200,
+    shadowColor: "#8559da",
+    shadowOpacity: 0.7,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
   },
   thirdContainer: {
     flex: 1,
@@ -90,8 +100,8 @@ const styles = StyleSheet.create({
   tipsContainer: {
     paddingTop: 40,
     paddingBottom: 20,
-    justifyContent: 'center',
-    alignContent: 'stretch',
+    justifyContent: 'space-around',
+    alignContent: 'center',
     paddingLeft: 25
   },
   welcomeback: {
@@ -103,7 +113,7 @@ const styles = StyleSheet.create({
     color: 393939,
     fontSize: 27,
   },
-  davidContainer:{
+  davidContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignContent: 'center'
@@ -115,9 +125,9 @@ const styles = StyleSheet.create({
     resizeMode: 'center'
   },
   mostPopular: {
-    color: 989898,
+    color: '#989898',
     fontSize: 20
-    
+
   },
   seeNow: {
 

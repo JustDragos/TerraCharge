@@ -1,9 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, Image, Pressable, TouchableOpacity } from 'react-native';
-import { back } from 'react-native/Libraries/Animated/Easing';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
 
 
 export function Profiles({ navigation }) {
@@ -75,50 +71,50 @@ export function Profiles({ navigation }) {
                         <Text> </Text>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
-                    <View style={{}}>
-                        <Image source={require('../../assets/Subtract.png')} style={{ width: 25, height: 25 }} />
-                    </View>
-                    <View style={{ paddingRight: 80 }}>
-                        <Text style={styles.payment}>Settings</Text>
-                    </View>
-                    <View style={{ justifyContent: 'center' }}>
-                        <Pressable>
+                <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
+                        <View style={{}}>
+                            <Image source={require('../../assets/Subtract.png')} style={{ width: 25, height: 25 }} />
+                        </View>
+                        <View style={{ paddingRight: 80 }}>
+                            <Text style={styles.payment}>Settings</Text>
+                        </View>
+                        <View style={{ justifyContent: 'center' }}>
                             <Image source={require('../../assets/navigators/go_forward.png')} style={{ width: 15, height: 15 }} />
-                        </Pressable>
+                        </View>
                     </View>
-                </View>
+                </TouchableOpacity>
                 <View style={{ padding: 10, flexDirection: 'row' }}>
                     <View style={{ flex: 1 }}></View>
                     <View style={{ borderLeftColor: '#6D42E6', borderLeftWidth: 1.5, flex: 13 }}>
                         <Text> </Text>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
-                    <View style={{ flex: 2 }}>
-                        <Image source={require('../../assets/Vector-3.png')} style={{ width: 33, height: 22 }} />
-                    </View>
-                    <View style={{ flex: 3, paddingRight: 20 }}>
-                        <Text style={styles.payment}>Find us</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 2 }}>
-                        <View style={{ justifyContent: 'center' }}>
-                            <Pressable>
+                <TouchableOpacity onPress={() => navigation.navigate('WebSite')}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
+                        <View style={{ flex: 2 }}>
+                            <Image source={require('../../assets/Vector-3.png')} style={{ width: 33, height: 22 }} />
+                        </View>
+                        <View style={{ flex: 3, paddingRight: 20 }}>
+                            <Text style={styles.payment}>Find us</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 2 }}>
+                            <View style={{ justifyContent: 'center' }}>
                                 <Image source={require('../../assets/InstagramGray.png')} style={{ width: 22, height: 22 }} />
-                            </Pressable>
-                        </View>
-                        <View style={{ justifyContent: 'center' }}>
-                            <Pressable>
+                            </View>
+                            <View style={{ justifyContent: 'center' }}>
+
                                 <Image source={require('../../assets/FacebookGray.png')} style={{ width: 23, height: 23 }} />
-                            </Pressable>
-                        </View>
-                        <View style={{ justifyContent: 'center' }}>
-                            <Pressable>
+
+                            </View>
+                            <View style={{ justifyContent: 'center' }}>
+
                                 <Image source={require('../../assets/TwitterGray.png')} style={{ width: 25, height: 25 }} />
-                            </Pressable>
+
+                            </View>
                         </View>
                     </View>
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.fourthContainer}>
                 <View style={{ justifyContent: 'center' }}>

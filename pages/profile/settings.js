@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, Button, Image, Pressable, TouchableOpacity} from 'react-native';
 
-export function PaymentHistory({navigation}) {
+export function Settings({ navigation }) {
     return (
         <View style = {styles.mainCointainer}>
             <View style = {styles.firstContainer}>
