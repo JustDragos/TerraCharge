@@ -16,7 +16,7 @@ export function TipsAndTricks({route}) {
           <View style={{ flex: 1, felxDirection: 'row', justifyContent: 'flex-start', paddingRight: 100 }}>
             <Image source={require('../../assets/battery1.png')} style={styles.charging1} />
           </View>
-          <View style={{ flex: 10 }}>
+          <View style={{ flex: 13 }}>
           </View>
         </View>
       </View>

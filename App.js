@@ -31,7 +31,7 @@ export default function App() {
                 <AppStack.Screen name="PaymentHistory" component={PaymentHistory}/>
                 <AppStack.Screen name="PaymentMethod" component={PaymentMethod}/>
                 <AppStack.Screen name="WebSite" component={WebSite}/>
-                <AppStack.Screen name="Settings" component={Settings}/>
+                <AppStack.Screen name="SettingsTab" component={Settings}/>
             </AppStack.Navigator>
         </NavigationContainer>
     );

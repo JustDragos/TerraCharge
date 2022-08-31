@@ -1,16 +1,31 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Button, Image, TouchableOpacity, Alert } from 'react-native';
 
 
 export function Profiles({ navigation, route }) {
     const user = route.params.user;
-    // the username from the database, please use this in the upper part of profile
-    // instead of the fixed name ( to change the name, go to sign_in/sign_up and change that name)
+    const logoutAlert = () => {
+        Alert.alert(
+            'Log out',
+            'Are you sure you want to log out ?',
+            [
+                {
+                    text: 'Yes',
+                    onPress: () => {
+                        navigation.navigate('GetStarted')
+                    },
+                },
+                {
+                    text: 'No',
+                }
+            ]
+        )
+    }
     return (
         <View style={styles.mainCointainer}>
             <View style={styles.firstContainer}>
                 <View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image source={require('../../assets/navigators/go_back.png')} style={styles.backIcon} />
                     </TouchableOpacity>
                 </View>
@@ -30,9 +45,11 @@ export function Profiles({ navigation, route }) {
                         <Text style={{ color: '#000000', fontSize: 20, fontWeight: '600' }}>Mister David</Text>
                     </View>
                 </View>
-                <View style={{ flex: 1, justifyContent: 'center' }}>
-                    <Image source={require('../../assets/fi_log-out.png')} style={{ width: 40, height: 40 }} />
-                </View>
+                <TouchableOpacity onPress={logoutAlert}>
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                        <Image source={require('../../assets/fi_log-out.png')} style={{ width: 40, height: 40 }} />
+                    </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.thirdContainer}>
                 <TouchableOpacity onPress={() => navigation.navigate('PaymentHistory')}>
@@ -74,7 +91,7 @@ export function Profiles({ navigation, route }) {
                         <Text> </Text>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+                <TouchableOpacity onPress={() => navigation.navigate('SettingsTab')}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
                         <View style={{}}>
                             <Image source={require('../../assets/Subtract.png')} style={{ width: 25, height: 25 }} />
