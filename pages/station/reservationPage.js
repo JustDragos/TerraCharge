@@ -3,6 +3,7 @@ import { useState } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { texts } from "../../pages/maps/styles.js";
 import ModalDropdown from 'react-native-modal-dropdown';
+import { addReservation } from "../../database/databaseHandler.js";
 
 function decideOnStyleBasedOnDate(date) {
 
@@ -119,6 +120,8 @@ export function Reservation({ navigation }) {
                         style={styles.submit_button}
                         onPress = {() => {
                             alert("You succsessfully reserved a station!")
+                            addReservation("USB-C", "Visa", "16:34", "30.8.2022");
+                            
                             navigation.navigate("Tabs", {name: "Tabs"})
                         }}
                     >

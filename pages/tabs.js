@@ -18,17 +18,16 @@ import { PortalProvider, PortalHost } from '@gorhom/portal';
 const Tab = createBottomTabNavigator();
 
 // Hiding Tab Names...
-export function Tabs() {
+export function Tabs({ route }) {
+  var user = route.params.user;
+
   // Animated Tab Indicator...
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
-  
+
   return (
 
     <SafeAreaView style={styles.SafeAreaViewContainer}>
       <PortalProvider>
-
-
-
         <Tab.Navigator
           screenOptions={{
             // Floating Tab Bar...
@@ -87,30 +86,33 @@ export function Tabs() {
             }
           })}></Tab.Screen>
 
-          <Tab.Screen name={"Search"} component={TipsAndTricks} options={{
-            tabBarLabel: () => { return null },
-            tabBarIcon: ({ focused }) => (
-              <View style={{
-                // centring Tab Button...
-                position: 'absolute',
-                top: 28
-              }}>
-                <FontAwesome5
-                  name="exclamation-circle"
-                  size={25}
-                  color={focused ? 'white' : 'white'}
-                ></FontAwesome5>
-              </View>
-            )
-          }} listeners={({ navigation, route }) => ({
-            // Onpress Update....
-            tabPress: e => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() + 23,
-                useNativeDriver: true
-              }).start();
-            }
-          })}></Tab.Screen>
+          <Tab.Screen name={"Search"} component={TipsAndTricks}
+            options={{
+              tabBarLabel: () => { return null },
+              tabBarIcon: ({ focused }) => (
+                <View style={{
+                  // centring Tab Button...
+                  position: 'absolute',
+                  top: 28
+                }}>
+                  <FontAwesome5
+                    name="exclamation-circle"
+                    size={25}
+                    color={focused ? 'white' : 'white'}
+                  ></FontAwesome5>
+                </View>
+              )
+            }}
+            initialParams={{ user: user }}
+            listeners={({ navigation, route }) => ({
+              // Onpress Update....
+              tabPress: e => {
+                Animated.spring(tabOffsetValue, {
+                  toValue: getWidth() + 23,
+                  useNativeDriver: true
+                }).start();
+              }
+            })}></Tab.Screen>
 
           <Tab.Screen name={"Notifications"} component={NotificationScreen} options={{
             tabBarLabel: () => { return null },
@@ -137,30 +139,33 @@ export function Tabs() {
             }
           })}></Tab.Screen>
 
-          <Tab.Screen name={"Settings"} component={Profiles} options={{
-            tabBarLabel: () => { return null },
-            tabBarIcon: ({ focused }) => (
-              <View style={{
-                // centring Tab Button...
-                position: 'absolute',
-                top: 28
-              }}>
-                <FontAwesome5
-                  name="user-alt"
-                  size={25}
-                  color={focused ? 'white' : 'white'}
-                ></FontAwesome5>
-              </View>
-            )
-          }} listeners={({ navigation, route }) => ({
-            // Onpress Update....
-            tabPress: e => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() + 200,
-                useNativeDriver: true
-              }).start();
-            }
-          })}></Tab.Screen>
+          <Tab.Screen name={"Settings"} component={Profiles}
+            options={{
+              tabBarLabel: () => { return null },
+              tabBarIcon: ({ focused }) => (
+                <View style={{
+                  // centring Tab Button...
+                  position: 'absolute',
+                  top: 28
+                }}>
+                  <FontAwesome5
+                    name="user-alt"
+                    size={25}
+                    color={focused ? 'white' : 'white'}
+                  ></FontAwesome5>
+                </View>
+              )
+            }}
+            initialParams={{ user: user }}
+            listeners={({ navigation, route }) => ({
+              // Onpress Update....
+              tabPress: e => {
+                Animated.spring(tabOffsetValue, {
+                  toValue: getWidth() + 200,
+                  useNativeDriver: true
+                }).start();
+              }
+            })}></Tab.Screen>
 
         </Tab.Navigator>
 

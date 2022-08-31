@@ -25,5 +25,6 @@ async function connectToDB() {
 nboard.on('ready', function () {
 	var led = new Jfive.Led(11);
 	connectToDB();
+	led.off();
 	// led.blink(1000); // 1 second interval  
 });

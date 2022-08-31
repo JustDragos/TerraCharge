@@ -2,7 +2,10 @@ import React from 'react';
 import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
 
 
-export function Profiles({ navigation }) {
+export function Profiles({ navigation, route }) {
+    const user = route.params.user;
+    // the username from the database, please use this in the upper part of profile
+    // instead of the fixed name ( to change the name, go to sign_in/sign_up and change that name)
     return (
         <View style={styles.mainCointainer}>
             <View style={styles.firstContainer}>

@@ -65,6 +65,26 @@ async function addUser(nameOfUser, emailOfUser, passwordOfUser) {
     }
 }
 
+async function addReservation(typeOfCharger, paymentMethod, hour, date){
+    try {
+        await client.connect();
+        const db = client.db("TerraCharge");
+        const users = db.collection("Reservations");
+        console.log("working database");
+        await users.insertOne({
+            chargerType: typeOfCharger,
+            paymentMethod: paymentMethod,
+            hour: hour,
+            date: date,
+        });
+        console.log("Reservation added");
+        client.close();
+    } finally {
+        // Ensures that the client will close when you finish/error
+        client.close();
+    }
+}
+
 async function passwordIsFound(emailOfUser, passwordOfUser) {
     try {
         await client.connect();
@@ -86,6 +106,14 @@ async function passwordIsFound(emailOfUser, passwordOfUser) {
 
 }
 
+app.post("/create_reservation.json", (req, res) =>{
+    console.log("Succesfully connected to create_reservation.json", "\n");
+    ((async () => {
+        addReservation(req.body.chargerType, req.body.paymentMethod, req.body.hour, req.body.date)
+
+    })()).catch(console.error);
+
+});
 
 app.get("/home.json", (req, res) => {
     res.json({ message: "Hello from server!" });
@@ -104,7 +132,7 @@ app.post("/make_user.json", (req, res) => {
         }
         else {
             res.json({ message: "Cannot add" });
-            console.log("line 85");
+            console.log("line 135");
         }
 
 

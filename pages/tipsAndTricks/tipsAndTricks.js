@@ -2,7 +2,9 @@ import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-n
 import { back } from 'react-native/Libraries/Animated/Easing';
 
 
-export function TipsAndTricks() {
+export function TipsAndTricks({route}) {
+  var user = route.params;
+  
   return (
     <View style={styles.container}>
       <View style={styles.firstContainer}>

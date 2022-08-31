@@ -1,94 +1,113 @@
 //import { StatusBar } from 'expo-status-bar';
-import { Dimensions, StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
+import { Dimensions, StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import { WebView } from 'react-native-webview';
-import React, { Component } from 'react'; 
+import React, { Component, useState } from 'react';
 import { TextInput } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-web';
 import { render } from 'react-dom';
+import { User } from '../../domain/user';
+import { addUser } from '../../database/databaseHandler';
 
+export function SignUp({ navigation }) {
+    const [emailOfUser, setEmailOfUser] = useState("");
+    const [passwordOfUser, setPasswordOfUser] = useState("");
+    const [confirmedPasswordOfUser, setConfirmedPasswordOfUser] = useState("");
+    return (
+        <View style={styles.main_view}>
 
-export function SignUp({navigation}){
-        return(
-            <View style={styles.main_view}>
-                
-                <View>
-                     <Image
-                        style={styles.image}
-                        source={require('../../assets/logo/dpitLogo.png')}
-                    />
-                    <Text style={styles.title} >
+            <View>
+                <Image
+                    style={styles.image}
+                    source={require('../../assets/logo/dpitLogo.png')}
+                />
+                <Text style={styles.title} >
+                    Sign Up
+                </Text>
+            </View>
+
+            <View style={styles.input_container}>
+                <Text style={styles.input_label}>
+                    E-mail
+                </Text>
+                <TextInput
+                    keyboardType='email-address'
+                    style={styles.input}
+                    returnKeyLabel='send'
+                    placeholder='youremail@email.com'
+                    onChangeText={newEmail => setEmailOfUser(newEmail)}
+                />
+                <Text style={styles.input_label}>
+                    Password
+                </Text>
+                <TextInput
+                    secureTextEntry={true}
+                    style={styles.input}
+                    returnKeyLabel='send'
+                    placeholder='Enter your password'
+                    onChangeText={newPassword => setPasswordOfUser(newPassword)}
+                />
+                <Text style={styles.input_label}>
+                    Confirm password
+                </Text>
+                <TextInput
+                    secureTextEntry={true}
+                    style={styles.input}
+                    returnKeyLabel='send'
+                    placeholder='Confirm your password'
+                    onChangeText={newConfirmedPassword => setConfirmedPasswordOfUser(newConfirmedPassword)}
+                />
+                <TouchableOpacity
+                    style={styles.submit_button}
+                    onPress={() => {
+                        if (passwordOfUser == confirmedPasswordOfUser && passwordOfUser != "") {
+                            
+                            ((async () => {
+                                var message = await addUser("Mister David", emailOfUser, passwordOfUser);
+                                console.log(message);
+                                var user = new User("Mister David", emailOfUser);
+                                navigation.navigate('Tabs', { user: user })
+                            })()).catch(console.error);
+                        }
+                        else
+                            {
+                                alert("passwords don't match");
+                            }
+                    }}
+                >
+                    <Text style={styles.submit_text}>
                         Sign Up
                     </Text>
-                </View>
-    
-                <View style={styles.input_container}>
-                    <Text style={styles.input_label}>
-                        E-mail
-                    </Text>
-                    <TextInput
-                        keyboardType='email-address'
-                        style={styles.input}
-                        returnKeyLabel='send'
-                        placeholder='youremail@email.com'
-                    />
-                    <Text style={styles.input_label}>
-                        Password
-                    </Text>
-                    <TextInput
-                        secureTextEntry = {true}
-                        style={styles.input}
-                        returnKeyLabel='send'
-                        placeholder='Enter your password'
-                    />
-                    <Text style={styles.input_label}>
-                        Confirm password
-                    </Text>
-                    <TextInput
-                        secureTextEntry = {true}
-                        style={styles.input}
-                        returnKeyLabel='send'
-                        placeholder='Confirm your password'
-                    />
-                    <TouchableOpacity
-                        style={styles.submit_button}
-                        onPress = {() => {
-                            navigation.navigate("Tabs", {name: "Tabs"})
-                        }}
-                    >
-                        <Text style={styles.submit_text}>
-                            Sign Up
-                        </Text>
-                    </TouchableOpacity>
-                    
-                </View>
-                <View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <View style={{flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50}} />
-                    <View>
-                        <Text style={{width: 90, textAlign: 'center'}}>Or try with</Text>
-                    </View>
-                        <View style={{flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50}} />
-                    </View>
-                    <View style={styles.try_with_container}>
-                        <Image
-                            style={styles.facebook_icon}
-                            source = {require('../../assets/Facebook.png')}
-                        />
-                        <Image
-                            style={styles.apple_icon}
-                            source = {require('../../assets/Apple.png')}
-                        />
-                        <Image
-                            style={styles.google_icon}
-                            source = {require('../../assets/Google.png')}
-                        />
-                    </View>
-                    
-                </View>
-                
+                </TouchableOpacity>
+
             </View>
-        );
-        
+            <View>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50 }} />
+                    <View>
+                        <Text style={{ width: 90, textAlign: 'center' }}>Or try with</Text>
+                    </View>
+                    <View style={{ flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50 }} />
+                </View>
+                <View style={styles.try_with_container}>
+                    <Image
+                        style={styles.facebook_icon}
+                        source={require('../../assets/Facebook.png')}
+                    />
+                    <Image
+                        style={styles.apple_icon}
+                        source={require('../../assets/Apple.png')}
+                    />
+                    <Image
+                        style={styles.google_icon}
+                        source={require('../../assets/Google.png')}
+                    />
+                </View>
+
+            </View>
+
+        </View>
+    );
+
 }
 
 const styles = StyleSheet.create({
@@ -145,19 +164,19 @@ const styles = StyleSheet.create({
         width: 70
     },
     submit_button: {
-    height: 70,
-    width: 300,
-    marginTop: 20,
-    backgroundColor: 'deepskyblue',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    alignItems: 'center',
-    borderRadius: 20
+        height: 70,
+        width: 300,
+        marginTop: 20,
+        backgroundColor: 'deepskyblue',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        alignItems: 'center',
+        borderRadius: 20
     },
     submit_text: {
         color: 'white',
         fontSize: 20,
         fontWeight: '700'
     }
-  });
+});
 

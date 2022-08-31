@@ -61,7 +61,8 @@ export function SignIn({ navigation }) {
                                 alert(message);
                             }
                             if (message == "valid user") {
-                                var user = new User(emailOfUser, passwordOfUser);
+                                var user = new User("Mister David", emailOfUser);
+                                
                                 navigation.navigate('Tabs', { user: user})
                             }
                         })()).catch(console.error);

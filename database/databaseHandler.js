@@ -7,20 +7,7 @@ import publicIP from 'react-native-public-ip';
 
 const url = 'https://terra-charge.loca.lt';
 
-async function getIpAddress() {
 
-    // Get Local IP
-    try {
-        publicIP().then(ip =>{
-            console.log(ip);
-        }).catch(error => {
-            console.log(error);
-        }); 
-
-    } catch (E) {
-
-    }
-}
 export async function addUser(nameOfUser, emailOfUser, passwordOfUser) {
     try {
         const response = await fetch(url + '/make_user.json', {
@@ -33,11 +20,14 @@ export async function addUser(nameOfUser, emailOfUser, passwordOfUser) {
 
         });
         const json = await response.json();
-
-        console.log(json)
+        
+        return json.message;
+        
 
     } catch (Error) {
         console.error(Error);
+        const message = "Something went wrong";
+        return message;
     }
 }
 
@@ -67,6 +57,7 @@ export async function verifyUser(emailOfUser, passwordOfUser) {
 
         });
         const json = await response.json();
+        
         console.log(json.message);
         return json.message;
     } catch (Error) {
@@ -77,10 +68,40 @@ export async function verifyUser(emailOfUser, passwordOfUser) {
 
 }
 
+
+export function addReservation(chargerType, paymentMethod, hour, date) {
+    try {
+        ((async () => {
+            const response = await fetch(url + '/create_reservation.json', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    chargerType: chargerType,
+                    paymentMethod: paymentMethod,
+                    date: date,
+                    hour: hour
+                })
+    
+            });
+            
+            
+        })()).catch(console.error);
+        
+    } catch (Error) {
+        console.error(Error);
+        
+    }
+}
+
+
+
 export function DatabaseHandler() {
     // addUser("Luca", "dex5@gmail.com", "234q");
     // verifyUser("dex8@gmail.com", "1214");
-    
+
     //the one above can return in res.json:
     // user exists - user is in database
     // valid user - user put correct email and password
