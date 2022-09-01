@@ -14,7 +14,7 @@ export function PaymentMethod({ navigation }) {
                 </View>
             </View>
             <View style={styles.secoundContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('AddCard')}>
                     <View style={styles.add}>
 
                         <View>
