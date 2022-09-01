@@ -16,10 +16,15 @@ export function SignUp({ navigation }) {
         <View style={styles.main_view}>
 
             <View>
-                <Image
-                    style={styles.image}
-                    source={require('../../assets/logo/dpitLogo.png')}
-                />
+                <View>
+                    <Image
+                        style={styles.image}
+                        source={require('../../assets/logo/dpitLogo.png')}
+                    />
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Image source={require('../../assets/navigators/go_back.png')} style={{ resizeMode: 'center', width: 60, height: 60 }} />
+                    </TouchableOpacity>
+                </View>
                 <Text style={styles.title} >
                     Sign Up
                 </Text>
@@ -60,7 +65,7 @@ export function SignUp({ navigation }) {
                     style={styles.submit_button}
                     onPress={() => {
                         if (passwordOfUser == confirmedPasswordOfUser && passwordOfUser != "") {
-                            
+
                             ((async () => {
                                 var message = await addUser("Mister David", emailOfUser, passwordOfUser);
                                 console.log(message);
@@ -68,10 +73,9 @@ export function SignUp({ navigation }) {
                                 navigation.navigate('Tabs', { user: user })
                             })()).catch(console.error);
                         }
-                        else
-                            {
-                                alert("passwords don't match");
-                            }
+                        else {
+                            alert("passwords don't match");
+                        }
                     }}
                 >
                     <Text style={styles.submit_text}>

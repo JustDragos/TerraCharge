@@ -2,7 +2,7 @@
 import { Dimensions, StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import { WebView } from 'react-native-webview';
 import React, { Component, useState } from 'react';
-import { TextInput } from 'react-native-gesture-handler';
+import { Directions, TextInput } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-web';
 import { render } from 'react-dom';
 import { buttons } from '../maps/styles';
@@ -17,10 +17,17 @@ export function SignIn({ navigation }) {
     return (
         <View style={[styles.main_view,]}>
             <View>
-                <Image
-                    style={styles.image}
-                    source={require('../../assets/logo/dpitLogo.png')}
-                />
+                <View>
+                    <Image
+                        style={styles.image}
+                        source={require('../../assets/logo/dpitLogo.png')}
+                    />
+                    <View>
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
+                            <Image source={require('../../assets/navigators/go_back.png')} style={{resizeMode: 'center', width: 60, height: 60}} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
                 <Text style={styles.title} >
                     Sign In
                 </Text>
@@ -52,18 +59,18 @@ export function SignIn({ navigation }) {
                     style={styles.submit_button}
                     onPress={() => {
                         // navigation.navigate("Tabs", {name: "Tabs"});
-                        
+
                         // the part below doesn't work in mobile data
                         ((async () => {
                             var message = await verifyUser(emailOfUser, passwordOfUser);
-                           
+
                             if (message != "valid user") {
                                 alert(message);
                             }
                             if (message == "valid user") {
                                 var user = new User("Mister David", emailOfUser);
-                                
-                                navigation.navigate('Tabs', { user: user})
+
+                                navigation.navigate('Tabs', { user: user })
                             }
                         })()).catch(console.error);
                     }}
