@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-n
 import { back } from 'react-native/Libraries/Animated/Easing';
 
 
-export function TipsAndTricks({route}) {
+export function TipsAndTricks({navigation, route}) {
   var user = route.params;
   
   return (
@@ -30,7 +30,7 @@ export function TipsAndTricks({route}) {
               <Text style={styles.tips}>Tips and tricks</Text>
               <Text style={styles.battery}>for battery health</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('BatteryHealth')}>
               <View style={{backgroundColor: '#95D2FF', paddingLeft: 30, justifyContent: 'center', alignContent: 'center', borderRadius: 30, width: 110, height: 25}}>
                 <Text style = {{color: '#fff'}}>See now</Text>
               </View>

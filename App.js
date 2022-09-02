@@ -13,6 +13,8 @@ import {PaymentMethod} from "./pages/profile/paymentMethod";
 import {WebSite} from "./pages/profile/website";
 import {Settings} from "./pages/profile/settings";
 import { AddCard } from "./pages/profile/addCard";
+import {BatteryHealth} from "./pages/tipsAndTricks/batteryHealth";
+
 export default function App() {
     const AppStack = createNativeStackNavigator();
     return (
@@ -33,6 +35,7 @@ export default function App() {
                 <AppStack.Screen name="PaymentMethod" component={PaymentMethod}/>
                 <AppStack.Screen name="WebSite" component={WebSite}/>
                 <AppStack.Screen name="SettingsTab" component={Settings}/>
+                <AppStack.Screen name="BatteryHealth" component={BatteryHealth}/>
                 <AppStack.Screen name="AddCard" component={AddCard}/>
             </AppStack.Navigator>
         </NavigationContainer>
