@@ -21,7 +21,19 @@ const images = StyleSheet.create({
         height: 25,
         tintColor: 'grey'
     },
-    
+    circleOfImage: {
+        width: 45,
+        height: 45,
+        backgroundColor: "#95D2FF",
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    appearanceOfImage: {
+        width: 25,
+        height: 25,
+        tintColor: 'white'
+    },
 })
 
 const buttons = StyleSheet.create({

@@ -52,7 +52,7 @@ export function Profiles({ navigation, route }) {
                 </TouchableOpacity>
             </View>
             <View style={styles.thirdContainer}>
-                <TouchableOpacity onPress={() => navigation.navigate('PaymentHistory')}>
+                <TouchableOpacity onPress={() => navigation.navigate('PaymentHistory', {user: user})}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
                         <View style={{}}>
                             <Image source={require('../../assets/payment.png')} style={{ width: 25, height: 25 }} />

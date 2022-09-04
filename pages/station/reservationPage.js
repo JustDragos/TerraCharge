@@ -38,7 +38,9 @@ function generateModal({ showModal, setShowModal }) {
         </Modal>);
 }
 
-export function Reservation({ navigation }) {
+export function Reservation({ navigation, route }) {
+    var user = route.params.user;
+    console.log(user);
     var today = new Date();
     const [date, setDate] = useState(today);
     const [mode, setMode] = useState('date');
@@ -120,9 +122,9 @@ export function Reservation({ navigation }) {
                         style={styles.submit_button}
                         onPress = {() => {
                             alert("You succsessfully reserved a station!")
-                            addReservation("USB-C", "Visa", "16:34", "30.8.2022");
+                            addReservation(user.email,"USB-C", "Visa", "16:34", "30.8.2022");
                             
-                            navigation.navigate("Tabs", {name: "Tabs"})
+                            navigation.navigate("Tabs", {user: user});
                         }}
                     >
                         <Text style={styles.submit_text}>

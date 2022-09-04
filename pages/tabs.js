@@ -61,7 +61,8 @@ export function Tabs({ route }) {
             // Tab ICons....
           }
 
-          <Tab.Screen name={"Home"} component={Maps} options={{
+          <Tab.Screen name={"Home"} component={Maps} 
+          options={{
             tabBarLabel: () => { return null },
             tabBarIcon: ({ focused }) => (
               <View style={{
@@ -76,7 +77,9 @@ export function Tabs({ route }) {
                 ></FontAwesome5>
               </View>
             )
-          }} listeners={({ navigation, route }) => ({
+          }}
+          initialParams={{ user: user }}
+          listeners={({ navigation, route }) => ({
             // Onpress Update....
             tabPress: e => {
               Animated.spring(tabOffsetValue, {

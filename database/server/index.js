@@ -55,7 +55,8 @@ async function addUser(nameOfUser, emailOfUser, passwordOfUser) {
         await users.insertOne({
             name: nameOfUser,
             email: emailOfUser,
-            password: passwordOfUser
+            password: passwordOfUser,
+            cardsAvailable: ["mastercard", "visa"],
         });
         console.log("User added");
         client.close();
@@ -65,7 +66,23 @@ async function addUser(nameOfUser, emailOfUser, passwordOfUser) {
     }
 }
 
-async function addReservation(typeOfCharger, paymentMethod, hour, date){
+async function getReservations(emailOfUser) {
+    try {
+        await client.connect();
+        const db = client.db("TerraCharge");
+        const reservations = db.collection("Reservations");
+        const results = await reservations.find({
+            email: emailOfUser
+        }).toArray();
+        client.close();
+        return results;
+    } finally {
+        // Ensures that the client will close when you finish/error
+        client.close();
+    }
+}
+
+async function addReservation(emailOfUser, typeOfCharger, paymentMethod, hour, date) {
     try {
         await client.connect();
         const db = client.db("TerraCharge");
@@ -76,6 +93,7 @@ async function addReservation(typeOfCharger, paymentMethod, hour, date){
             paymentMethod: paymentMethod,
             hour: hour,
             date: date,
+            email: emailOfUser,
         });
         console.log("Reservation added");
         client.close();
@@ -90,13 +108,13 @@ async function passwordIsFound(emailOfUser, passwordOfUser) {
         await client.connect();
         const db = client.db("TerraCharge");
         const coll = db.collection("Users");
-        const query = { email: emailOfUser, password: passwordOfUser};
+        const query = { email: emailOfUser, password: passwordOfUser };
         var results = await coll.findOne(query);
-        if (results == null){
+        if (results == null) {
             client.close();
             return false;
         }
-        
+
         client.close();
         return true;
     } finally {
@@ -106,18 +124,59 @@ async function passwordIsFound(emailOfUser, passwordOfUser) {
 
 }
 
-app.post("/create_reservation.json", (req, res) =>{
+async function getStatusOfLocker() {
+    try {
+        await client.connect();
+        const db = client.db("TerraCharge");
+        const coll = db.collection("Locker");
+        const query = { _id: "1" };
+        var results = await coll.findOne(query);
+
+        return results;
+    } catch (Error) {
+        console.error(Error);
+        return "inexistent";
+    }
+}
+
+async function changeStatus(newStatus) {
+    try {
+        await client.connect();
+        const db = client.db("TerraCharge");
+        const reservations = db.collection("Locker");
+        await reservations.updateOne({ _id: "1" }, {
+            $set: {"status": newStatus}
+        });
+        client.close();
+        console.log("Things changed")
+    } finally {
+        // Ensures that the client will close when you finish/error
+        client.close();
+    }
+}
+
+app.post("/create_reservation.json", (req, res) => {
     console.log("Succesfully connected to create_reservation.json", "\n");
     ((async () => {
-        addReservation(req.body.chargerType, req.body.paymentMethod, req.body.hour, req.body.date)
+        addReservation(req.body.emailOfUser, req.body.chargerType, req.body.paymentMethod, req.body.hour, req.body.date)
 
     })()).catch(console.error);
 
 });
 
+
 app.get("/home.json", (req, res) => {
     res.json({ message: "Hello from server!" });
     console.log("Succesfully connected to home.json", "\n");
+});
+
+app.post("/get_reservations.json", (req, res) => {
+    ((async () => {
+
+        var results = await getReservations(req.body.email);
+
+        res.json({ results });
+    })()).catch(console.error);
 });
 
 app.post("/make_user.json", (req, res) => {
@@ -139,7 +198,22 @@ app.post("/make_user.json", (req, res) => {
     })()).catch(console.error);
 });
 
+app.post("/get_status.json", (req, res) => {
+    ((async () => {
 
+        var results = await getStatusOfLocker();
+
+        res.json({ results });
+    })()).catch(console.error);
+
+});
+app.post("/change_status.json", (req, res) => {
+    ((async () => {
+        await changeStatus(req.body.newStatus);
+        var results = "went there";
+        res.json({ results });
+    })()).catch(console.error);
+});
 
 app.post("/verify_user.json", (req, res) => {
     console.log("Succesfully connected to verify_user.json", "\n");
@@ -152,10 +226,10 @@ app.post("/verify_user.json", (req, res) => {
             // if yes you verify it's password
             console.log("user exists");
             var passwordIsValid = await passwordIsFound(req.body.email, req.body.password);
-            if(passwordIsValid == true)
-                res.json({message: "valid user"});
+            if (passwordIsValid == true)
+                res.json({ message: "valid user" });
             else
-                res.json({message: "wrong password"});
+                res.json({ message: "wrong password" });
 
         }
         else {

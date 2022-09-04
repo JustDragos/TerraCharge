@@ -10,10 +10,9 @@ documentation:
   modal: https://reactnative.dev/docs/modal <br/>
   concurrently: https://www.npmjs.com/package/concurrently#usage for running app and backend at the same time <br/>
 
-  how to start app:
-    -start backend: node database/server/index.js (this connects app with the database)
+  how to start app:<br/>
+    -start backend: node database/server/index.js (this connects app with the database)<br/>
     -start webserver: lt --port 3002 --subdomain terra-charge (this is so that you can get to the backend from any device)<br/>
     - if the first one doesn't work, use: lt --port 3002 --subdomain terra-charge-backend<br/>
-    <br/> on the network)
-    -start app: npm start (first 2 steps only need to be done the first time)
+    -start app: npm start (first 2 steps only need to be done the first time) <br/>
     -start arduino: node arduino/arduinoServer.js ( backend and webserver need to be opened)

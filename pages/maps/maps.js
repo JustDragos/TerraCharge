@@ -11,7 +11,7 @@ import { LoadSearchBar } from './search_bar';
 import * as Location from 'expo-location';
 import { buttons, images, texts, views } from './styles';
 import { AirbnbRating } from 'react-native-ratings';
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps';
 
 function distanceBetweenTwoPoints(lat1, lon1, lat2, lon2) {
@@ -133,7 +133,8 @@ function renderFirstItem(station, shouldBeFirst) {
   return [views.eachListElement, { backgroundColor: 'lightcoral' }];
 }
 
-export function Maps({ navigation }) {
+export function Maps({ navigation, route }) {
+  var user = route.params.user;
   // this is the style of the map
   const sheetRef = React.useRef(null);
   const [indexOfStation, setIndexOfStation] = useState(0);
@@ -179,6 +180,7 @@ export function Maps({ navigation }) {
             onPress={() => { operateBottomSheet(sheetRef), setIndexOfStation(index) }}
             icon={marker.status == 1 ? require(green_icon) : require(red_icon)}
           >
+            
           </Marker>
 
         ))}
@@ -189,7 +191,7 @@ export function Maps({ navigation }) {
         <View >
           <BottomSheet isOpen={false}
             sliderMaxHeight={400}
-            sliderMinHeight={0}
+            sliderMinHeight={-5}
             ref={sheetRef}
           >
             {(onScrollEndDrag) => (
@@ -218,7 +220,7 @@ export function Maps({ navigation }) {
                     </View>
                     <TouchableOpacity
                       style={buttons.buttonOfVectorForward}
-                      onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[indexOfStation] })}
+                      onPress={() => navigation.navigate('PageOfStation', {station: stationsArray[indexOfStation], user: user})}
                     >
 
                       <Image
@@ -256,7 +258,7 @@ export function Maps({ navigation }) {
                         </Text>
                       </View>
                       <TouchableOpacity style={buttons.buttonOfVectorForward}
-                        onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[index] })}
+                        onPress={() => navigation.navigate('PageOfStation', { station: stationsArray[index], user: user })}
                       >
                         <Image
                           style={images.styleOfVectorForward}

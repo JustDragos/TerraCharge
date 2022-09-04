@@ -7,6 +7,8 @@ import { texts } from '../maps/styles';
 
 function OverviewFunction({ route }) {
     const station = route.params.station;
+    var user = route.params.user;
+    
     return (
 
         <View style={{ alignContent: 'flex-start', width: "100%", marginLeft: "5%" }}>
@@ -73,7 +75,8 @@ function LocationFunction() {
 
     );
 }
-function generateTopTab(station, Tab) {
+function generateTopTab(station, Tab, user) {
+    
     return (
         <View style={{ height: "33%" }}>
             <Tab.Navigator
@@ -100,7 +103,7 @@ function generateTopTab(station, Tab) {
                 }}
                 sceneContainerStyle={{ backgroundColor: "white", width: "50%" }}
             >
-                <Tab.Screen name='Overview' component={OverviewFunction} initialParams={{ station: station }} />
+                <Tab.Screen name='Overview' component={OverviewFunction} initialParams={{ station: station, user: user }} />
                 <Tab.Screen name='Reviews' component={ReviewsFunction} />
                 <Tab.Screen name='Location' component={LocationFunction} />
             </Tab.Navigator>
@@ -142,7 +145,7 @@ function generatePhotoContainer(navigation) {
         </View>
     );
 }
-function generateInformationContainer(station, Tab, navigation) {
+function generateInformationContainer(station, Tab, navigation, user) {
     const [isFavourite, setIsFavourite] = useState(station.isFavourite)
     return (<View style={styles.informationContainer}>
         <View
@@ -205,11 +208,11 @@ function generateInformationContainer(station, Tab, navigation) {
 
         {/* below needs modifications so that top bar has buttons instead of tabs*/}
 
-        {generateTopTab(station, Tab)}
+        {generateTopTab(station, Tab, user)}
 
         {/*Up untill here */}
         <TouchableOpacity style={[styles.button, { backgroundColor: '#95D2FF', alignSelf: 'center', width: '90%', height: 50, marginLeft: "20%", marginTop: "1%", marginRight: "20%", marginBottom: "3%", }]}
-        onPress={() => navigation.navigate('ReservationActivity')}
+        onPress={() => navigation.navigate('ReservationActivity', {user: user})}
     >
             <Text style={{ color: 'white', fontSize: 20 }}>
                 Reserve now
@@ -217,13 +220,14 @@ function generateInformationContainer(station, Tab, navigation) {
         </TouchableOpacity>
     </View>);
 }
-export function PageOfStation({ route, navigation }) {
+export function PageOfStation({ navigation, route }) {
     const Tab = createMaterialTopTabNavigator();
-    const { station } = route.params;
+    var station = route.params.station;
+    var user = route.params.user;
     return (
         <View style={styles.container}>
             {generatePhotoContainer(navigation)}
-            {generateInformationContainer(station, Tab, navigation)}
+            {generateInformationContainer(station, Tab, navigation, user)}
         </View>
     )
 }

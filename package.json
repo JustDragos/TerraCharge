@@ -62,7 +62,8 @@
     "react-native-webview": "^11.18.1",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "sequelize": "^6.21.4",
-    "start": "^5.1.0"
+    "start": "^5.1.0",
+    "temporal": "^0.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

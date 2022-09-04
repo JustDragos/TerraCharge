@@ -11,19 +11,21 @@ import { addUser } from '../../database/databaseHandler';
 export function SignUp({ navigation }) {
     const [emailOfUser, setEmailOfUser] = useState("");
     const [passwordOfUser, setPasswordOfUser] = useState("");
+    const [nameOfUser, setNameOfUser] = useState("");
     const [confirmedPasswordOfUser, setConfirmedPasswordOfUser] = useState("");
     return (
         <View style={styles.main_view}>
 
             <View>
-                <View>
-                    <Image
-                        style={styles.image}
-                        source={require('../../assets/logo/dpitLogo.png')}
-                    />
+                <View style={{ flexDirection: 'row', marginTop: "5%" }}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image source={require('../../assets/navigators/go_back.png')} style={{ resizeMode: 'center', width: 60, height: 60 }} />
                     </TouchableOpacity>
+                    <Image
+                        style={[styles.image, {marginLeft: "13%"}]}
+                        source={require('../../assets/logo/dpitLogo.png')}
+                    />
+
                 </View>
                 <Text style={styles.title} >
                     Sign Up
@@ -31,6 +33,15 @@ export function SignUp({ navigation }) {
             </View>
 
             <View style={styles.input_container}>
+                <Text style={styles.input_label}>
+                    User name
+                </Text>
+                <TextInput
+                    style={styles.input}
+                    returnKeyLabel='send'
+                    placeholder='username'
+                    onChangeText={newNameOfUser => setNameOfUser(newNameOfUser)}
+                />
                 <Text style={styles.input_label}>
                     E-mail
                 </Text>
@@ -64,12 +75,12 @@ export function SignUp({ navigation }) {
                 <TouchableOpacity
                     style={styles.submit_button}
                     onPress={() => {
-                        if (passwordOfUser == confirmedPasswordOfUser && passwordOfUser != "") {
+                        if (passwordOfUser == confirmedPasswordOfUser && passwordOfUser != "" && emailOfUser != "") {
 
                             ((async () => {
-                                var message = await addUser("Mister David", emailOfUser, passwordOfUser);
+                                var message = await addUser(nameOfUser, emailOfUser, passwordOfUser);
                                 console.log(message);
-                                var user = new User("Mister David", emailOfUser);
+                                var user = new User(nameOfUser, emailOfUser);
                                 navigation.navigate('Tabs', { user: user })
                             })()).catch(console.error);
                         }
@@ -85,12 +96,12 @@ export function SignUp({ navigation }) {
 
             </View>
             <View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <View style={{ flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50 }} />
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: "3%" }}>
+                    <View style={{ width: "20%",marginLeft: "15%", height: 5, backgroundColor: 'grey', borderRadius: 50 }} />
                     <View>
                         <Text style={{ width: 90, textAlign: 'center' }}>Or try with</Text>
                     </View>
-                    <View style={{ flex: 1, height: 5, backgroundColor: 'gray', borderRadius: 50 }} />
+                    <View style={{ width: "20%", marginRight: "20%", height: 5, backgroundColor: 'grey', borderRadius: 50 }} />
                 </View>
                 <View style={styles.try_with_container}>
                     <Image
@@ -120,15 +131,16 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 45,
+        width: "70%",
         borderTopColor: 'white',
         borderRightColor: 'white',
         borderLeftColor: 'white',
-        margin: 12,
+        marginLeft: "10%",
         borderWidth: 1,
-        padding: 10
+        
     },
     image: {
-        marginTop: 60,
+        marginTop: "4%",
         height: 150,
         width: 150,
         justifyContent: 'center',
@@ -136,18 +148,20 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        paddingTop: 20,
+        marginTop: "1%",
         fontSize: 35,
         fontFamily: 'sans-serif',
         textAlign: 'center'
     },
     input_label: {
-        marginLeft: 20,
+        marginLeft: "10%",
+        marginTop: "2%",
         fontFamily: 'sans-serif',
         fontSize: 20,
     },
     input_container: {
-        margin: 30
+        marginLeft: "7%",
+        marginRight: "5%",   
     },
     try_with_container: {
         paddingTop: 10,
@@ -168,19 +182,23 @@ const styles = StyleSheet.create({
         width: 70
     },
     submit_button: {
-        height: 70,
-        width: 300,
+        width: "60%",
+        height: 75,
         marginTop: 20,
+        alignSelf: 'center',
+        marginLeft: "15%",
+        marginRight: "15%",
         backgroundColor: 'deepskyblue',
         justifyContent: 'center',
-        alignSelf: 'center',
+        
         alignItems: 'center',
         borderRadius: 20
     },
     submit_text: {
         color: 'white',
         fontSize: 20,
-        fontWeight: '700'
+        width: 100,
+       fontWeight: '700'
     }
 });
 
