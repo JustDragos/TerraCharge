@@ -7,7 +7,7 @@ import publicIP from 'react-native-public-ip';
 
 const url = 'https://terra-charge.loca.lt';
 
-async function getAsyncLockerStatus() {
+export async function getAsyncLockerStatus() {
 	try {
 		const response = await fetch(url + '/get_status.json', {
 			headers: {
@@ -16,7 +16,7 @@ async function getAsyncLockerStatus() {
 			},
 			method: 'POST',
 			body: JSON.stringify({
-				id: 1
+				id: "1"
 			})
 		});
 		const json = await response.json();

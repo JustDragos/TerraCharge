@@ -1,27 +1,25 @@
 import { Text, View, StyleSheet, Button, Image, Pressable, TouchableOpacity } from 'react-native';
-import { changeStatusOfLocker } from '../../database/databaseHandler';
+import { changeStatusOfLocker, getAsyncLockerStatus } from '../../database/databaseHandler';
 import { useState, useEffect } from 'react';
-function changeStatusInSync(newStatus) {
-    (async () => {
-        await changeStatusOfLocker(newStatus);
-    })();
-}
+
 export function Settings({ navigation }) {
     const [status, setStatus] = useState(false);
     var componentIsMounted = false;
     useEffect(() => {
+        
         if (componentIsMounted == false) {
             (async () => {
 
-                var newReservations = await g(emailOfUser);
-                setReservations(newReservations);
+                var newStatus = await getAsyncLockerStatus();
+                setStatus(newStatus.status);
+                console.log(newStatus.status);
+                // var newReservations = await getAsyncLockerStatus();
 
-
-
-            })();
+            })().catch((E) => { console.log(E) });
             componentIsMounted = true;
         }
     }, [componentIsMounted]);
+   
     return (
         <View style={styles.mainCointainer}>
             <View style={styles.firstContainer}>
@@ -35,9 +33,24 @@ export function Settings({ navigation }) {
                 </View>
             </View>
             <TouchableOpacity
-                style={{ width: 100, height: 100, borderWidth: 4, alignSelf: 'center' }}
-                onPress={() => { setStatus(!status); changeStatusInSync(status) }}
-            />
+                style={{ width: 100, height: 100, borderWidth: 1, alignSelf: 'center' }}
+                onPress={() => {
+                    
+                    ((async() =>{
+                        await changeStatusOfLocker(!status)
+                        setStatus(!status);
+                    
+                    })()).catch((E) =>{console.log(E)});
+
+                }}
+            >
+                <Text style={{
+                    color: 'black',
+                    fontWeight: "600", fontSize: 20
+                }}>
+                    {status.toString()}
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }

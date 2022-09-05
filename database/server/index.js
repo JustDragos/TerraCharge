@@ -147,8 +147,9 @@ async function changeStatus(newStatus) {
         await reservations.updateOne({ _id: "1" }, {
             $set: {"status": newStatus}
         });
-        client.close();
+        
         console.log("Things changed")
+        client.close();
     } finally {
         // Ensures that the client will close when you finish/error
         client.close();
