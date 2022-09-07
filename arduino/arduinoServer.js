@@ -1,10 +1,12 @@
 var Jfive = require('johnny-five');
 var fetch = require('cross-fetch');
 var temporal = require("temporal");
-const { useEffect, useState } = require('react');
+
+const originalUrl = 'https://terra-charge.loca.lt';
+const backupUrl = 'https://terra-charge-backend.loca.lt';
+const url = originalUrl;
 
 
-const url = 'https://terra-charge.loca.lt';
 
 var nboard = new Jfive.Board(
 	{
@@ -73,17 +75,32 @@ function getStatusOfLocker() {
 
 }
 
+function closeAfterInterval(time, pin){
+	openLocker(pin);
+	setTimeout(function() {
+		closeLocker(pin);
+
+	}, time);
+};
+
+function temporaryOpen(time, pin){
+	closeAfterInterval(time, pin);
+	// this is supposed to closed 
+}
 
 nboard.on('ready', function () {
 
 	// This will set pin 11 high (on)
 	// pin.high() closes the electricity for the pin
 	// pin.low() opens the electricity for the pin
+	console.log()
 	var pin = new Jfive.Pin(11);
 	closeLocker(pin);
+	
 	// Loop(pin);
 	temporal.loop(5000, function (loop) {
 		// every 5 seconds you do this
+		// it can be modified but then there are too many requests to the database
 		((async () => {
 			var status = await getStatusOfLocker();
 			if(status.status == false){
@@ -91,6 +108,8 @@ nboard.on('ready', function () {
 			}
 			else{
 				openLocker(pin);
+				//temporaryOpen(5000, pin);
+
 			}
 			console.log(status);
 		})()).catch(console.error); 

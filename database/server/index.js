@@ -243,7 +243,7 @@ app.post("/verify_user.json", (req, res) => {
 });
 
 app.listen(3002, () => {
-    console.log(`Server running`);
+    console.log(`Server running successfully`);
 
 });
 

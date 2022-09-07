@@ -1,30 +1,31 @@
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { NetworkInfo } from 'react-native-network-info';
-import publicIP from 'react-native-public-ip';
 
-const url = 'https://terra-charge.loca.lt';
+
+const originalUrl = 'https://terra-charge.loca.lt';
+const backupUrl = 'https://terra-charge-backend.loca.lt';
+const url = originalUrl;
+
 
 export async function getAsyncLockerStatus() {
-	try {
-		const response = await fetch(url + '/get_status.json', {
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			method: 'POST',
-			body: JSON.stringify({
-				id: "1"
-			})
-		});
-		const json = await response.json();
+    try {
+        const response = await fetch(url + '/get_status.json', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                id: "1"
+            })
+        });
+        const json = await response.json();
 
-		return json.results;
-	} catch (E) {
-		console.log(E);
-	}
+        return json.results;
+    } catch (E) {
+        console.log(E);
+    }
 }
 
 export async function addUser(nameOfUser, emailOfUser, passwordOfUser) {
@@ -87,7 +88,7 @@ export async function verifyUser(emailOfUser, passwordOfUser) {
 
 }
 
-export async function changeStatusOfLocker(status){
+export async function changeStatusOfLocker(status) {
     try {
 
         const response = await fetch(url + '/change_status.json', {
