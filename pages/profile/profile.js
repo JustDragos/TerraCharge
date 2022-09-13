@@ -42,7 +42,7 @@ export function Profiles({ navigation, route }) {
                         <Text style={{ color: '#828282', fontSize: 20 }}>Welcome</Text>
                     </View>
                     <View>
-                        <Text style={{ color: '#000000', fontSize: 20, fontWeight: '600' }}>Mister David</Text>
+                        <Text style={{ color: '#000000', fontSize: 20, fontWeight: '600' }}>{user.name}</Text>
                     </View>
                 </View>
                 <TouchableOpacity onPress={logoutAlert}>

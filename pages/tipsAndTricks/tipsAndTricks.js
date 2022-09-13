@@ -3,7 +3,7 @@ import { back } from 'react-native/Libraries/Animated/Easing';
 
 
 export function TipsAndTricks({navigation, route}) {
-  var user = route.params;
+  var user = route.params.user;
   
   return (
     <View style={styles.container}>
@@ -11,12 +11,12 @@ export function TipsAndTricks({navigation, route}) {
         <Text style={styles.welcomeback}>Welcome back,</Text>
         <View style={styles.davidContainer}>
           <View style={{ flex: 7 }}>
-            <Text style={styles.david}>David!</Text>
+            <Text style={styles.david}>{user.name}</Text>
           </View>
           <View style={{ flex: 1, felxDirection: 'row', justifyContent: 'flex-start', paddingRight: 100 }}>
             <Image source={require('../../assets/battery1.png')} style={styles.charging1} />
           </View>
-          <View style={{ flex: 13 }}>
+          <View style={{flex: 4}}>
           </View>
         </View>
       </View>
