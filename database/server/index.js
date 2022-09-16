@@ -156,6 +156,30 @@ async function changeStatus(newStatus) {
     }
 }
 
+async function deleteReservations(){
+    try {
+        await client.connect();
+        const db = client.db("TerraCharge");
+        const reservations = db.collection("Reservations");
+        await reservations.deleteMany({});
+        
+        console.log("All reservations deleted")
+        client.close();
+    } finally {
+        // Ensures that the client will close when you finish/error
+        client.close();
+    }
+}
+
+app.post("/delete_reservations.json", (req, res) => {
+    console.log("Succesfully connected to delete_reservation.json", "\n");
+    ((async () => {
+        await deleteReservations();
+    })()).catch(console.error);
+
+
+});
+
 app.post("/create_reservation.json", (req, res) => {
     console.log("Succesfully connected to create_reservation.json", "\n");
     ((async () => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button, Image, TouchableOpacity, Alert } from 'react-native';
+import { deleteAllReservations } from '../../database/databaseHandler';
 
 
 export function Profiles({ navigation, route }) {
@@ -72,7 +73,7 @@ export function Profiles({ navigation, route }) {
                         <Text> </Text>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate('PaymentMethod')}>
+                <TouchableOpacity onPress={() => navigation.navigate('PaymentMethod') }>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20 }}>
                         <View style={{}}>
                             <Image source={require('../../assets/Vector-9.png')} style={{ width: 20, height: 20 }} />

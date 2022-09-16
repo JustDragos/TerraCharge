@@ -10,7 +10,7 @@ const url = originalUrl;
 
 var nboard = new Jfive.Board(
 	{
-		port: "Com3"
+		port: "Com4"
 	}
 );
 
@@ -43,6 +43,27 @@ async function getAsyncLockerStatus() {
 	} catch (E) {
 		console.log(E);
 	}
+}
+
+ async function changeAsyncStatusInDatabase(){
+	try {
+		const response = await fetch(url + '/change_status.json', {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			method: 'POST',
+			body: JSON.stringify({
+				newStatus: false
+			})
+		});
+		const json = await response.json();
+
+		return json.results;
+	} catch (E) {
+		console.log(E);
+	}
+
 }
 
 function openLocker(pin) {
@@ -83,9 +104,21 @@ function closeAfterInterval(time, pin){
 	}, time);
 };
 
+async function closeLockerDatabase(){
+	return changeAsyncStatusInDatabase().then(function (response) {
+		return response;
+	});
+
+}
+
 function temporaryOpen(time, pin){
 	closeAfterInterval(time, pin);
 	// this is supposed to closed 
+	((async () => {
+		await closeLockerDatabase();
+		
+	})()).catch(console.error);
+	
 }
 
 nboard.on('ready', function () {
@@ -107,7 +140,7 @@ nboard.on('ready', function () {
 				closeLocker(pin);
 			}
 			else{
-				openLocker(pin);
+				temporaryOpen(5000, pin);
 				//temporaryOpen(5000, pin);
 
 			}

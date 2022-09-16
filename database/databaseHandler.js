@@ -8,6 +8,31 @@ const backupUrl = 'https://terra-charge-backend.loca.lt';
 const url = originalUrl;
 
 
+export async function deleteAllReservations(){
+    try {
+        const response = await fetch(url + '/delete_reservations.json', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                
+            })
+
+        });
+        const json = await response.json();
+        console.log('Reservation collection changed');
+
+        return json.message;
+    } catch (Error) {
+        console.error(Error);
+        const message = "something went wrong";
+        return message;
+    }
+
+}
+
 export async function getAsyncLockerStatus() {
     try {
         const response = await fetch(url + '/get_status.json', {
@@ -103,8 +128,8 @@ export async function changeStatusOfLocker(status) {
 
         });
         const json = await response.json();
+        console.log('Status changed');
 
-        console.log(json.message);
         return json.message;
     } catch (Error) {
         console.error(Error);
@@ -113,28 +138,43 @@ export async function changeStatusOfLocker(status) {
     }
 }
 
-export function addReservation(emailOfUser, chargerType, paymentMethod, hour, date) {
+export function openLocker() {
     try {
         ((async () => {
-            const response = await fetch(url + '/create_reservation.json', {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify({
-                    chargerType: chargerType,
-                    paymentMethod: paymentMethod,
-                    date: date,
-                    hour: hour,
-                    emailOfUser: emailOfUser,
-                })
-
-            });
-
-
+            await changeStatusOfLocker(true);
         })()).catch(console.error);
+    } catch (Error) {
+        console.error(Error)
+    }
+}
 
+export async function addReservationAndOpenLocker(emailOfUser, chargerType, paymentMethod, hour, date) {
+    await Promise.all([
+        await changeStatusOfLocker(true),
+        await addReservation(emailOfUser, chargerType, paymentMethod, hour, date),
+        
+    ]).then(() => console.log('All promises resolved')).catch((Error) => {
+        console.log(Error);
+    });
+}
+
+export async function addReservation(emailOfUser, chargerType, paymentMethod, hour, date) {
+    try {
+        const response = await fetch(url + '/create_reservation.json', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                chargerType: chargerType,
+                paymentMethod: paymentMethod,
+                date: date,
+                hour: hour,
+                emailOfUser: emailOfUser,
+            })
+
+        });
     } catch (Error) {
         console.error(Error);
 

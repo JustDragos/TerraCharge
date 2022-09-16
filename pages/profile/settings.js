@@ -1,24 +1,28 @@
-import { Text, View, StyleSheet, Button, Image, Pressable, TouchableOpacity } from 'react-native';
-import { changeStatusOfLocker, getAsyncLockerStatus } from '../../database/databaseHandler';
-import { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { openLocker } from '../../database/databaseHandler';
+
+
+// deleted functions(){
+//    // const [status, setStatus] = useState(false);
+    // var componentIsMounted = false;
+    // useEffect(() => {
+        
+    //     if (componentIsMounted == false) {
+    //         (async () => {
+
+    //             var newStatus = await getAsyncLockerStatus();
+    //             setStatus(newStatus.status);
+    //             console.log(newStatus.status);
+    //             // var newReservations = await getAsyncLockerStatus();
+
+    //         })().catch((E) => { console.log(E) });
+    //         componentIsMounted = true;
+    //     }
+    // }, [componentIsMounted]);
+//}
 
 export function Settings({ navigation }) {
-    const [status, setStatus] = useState(false);
-    var componentIsMounted = false;
-    useEffect(() => {
-        
-        if (componentIsMounted == false) {
-            (async () => {
-
-                var newStatus = await getAsyncLockerStatus();
-                setStatus(newStatus.status);
-                console.log(newStatus.status);
-                // var newReservations = await getAsyncLockerStatus();
-
-            })().catch((E) => { console.log(E) });
-            componentIsMounted = true;
-        }
-    }, [componentIsMounted]);
+    
    
     return (
         <View style={styles.mainCointainer}>
@@ -35,12 +39,8 @@ export function Settings({ navigation }) {
             <TouchableOpacity
                 style={{ width: 100, height: 100, borderWidth: 1, alignSelf: 'center' }}
                 onPress={() => {
+                    openLocker();
                     
-                    ((async() =>{
-                        await changeStatusOfLocker(!status)
-                        setStatus(!status);
-                    
-                    })()).catch((E) =>{console.log(E)});
 
                 }}
             >
@@ -48,7 +48,7 @@ export function Settings({ navigation }) {
                     color: 'black',
                     fontWeight: "600", fontSize: 20
                 }}>
-                    {status.toString()}
+                    Open the locker!
                 </Text>
             </TouchableOpacity>
         </View>
