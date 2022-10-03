@@ -16,3 +16,4 @@ documentation:
     - if the first one doesn't work, use: lt --port 3002 --subdomain terra-charge-backend<br/>
     -start app: npm start (first 2 steps only need to be done the first time) <br/>
     -start arduino: node arduino/arduinoServer.js ( backend and webserver need to be opened)
+    -start mobile mirroring: cd mobile-presentation && scrcpy && cd ..
