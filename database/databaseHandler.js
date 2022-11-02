@@ -5,7 +5,7 @@ import { View } from "react-native";
 
 const originalUrl = 'https://terra-charge.loca.lt';
 const backupUrl = 'https://terra-charge-backend.loca.lt';
-const url = originalUrl;
+const url = backupUrl;
 
 
 export async function deleteAllReservations(){

@@ -4,13 +4,13 @@ var temporal = require("temporal");
 
 const originalUrl = 'https://terra-charge.loca.lt';
 const backupUrl = 'https://terra-charge-backend.loca.lt';
-const url = originalUrl;
+const url = backupUrl;
 
 
 
 var nboard = new Jfive.Board(
 	{
-		port: "Com4"
+		port: "Com5"
 	}
 );
 
